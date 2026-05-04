@@ -9,38 +9,109 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProceduresRouteImport } from './routes/procedures'
+import { Route as JourneyRouteImport } from './routes/journey'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
 
+const ProceduresRoute = ProceduresRouteImport.update({
+  id: '/procedures',
+  path: '/procedures',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JourneyRoute = JourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProceduresProcedureIdRoute = ProceduresProcedureIdRouteImport.update({
+  id: '/$procedureId',
+  path: '/$procedureId',
+  getParentRoute: () => ProceduresRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/journey': typeof JourneyRoute
+  '/procedures': typeof ProceduresRouteWithChildren
+  '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/journey': typeof JourneyRoute
+  '/procedures': typeof ProceduresRouteWithChildren
+  '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
+  '/journey': typeof JourneyRoute
+  '/procedures': typeof ProceduresRouteWithChildren
+  '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contact'
+    | '/journey'
+    | '/procedures'
+    | '/procedures/$procedureId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/contact' | '/journey' | '/procedures' | '/procedures/$procedureId'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/journey'
+    | '/procedures'
+    | '/procedures/$procedureId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
+  JourneyRoute: typeof JourneyRoute
+  ProceduresRoute: typeof ProceduresRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/procedures': {
+      id: '/procedures'
+      path: '/procedures'
+      fullPath: '/procedures'
+      preLoaderRoute: typeof ProceduresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +119,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/procedures/$procedureId': {
+      id: '/procedures/$procedureId'
+      path: '/$procedureId'
+      fullPath: '/procedures/$procedureId'
+      preLoaderRoute: typeof ProceduresProcedureIdRouteImport
+      parentRoute: typeof ProceduresRoute
+    }
   }
 }
 
+interface ProceduresRouteChildren {
+  ProceduresProcedureIdRoute: typeof ProceduresProcedureIdRoute
+}
+
+const ProceduresRouteChildren: ProceduresRouteChildren = {
+  ProceduresProcedureIdRoute: ProceduresProcedureIdRoute,
+}
+
+const ProceduresRouteWithChildren = ProceduresRoute._addFileChildren(
+  ProceduresRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
+  JourneyRoute: JourneyRoute,
+  ProceduresRoute: ProceduresRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
