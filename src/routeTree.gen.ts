@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProceduresRouteImport } from './routes/procedures'
+import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
 
 const ProceduresRoute = ProceduresRouteImport.update({
   id: '/procedures',
   path: '/procedures',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JourneyRoute = JourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,30 +37,34 @@ const ProceduresProcedureIdRoute = ProceduresProcedureIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/procedures' | '/procedures/$procedureId'
+  fullPaths: '/' | '/journey' | '/procedures' | '/procedures/$procedureId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/procedures' | '/procedures/$procedureId'
-  id: '__root__' | '/' | '/procedures' | '/procedures/$procedureId'
+  to: '/' | '/journey' | '/procedures' | '/procedures/$procedureId'
+  id: '__root__' | '/' | '/journey' | '/procedures' | '/procedures/$procedureId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  JourneyRoute: typeof JourneyRoute
   ProceduresRoute: typeof ProceduresRouteWithChildren
 }
 
@@ -65,6 +75,13 @@ declare module '@tanstack/react-router' {
       path: '/procedures'
       fullPath: '/procedures'
       preLoaderRoute: typeof ProceduresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -98,6 +115,7 @@ const ProceduresRouteWithChildren = ProceduresRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  JourneyRoute: JourneyRoute,
   ProceduresRoute: ProceduresRouteWithChildren,
 }
 export const routeTree = rootRouteImport
