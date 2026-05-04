@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProceduresRouteImport } from './routes/procedures'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
 
 const ProceduresRoute = ProceduresRouteImport.update({
   id: '/procedures',
@@ -22,31 +23,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProceduresProcedureIdRoute = ProceduresProcedureIdRouteImport.update({
+  id: '/$procedureId',
+  path: '/$procedureId',
+  getParentRoute: () => ProceduresRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/procedures': typeof ProceduresRoute
+  '/procedures': typeof ProceduresRouteWithChildren
+  '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/procedures': typeof ProceduresRoute
+  '/procedures': typeof ProceduresRouteWithChildren
+  '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/procedures': typeof ProceduresRoute
+  '/procedures': typeof ProceduresRouteWithChildren
+  '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/procedures'
+  fullPaths: '/' | '/procedures' | '/procedures/$procedureId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/procedures'
-  id: '__root__' | '/' | '/procedures'
+  to: '/' | '/procedures' | '/procedures/$procedureId'
+  id: '__root__' | '/' | '/procedures' | '/procedures/$procedureId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ProceduresRoute: typeof ProceduresRoute
+  ProceduresRoute: typeof ProceduresRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +74,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/procedures/$procedureId': {
+      id: '/procedures/$procedureId'
+      path: '/$procedureId'
+      fullPath: '/procedures/$procedureId'
+      preLoaderRoute: typeof ProceduresProcedureIdRouteImport
+      parentRoute: typeof ProceduresRoute
+    }
   }
 }
 
+interface ProceduresRouteChildren {
+  ProceduresProcedureIdRoute: typeof ProceduresProcedureIdRoute
+}
+
+const ProceduresRouteChildren: ProceduresRouteChildren = {
+  ProceduresProcedureIdRoute: ProceduresProcedureIdRoute,
+}
+
+const ProceduresRouteWithChildren = ProceduresRoute._addFileChildren(
+  ProceduresRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ProceduresRoute: ProceduresRoute,
+  ProceduresRoute: ProceduresRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
