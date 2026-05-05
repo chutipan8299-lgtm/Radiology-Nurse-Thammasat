@@ -16,6 +16,7 @@ import {
 import { useMemo, useState } from "react";
 import { procedures, type Category } from "@/data/procedures";
 import { useMode } from "@/contexts/mode-context";
+import { useLanguage } from "@/contexts/language-context";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,15 +32,16 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const services: { name: Category; icon: typeof Stethoscope; desc: string }[] = [
-  { name: "Diagnostic Radiology", icon: Stethoscope, desc: "X-ray, CT, MRI, ultrasound — see what's inside, safely." },
-  { name: "Interventional Radiology", icon: Activity, desc: "Minimally invasive image-guided treatments." },
-  { name: "Nuclear Medicine", icon: Atom, desc: "PET, SPECT and tracer-based diagnostics." },
-  { name: "Radiation Therapy", icon: Radiation, desc: "Targeted radiation treatment for cancer care." },
+const services: { name: Category; icon: typeof Stethoscope; nameKey: string; descKey: string }[] = [
+  { name: "Diagnostic Radiology", icon: Stethoscope, nameKey: "service.diagnostic.name", descKey: "service.diagnostic.desc" },
+  { name: "Interventional Radiology", icon: Activity, nameKey: "service.interventional.name", descKey: "service.interventional.desc" },
+  { name: "Nuclear Medicine", icon: Atom, nameKey: "service.nuclear.name", descKey: "service.nuclear.desc" },
+  { name: "Radiation Therapy", icon: Radiation, nameKey: "service.radiation.name", descKey: "service.radiation.desc" },
 ];
 
 function HomePage() {
   const { mode } = useMode();
+  const { t } = useLanguage();
   const [q, setQ] = useState("");
 
   const matches = useMemo(() => {
@@ -68,13 +70,13 @@ function HomePage() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-primary shadow-sm">
                 <Sparkles className="h-3.5 w-3.5" />
-                {mode === "patient" ? "Patient-friendly guides" : "Staff resources & protocols"}
+                {mode === "patient" ? t("home.badge.patient") : t("home.badge.staff")}
               </div>
               <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
-                Radiology Nursing <span className="bg-[var(--gradient-hero)] bg-clip-text text-transparent">Unit</span>
+                {t("home.title.prefix")} <span className="bg-[var(--gradient-hero)] bg-clip-text text-transparent">{t("home.title.highlight")}</span>
               </h1>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                Preparation & guidance for radiology procedures — clear, calm, and trustworthy. Know what to expect before, during, and after your visit.
+                {t("home.subtitle")}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -82,14 +84,14 @@ function HomePage() {
                   to="/journey"
                   className="group inline-flex items-center gap-2 rounded-full bg-[var(--gradient-hero)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5"
                 >
-                  Prepare Before Your Visit
+                  {t("home.cta.prepare")}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
                 <Link
                   to="/procedures"
                   className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary"
                 >
-                  <Search className="h-4 w-4" /> Search Procedures
+                  <Search className="h-4 w-4" /> {t("home.cta.search")}
                 </Link>
               </div>
 
@@ -100,7 +102,7 @@ function HomePage() {
                   <input
                     value={q}
                     onChange={(e) => setQ(e.target.value)}
-                    placeholder="Search e.g. CT scan, Lung biopsy"
+                    placeholder={t("home.search.placeholder")}
                     className="flex-1 bg-transparent px-1 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground"
                   />
                   <Link
@@ -108,7 +110,7 @@ function HomePage() {
                     search={{ q }}
                     className="rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
                   >
-                    Search
+                    {t("home.search.button")}
                   </Link>
                 </div>
                 {matches.length > 0 && (
@@ -139,23 +141,23 @@ function HomePage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-                    <span className="text-xs font-medium text-muted-foreground">Your visit at a glance</span>
+                    <span className="text-xs font-medium text-muted-foreground">{t("home.card.title")}</span>
                   </div>
-                  <span className="rounded-full bg-secondary px-2.5 py-1 text-[10px] font-medium text-secondary-foreground">Today</span>
+                  <span className="rounded-full bg-secondary px-2.5 py-1 text-[10px] font-medium text-secondary-foreground">{t("home.card.today")}</span>
                 </div>
                 <div className="mt-6 space-y-4">
                   {[
-                    { icon: ShieldCheck, t: "Safe & evidence-based", d: "Care follows the latest hospital protocols." },
-                    { icon: HeartHandshake, t: "Compassionate team", d: "Nurses guide you through every step." },
-                    { icon: Clock, t: "On-time & efficient", d: "Most visits take 15–60 minutes." },
+                    { icon: ShieldCheck, tk: "home.card.safe.t", dk: "home.card.safe.d" },
+                    { icon: HeartHandshake, tk: "home.card.team.t", dk: "home.card.team.d" },
+                    { icon: Clock, tk: "home.card.time.t", dk: "home.card.time.d" },
                   ].map((f) => (
-                    <div key={f.t} className="flex items-start gap-3 rounded-2xl bg-muted/60 p-4">
+                    <div key={f.tk} className="flex items-start gap-3 rounded-2xl bg-muted/60 p-4">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
                         <f.icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <div className="text-sm font-semibold text-foreground">{f.t}</div>
-                        <div className="text-xs text-muted-foreground">{f.d}</div>
+                        <div className="text-sm font-semibold text-foreground">{t(f.tk)}</div>
+                        <div className="text-xs text-muted-foreground">{t(f.dk)}</div>
                       </div>
                     </div>
                   ))}
@@ -170,11 +172,11 @@ function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-6">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Our Services</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Choose a category to explore procedures and prepare ahead.</p>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">{t("home.services.title")}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{t("home.services.subtitle")}</p>
           </div>
           <Link to="/procedures" className="hidden text-sm font-medium text-primary hover:underline md:inline">
-            View all procedures →
+            {t("home.services.viewAll")}
           </Link>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -189,10 +191,10 @@ function HomePage() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary">
                 <s.icon className="h-6 w-6" />
               </div>
-              <h3 className="mt-4 text-base font-semibold text-foreground">{s.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+              <h3 className="mt-4 text-base font-semibold text-foreground">{t(s.nameKey)}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{t(s.descKey)}</p>
               <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                Explore <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                {t("home.services.explore")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </div>
             </Link>
           ))}
@@ -205,28 +207,26 @@ function HomePage() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h2 className="text-xl font-bold text-foreground md:text-2xl">
-                {mode === "staff" ? "Staff Quick Access" : "Helpful Resources"}
+                {mode === "staff" ? t("home.quick.staff.title") : t("home.quick.patient.title")}
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                {mode === "staff"
-                  ? "Fast links to protocols, guidelines, and common procedures."
-                  : "Information sheets and emergency guidance — at your fingertips."}
+                {mode === "staff" ? t("home.quick.staff.desc") : t("home.quick.patient.desc")}
               </p>
             </div>
             {mode === "staff" && (
               <span className="rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground">
-                Staff Mode
+                {t("mode.staffBadge")}
               </span>
             )}
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {[
-              { icon: FileText, t: "Download Protocols", d: "Standardized clinical procedures (PDF).", to: "/procedures" },
-              { icon: AlertCircle, t: "Emergency Guidelines", d: "Contrast reactions, codes, and escalation.", to: "/procedures" },
-              { icon: Stethoscope, t: "Common Procedures", d: "Quick reference for daily workflows.", to: "/procedures" },
+              { icon: FileText, tk: "home.quick.protocols.t", dk: "home.quick.protocols.d", to: "/procedures" },
+              { icon: AlertCircle, tk: "home.quick.emergency.t", dk: "home.quick.emergency.d", to: "/procedures" },
+              { icon: Stethoscope, tk: "home.quick.common.t", dk: "home.quick.common.d", to: "/procedures" },
             ].map((c) => (
               <Link
-                key={c.t}
+                key={c.tk}
                 to={c.to}
                 className="group flex items-start gap-3 rounded-2xl border border-border bg-background p-4 hover:border-primary/40 hover:bg-secondary/40"
               >
@@ -234,8 +234,8 @@ function HomePage() {
                   <c.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-foreground">{c.t}</div>
-                  <div className="text-xs text-muted-foreground">{c.d}</div>
+                  <div className="text-sm font-semibold text-foreground">{t(c.tk)}</div>
+                  <div className="text-xs text-muted-foreground">{t(c.dk)}</div>
                 </div>
               </Link>
             ))}
