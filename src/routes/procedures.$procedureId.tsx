@@ -18,6 +18,7 @@ import {
 import { useState } from "react";
 import { procedures } from "@/data/procedures";
 import { useMode } from "@/contexts/mode-context";
+import { useLanguage } from "@/contexts/language-context";
 
 export const Route = createFileRoute("/procedures/$procedureId")({
   loader: ({ params }) => {
@@ -48,11 +49,12 @@ export const Route = createFileRoute("/procedures/$procedureId")({
 function ProcedureDetail() {
   const p = Route.useLoaderData();
   const { mode } = useMode();
+  const { t } = useLanguage();
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12">
       <Link to="/procedures" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary">
-        <ArrowLeft className="h-4 w-4" /> All procedures
+        <ArrowLeft className="h-4 w-4" /> {t("detail.back")}
       </Link>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_320px]">
@@ -60,8 +62,8 @@ function ProcedureDetail() {
         <article className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">{p.category}</span>
-            <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{p.type}</span>
-            <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{p.complexity}</span>
+            <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{t(`proc.type.${p.type}`)}</span>
+            <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{t(`proc.complexity.${p.complexity}`)}</span>
             <span className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
               <Clock className="h-3 w-3" /> {p.duration}
             </span>
@@ -76,16 +78,16 @@ function ProcedureDetail() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-background shadow-md">
                   <Stethoscope className="h-6 w-6 text-primary" />
                 </div>
-                <p className="mt-3 text-sm">Patient education video coming soon</p>
+                <p className="mt-3 text-sm">{t("detail.videoSoon")}</p>
               </div>
             </div>
           </div>
 
-          <Section icon={Users} title="Who is this for">
+          <Section icon={Users} title={t("detail.who")}>
             <p>{p.whoFor}</p>
           </Section>
 
-          <Section icon={AlertTriangle} title="Risks & Warnings" tone="warn">
+          <Section icon={AlertTriangle} title={t("detail.risks")} tone="warn">
             <ul className="space-y-2">
               {p.risks.map((r: string) => (
                 <li key={r} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />{r}</li>
@@ -93,7 +95,7 @@ function ProcedureDetail() {
             </ul>
           </Section>
 
-          <Section icon={ClipboardCheck} title="Preparation (before your visit)">
+          <Section icon={ClipboardCheck} title={t("detail.prep")}>
             <ol className="space-y-3">
               {p.preparation.map((s: string, i: number) => (
                 <li key={s} className="flex gap-3">
@@ -104,7 +106,7 @@ function ProcedureDetail() {
             </ol>
           </Section>
 
-          <Section icon={ListOrdered} title="Procedure Steps">
+          <Section icon={ListOrdered} title={t("detail.steps")}>
             <ol className="space-y-3">
               {p.steps.map((s: string, i: number) => (
                 <li key={s} className="flex gap-3">
@@ -115,7 +117,7 @@ function ProcedureDetail() {
             </ol>
           </Section>
 
-          <Section icon={HeartPulse} title="Aftercare (post-procedure)">
+          <Section icon={HeartPulse} title={t("detail.after")}>
             <ul className="space-y-2">
               {p.aftercare.map((s: string) => (
                 <li key={s} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{s}</li>
@@ -123,7 +125,7 @@ function ProcedureDetail() {
             </ul>
           </Section>
 
-          <Section icon={HelpCircle} title="Frequently Asked Questions">
+          <Section icon={HelpCircle} title={t("detail.faq")}>
             <div className="divide-y divide-border rounded-2xl border border-border bg-background">
               {p.faq.map((f: { q: string; a: string }, i: number) => <FaqItem key={i} q={f.q} a={f.a} />)}
             </div>
@@ -134,18 +136,18 @@ function ProcedureDetail() {
             <>
               <div className="mt-12 rounded-2xl border border-accent bg-accent/30 p-5">
                 <span className="inline-flex items-center gap-1 rounded-full bg-background px-2.5 py-1 text-[10px] font-medium text-primary">
-                  Staff Mode
+                  {t("mode.staffBadge")}
                 </span>
-                <h2 className="mt-3 text-lg font-semibold text-foreground">Clinical Notes</h2>
+                <h2 className="mt-3 text-lg font-semibold text-foreground">{t("detail.clinicalNotes")}</h2>
                 <ul className="mt-3 space-y-2 text-sm text-foreground">
-                  {(p.staffNotes ?? ["No clinical notes for this procedure."]).map((n: string) => (
+                  {(p.staffNotes ?? [t("detail.noNotes")]).map((n: string) => (
                     <li key={n} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{n}</li>
                   ))}
                 </ul>
               </div>
 
               {p.protocol && p.protocol.length > 0 && (
-                <Section icon={FileText} title="Internal Protocol">
+                <Section icon={FileText} title={t("detail.protocol")}>
                   <ul className="space-y-2">
                     {p.protocol.map((s: string) => <li key={s} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-deep" />{s}</li>)}
                   </ul>
@@ -153,7 +155,7 @@ function ProcedureDetail() {
               )}
 
               {p.checklist && p.checklist.length > 0 && (
-                <Section icon={ClipboardCheck} title="Pre-procedure Checklist">
+                <Section icon={ClipboardCheck} title={t("detail.checklist")}>
                   <ul className="space-y-2">
                     {p.checklist.map((s: string) => (
                       <li key={s} className="flex items-center gap-3 rounded-xl border border-border bg-background px-3 py-2">
@@ -171,25 +173,25 @@ function ProcedureDetail() {
         {/* Sticky sidebar */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
-            <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Need help?</div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t("detail.needHelp")}</div>
             <div className="mt-4 space-y-3">
               <a href="tel:+6621234567" className="flex items-center justify-between rounded-xl bg-[var(--gradient-hero)] px-4 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)]">
-                <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" /> Contact Hospital</span>
+                <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" /> {t("detail.contactHospital")}</span>
                 <ArrowRight className="h-4 w-4" />
               </a>
               <Link to="/contact" className="flex items-center justify-between rounded-xl border border-border px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary">
-                <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> View Location</span>
+                <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {t("detail.viewLocation")}</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <button className="flex w-full items-center justify-between rounded-xl border border-border px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary">
-                <span className="inline-flex items-center gap-2"><FileText className="h-4 w-4 text-primary" /> Download Info Sheet</span>
+                <span className="inline-flex items-center gap-2"><FileText className="h-4 w-4 text-primary" /> {t("detail.downloadInfo")}</span>
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
             <div className="mt-5 rounded-xl bg-muted p-4 text-xs text-muted-foreground">
-              <strong className="text-foreground">Operating hours</strong>
-              <div className="mt-1">Mon–Fri 7:00–17:00</div>
-              <div>Sat 8:00–12:00</div>
+              <strong className="text-foreground">{t("detail.hours")}</strong>
+              <div className="mt-1">{t("detail.hours.mf")}</div>
+              <div>{t("detail.hours.sat")}</div>
             </div>
           </div>
         </aside>

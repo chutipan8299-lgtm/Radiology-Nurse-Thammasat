@@ -26,8 +26,8 @@ export function SiteHeader() {
             <Heart className="h-5 w-5 text-primary-foreground" fill="currentColor" />
           </div>
           <div className="leading-tight">
-            <div className="text-sm font-semibold text-foreground">Radiology Nursing</div>
-            <div className="text-[11px] text-muted-foreground">Care · Guidance · Trust</div>
+            <div className="text-sm font-semibold text-foreground">{t("brand.name")}</div>
+            <div className="text-[11px] text-muted-foreground">{t("brand.tagline")}</div>
           </div>
         </Link>
 
