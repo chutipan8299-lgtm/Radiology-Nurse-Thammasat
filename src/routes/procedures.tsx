@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
 import { Search, Filter, ArrowRight, Stethoscope, Activity, Atom, Radiation } from "lucide-react";
 import { procedures, categories, type Category, type Type, type Complexity } from "@/data/procedures";
+import { useLanguage } from "@/contexts/language-context";
 
 type Search = {
   q?: string;
@@ -36,6 +37,7 @@ const categoryIcon: Record<Category, typeof Stethoscope> = {
 function ProceduresPage() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
+  const { t: tr } = useLanguage();
   const [q, setQ] = useState(search.q ?? "");
 
   useEffect(() => setQ(search.q ?? ""), [search.q]);
@@ -58,8 +60,8 @@ function ProceduresPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
       <div className="max-w-2xl">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">Radiology Procedures</h1>
-        <p className="mt-2 text-muted-foreground">Find a procedure to learn what to expect, how to prepare, and what to do after.</p>
+        <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">{tr("proc.title")}</h1>
+        <p className="mt-2 text-muted-foreground">{tr("proc.subtitle")}</p>
       </div>
 
       {/* Search */}
@@ -71,7 +73,7 @@ function ProceduresPage() {
             setQ(e.target.value);
             navigate({ search: (prev: Search) => ({ ...prev, q: e.target.value || undefined }) });
           }}
-          placeholder="Search e.g. CT scan, Lung biopsy"
+          placeholder={tr("home.search.placeholder")}
           className="flex-1 bg-transparent px-1 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground"
         />
       </div>
@@ -79,10 +81,10 @@ function ProceduresPage() {
       {/* Filters */}
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground">
-          <Filter className="h-3.5 w-3.5" /> Filter:
+          <Filter className="h-3.5 w-3.5" /> {tr("proc.filter")}
         </span>
         <FilterPill
-          label="All"
+          label={tr("proc.all")}
           active={(search.category ?? "all") === "all"}
           onClick={() => navigate({ search: (p: Search) => ({ ...p, category: "all" }) })}
         />
@@ -98,7 +100,7 @@ function ProceduresPage() {
         {(["all", "Diagnostic", "Treatment"] as const).map((t) => (
           <FilterPill
             key={t}
-            label={t === "all" ? "Any type" : t}
+            label={t === "all" ? tr("proc.anyType") : tr(`proc.type.${t}`)}
             active={(search.type ?? "all") === t}
             onClick={() => navigate({ search: (p: Search) => ({ ...p, type: t }) })}
           />
@@ -106,7 +108,7 @@ function ProceduresPage() {
         {(["all", "Non-invasive", "Invasive"] as const).map((c) => (
           <FilterPill
             key={c}
-            label={c === "all" ? "Any complexity" : c}
+            label={c === "all" ? tr("proc.anyComplexity") : tr(`proc.complexity.${c}`)}
             active={(search.complexity ?? "all") === c}
             onClick={() => navigate({ search: (p: Search) => ({ ...p, complexity: c }) })}
           />
@@ -129,7 +131,7 @@ function ProceduresPage() {
                   <Icon className="h-5 w-5" />
                 </div>
                 <span className="rounded-full bg-muted px-2.5 py-1 text-[10px] font-medium text-muted-foreground">
-                  {p.complexity}
+                  {tr(`proc.complexity.${p.complexity}`)}
                 </span>
               </div>
               <h3 className="mt-4 text-base font-semibold text-foreground">{p.name}</h3>
@@ -137,7 +139,7 @@ function ProceduresPage() {
               <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted-foreground">
                 <span>{p.category}</span>
                 <span className="inline-flex items-center gap-1 font-medium text-primary">
-                  View details <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  {tr("proc.viewDetails")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>
               </div>
             </Link>
@@ -145,7 +147,7 @@ function ProceduresPage() {
         })}
         {filtered.length === 0 && (
           <div className="col-span-full rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-            No procedures match your search.
+            {tr("proc.noResults")}
           </div>
         )}
       </div>
