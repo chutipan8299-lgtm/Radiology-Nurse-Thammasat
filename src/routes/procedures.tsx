@@ -69,7 +69,7 @@ function ProceduresPage() {
           value={q}
           onChange={(e) => {
             setQ(e.target.value);
-            navigate({ search: (prev) => ({ ...prev, q: e.target.value || undefined }) });
+            navigate({ search: (prev: Search) => ({ ...prev, q: e.target.value || undefined }) });
           }}
           placeholder="Search e.g. CT scan, Lung biopsy"
           className="flex-1 bg-transparent px-1 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground"
@@ -84,14 +84,14 @@ function ProceduresPage() {
         <FilterPill
           label="All"
           active={(search.category ?? "all") === "all"}
-          onClick={() => navigate({ search: (p) => ({ ...p, category: "all" }) })}
+          onClick={() => navigate({ search: (p: Search) => ({ ...p, category: "all" }) })}
         />
         {categories.map((c) => (
           <FilterPill
             key={c}
             label={c}
             active={search.category === c}
-            onClick={() => navigate({ search: (p) => ({ ...p, category: c }) })}
+            onClick={() => navigate({ search: (p: Search) => ({ ...p, category: c }) })}
           />
         ))}
         <span className="mx-2 hidden h-5 w-px bg-border md:inline" />
@@ -100,7 +100,7 @@ function ProceduresPage() {
             key={t}
             label={t === "all" ? "Any type" : t}
             active={(search.type ?? "all") === t}
-            onClick={() => navigate({ search: (p) => ({ ...p, type: t }) })}
+            onClick={() => navigate({ search: (p: Search) => ({ ...p, type: t }) })}
           />
         ))}
         {(["all", "Non-invasive", "Invasive"] as const).map((c) => (
@@ -108,7 +108,7 @@ function ProceduresPage() {
             key={c}
             label={c === "all" ? "Any complexity" : c}
             active={(search.complexity ?? "all") === c}
-            onClick={() => navigate({ search: (p) => ({ ...p, complexity: c }) })}
+            onClick={() => navigate({ search: (p: Search) => ({ ...p, complexity: c }) })}
           />
         ))}
       </div>

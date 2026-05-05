@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 import { ModeProvider } from "@/contexts/mode-context";
+import { LanguageProvider } from "@/contexts/language-context";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -71,7 +72,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <ModeProvider>
+    <LanguageProvider>
+      <ModeProvider>
       <div className="flex min-h-screen flex-col bg-background">
         <SiteHeader />
         <main className="flex-1">
@@ -79,6 +81,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
       </div>
-    </ModeProvider>
+      </ModeProvider>
+    </LanguageProvider>
   );
 }
