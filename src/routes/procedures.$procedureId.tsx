@@ -87,7 +87,7 @@ function ProcedureDetail() {
 
           <Section icon={AlertTriangle} title="Risks & Warnings" tone="warn">
             <ul className="space-y-2">
-              {p.risks.map((r) => (
+              {p.risks.map((r: string) => (
                 <li key={r} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-destructive" />{r}</li>
               ))}
             </ul>
@@ -95,7 +95,7 @@ function ProcedureDetail() {
 
           <Section icon={ClipboardCheck} title="Preparation (before your visit)">
             <ol className="space-y-3">
-              {p.preparation.map((s, i) => (
+              {p.preparation.map((s: string, i: number) => (
                 <li key={s} className="flex gap-3">
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">{i + 1}</span>
                   <span>{s}</span>
@@ -106,7 +106,7 @@ function ProcedureDetail() {
 
           <Section icon={ListOrdered} title="Procedure Steps">
             <ol className="space-y-3">
-              {p.steps.map((s, i) => (
+              {p.steps.map((s: string, i: number) => (
                 <li key={s} className="flex gap-3">
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--gradient-hero)] text-xs font-semibold text-primary-foreground">{i + 1}</span>
                   <span>{s}</span>
@@ -117,7 +117,7 @@ function ProcedureDetail() {
 
           <Section icon={HeartPulse} title="Aftercare (post-procedure)">
             <ul className="space-y-2">
-              {p.aftercare.map((s) => (
+              {p.aftercare.map((s: string) => (
                 <li key={s} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{s}</li>
               ))}
             </ul>
@@ -125,7 +125,7 @@ function ProcedureDetail() {
 
           <Section icon={HelpCircle} title="Frequently Asked Questions">
             <div className="divide-y divide-border rounded-2xl border border-border bg-background">
-              {p.faq.map((f, i) => <FaqItem key={i} q={f.q} a={f.a} />)}
+              {p.faq.map((f: { q: string; a: string }, i: number) => <FaqItem key={i} q={f.q} a={f.a} />)}
             </div>
           </Section>
 
@@ -138,7 +138,7 @@ function ProcedureDetail() {
                 </span>
                 <h2 className="mt-3 text-lg font-semibold text-foreground">Clinical Notes</h2>
                 <ul className="mt-3 space-y-2 text-sm text-foreground">
-                  {(p.staffNotes ?? ["No clinical notes for this procedure."]).map((n) => (
+                  {(p.staffNotes ?? ["No clinical notes for this procedure."]).map((n: string) => (
                     <li key={n} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{n}</li>
                   ))}
                 </ul>
@@ -147,7 +147,7 @@ function ProcedureDetail() {
               {p.protocol && p.protocol.length > 0 && (
                 <Section icon={FileText} title="Internal Protocol">
                   <ul className="space-y-2">
-                    {p.protocol.map((s) => <li key={s} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-deep" />{s}</li>)}
+                    {p.protocol.map((s: string) => <li key={s} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-deep" />{s}</li>)}
                   </ul>
                 </Section>
               )}
@@ -155,7 +155,7 @@ function ProcedureDetail() {
               {p.checklist && p.checklist.length > 0 && (
                 <Section icon={ClipboardCheck} title="Pre-procedure Checklist">
                   <ul className="space-y-2">
-                    {p.checklist.map((s) => (
+                    {p.checklist.map((s: string) => (
                       <li key={s} className="flex items-center gap-3 rounded-xl border border-border bg-background px-3 py-2">
                         <input type="checkbox" className="h-4 w-4 accent-[oklch(0.62_0.19_0)]" />
                         <span className="text-sm">{s}</span>
