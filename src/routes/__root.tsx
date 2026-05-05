@@ -34,10 +34,14 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Radiology Nursing Unit — Preparation & Guidance" },
       { name: "description", content: "Patient preparation, procedure guides and staff resources for the Radiology Nursing Unit." },
-      { property: "og:title", content: "Radiology Nursing Unit" },
-      { property: "og:description", content: "Preparation & guidance for radiology procedures." },
+      { property: "og:title", content: "Radiology Nursing Unit — Preparation & Guidance" },
+      { property: "og:description", content: "Patient preparation, procedure guides and staff resources for the Radiology Nursing Unit." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Radiology Nursing Unit — Preparation & Guidance" },
+      { name: "twitter:description", content: "Patient preparation, procedure guides and staff resources for the Radiology Nursing Unit." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b38593f3-d9fd-46cc-8078-00bf40cf0f01/id-preview-1f30e309--0064b913-d777-48c1-9865-ed9f157823ed.lovable.app-1777892056025.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b38593f3-d9fd-46cc-8078-00bf40cf0f01/id-preview-1f30e309--0064b913-d777-48c1-9865-ed9f157823ed.lovable.app-1777892056025.png" },
     ],
     links: [
       {
