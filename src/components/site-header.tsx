@@ -1,18 +1,20 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Menu, X, Stethoscope, User } from "lucide-react";
+import { Heart, Menu, X, Stethoscope, User, Languages } from "lucide-react";
 import { useMode } from "@/contexts/mode-context";
+import { useLanguage } from "@/contexts/language-context";
 import { cn } from "@/lib/utils";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/procedures", label: "Procedures" },
-  { to: "/journey", label: "Patient Journey" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", key: "nav.home" },
+  { to: "/procedures", key: "nav.procedures" },
+  { to: "/journey", key: "nav.journey" },
+  { to: "/contact", key: "nav.contact" },
 ];
 
 export function SiteHeader() {
   const { mode, setMode } = useMode();
+  const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
 
@@ -43,13 +45,21 @@ export function SiteHeader() {
                     : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground",
                 )}
               >
-                {n.label}
+                {t(n.key)}
               </Link>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => setLang(lang === "en" ? "th" : "en")}
+            className="hidden h-9 items-center gap-1.5 rounded-full border border-border bg-muted px-3 text-xs font-semibold text-foreground transition-colors hover:bg-secondary sm:inline-flex"
+            aria-label="Toggle language"
+          >
+            <Languages className="h-3.5 w-3.5" />
+            {lang === "en" ? "TH" : "EN"}
+          </button>
           <div className="hidden items-center rounded-full border border-border bg-muted p-1 sm:flex">
             <button
               onClick={() => setMode("patient")}
@@ -60,7 +70,7 @@ export function SiteHeader() {
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
-              <User className="h-3.5 w-3.5" /> Patient
+              <User className="h-3.5 w-3.5" /> {t("mode.patient")}
             </button>
             <button
               onClick={() => setMode("staff")}
@@ -71,7 +81,7 @@ export function SiteHeader() {
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
-              <Stethoscope className="h-3.5 w-3.5" /> Staff
+              <Stethoscope className="h-3.5 w-3.5" /> {t("mode.staff")}
             </button>
           </div>
 
@@ -95,9 +105,16 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
               >
-                {n.label}
+                {t(n.key)}
               </Link>
             ))}
+            <button
+              onClick={() => setLang(lang === "en" ? "th" : "en")}
+              className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full border border-border bg-muted px-3 py-2 text-xs font-semibold text-foreground"
+            >
+              <Languages className="h-3.5 w-3.5" />
+              {lang === "en" ? "ภาษาไทย" : "English"}
+            </button>
             <div className="mt-2 flex items-center rounded-full border border-border bg-muted p-1">
               <button
                 onClick={() => setMode("patient")}
@@ -106,7 +123,7 @@ export function SiteHeader() {
                   mode === "patient" ? "bg-background text-primary shadow-sm" : "text-muted-foreground",
                 )}
               >
-                <User className="h-3.5 w-3.5" /> Patient
+                <User className="h-3.5 w-3.5" /> {t("mode.patient")}
               </button>
               <button
                 onClick={() => setMode("staff")}
@@ -115,7 +132,7 @@ export function SiteHeader() {
                   mode === "staff" ? "bg-background text-primary shadow-sm" : "text-muted-foreground",
                 )}
               >
-                <Stethoscope className="h-3.5 w-3.5" /> Staff
+                <Stethoscope className="h-3.5 w-3.5" /> {t("mode.staff")}
               </button>
             </div>
           </div>
