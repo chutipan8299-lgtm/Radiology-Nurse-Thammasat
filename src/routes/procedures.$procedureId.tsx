@@ -21,6 +21,15 @@ import { useMode } from "@/contexts/mode-context";
 import { useLanguage } from "@/contexts/language-context";
 import { useLocalizedProcedure } from "@/lib/procedure-i18n";
 
+const categoryKey = (c: string) =>
+  c === "Diagnostic Radiology"
+    ? "service.diagnostic.name"
+    : c === "Interventional Radiology"
+      ? "service.interventional.name"
+      : c === "Nuclear Medicine"
+        ? "service.nuclear.name"
+        : "service.radiation.name";
+
 export const Route = createFileRoute("/procedures/$procedureId")({
   loader: ({ params }) => {
     const p = procedures.find((x) => x.id === params.procedureId);
