@@ -7,6 +7,18 @@ export type Category =
 export type Complexity = "Non-invasive" | "Invasive";
 export type Type = "Diagnostic" | "Treatment";
 
+export interface ProcedureI18n {
+  name?: string;
+  description?: string;
+  whoFor?: string;
+  duration?: string;
+  risks?: string[];
+  preparation?: string[];
+  steps?: string[];
+  aftercare?: string[];
+  faq?: { q: string; a: string }[];
+}
+
 export interface Procedure {
   id: string;
   name: string;
@@ -27,6 +39,7 @@ export interface Procedure {
   staffNotes?: string[];
   protocol?: string[];
   checklist?: string[];
+  i18n?: { th?: ProcedureI18n };
 }
 
 export const procedures: Procedure[] = [
