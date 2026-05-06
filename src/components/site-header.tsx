@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Heart, Menu, X, Stethoscope, User, Languages } from "lucide-react";
+import { Heart, Menu, X, Stethoscope, User, Languages, LogIn } from "lucide-react";
 import { useMode } from "@/contexts/mode-context";
 import { useLanguage } from "@/contexts/language-context";
 import { cn } from "@/lib/utils";
@@ -84,6 +84,14 @@ export function SiteHeader() {
               <Stethoscope className="h-3.5 w-3.5" /> {t("mode.staff")}
             </button>
           </div>
+
+          <Link
+            to="/staff/login"
+            className="hidden h-9 items-center gap-1.5 rounded-full bg-primary px-3.5 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-opacity hover:opacity-95 sm:inline-flex"
+          >
+            <LogIn className="h-3.5 w-3.5" />
+            {lang === "en" ? "Staff Login" : "เข้าสู่ระบบ"}
+          </Link>
 
           <button
             onClick={() => setOpen((o) => !o)}
