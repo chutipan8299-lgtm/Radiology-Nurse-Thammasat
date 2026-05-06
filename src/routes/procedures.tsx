@@ -3,6 +3,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Search, Filter, ArrowRight, Stethoscope, Activity, Atom, Radiation } from "lucide-react";
 import { procedures, categories, type Category, type Type, type Complexity } from "@/data/procedures";
 import { useLanguage } from "@/contexts/language-context";
+import { localizeProcedure } from "@/lib/procedure-i18n";
 
 type Search = {
   q?: string;
@@ -34,17 +35,24 @@ const categoryIcon: Record<Category, typeof Stethoscope> = {
   "Radiation Therapy": Radiation,
 };
 
+const categoryKeyMap: Record<Category, string> = {
+  "Diagnostic Radiology": "service.diagnostic.name",
+  "Interventional Radiology": "service.interventional.name",
+  "Nuclear Medicine": "service.nuclear.name",
+  "Radiation Therapy": "service.radiation.name",
+};
+
 function ProceduresPage() {
   const search = Route.useSearch();
   const navigate = Route.useNavigate();
-  const { t: tr } = useLanguage();
+  const { t: tr, lang } = useLanguage();
   const [q, setQ] = useState(search.q ?? "");
 
   useEffect(() => setQ(search.q ?? ""), [search.q]);
 
   const filtered = useMemo(() => {
     const s = q.trim().toLowerCase();
-    return procedures.filter((p) => {
+    return procedures.map((p) => localizeProcedure(p, lang)).filter((p) => {
       if (search.category && search.category !== "all" && p.category !== search.category) return false;
       if (search.type && search.type !== "all" && p.type !== search.type) return false;
       if (search.complexity && search.complexity !== "all" && p.complexity !== search.complexity) return false;
@@ -55,7 +63,7 @@ function ProceduresPage() {
         p.keywords.some((k) => k.includes(s))
       );
     });
-  }, [q, search]);
+  }, [q, search, lang]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-6 md:py-14">
@@ -91,7 +99,7 @@ function ProceduresPage() {
         {categories.map((c) => (
           <FilterPill
             key={c}
-            label={c}
+            label={tr(categoryKeyMap[c])}
             active={search.category === c}
             onClick={() => navigate({ search: (p: Search) => ({ ...p, category: c }) })}
           />
@@ -137,7 +145,7 @@ function ProceduresPage() {
               <h3 className="mt-4 text-base font-semibold text-foreground">{p.name}</h3>
               <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">{p.description}</p>
               <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted-foreground">
-                <span>{p.category}</span>
+                <span>{tr(categoryKeyMap[p.category])}</span>
                 <span className="inline-flex items-center gap-1 font-medium text-primary">
                   {tr("proc.viewDetails")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>

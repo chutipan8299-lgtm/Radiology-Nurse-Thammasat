@@ -19,6 +19,16 @@ import { useState } from "react";
 import { procedures } from "@/data/procedures";
 import { useMode } from "@/contexts/mode-context";
 import { useLanguage } from "@/contexts/language-context";
+import { useLocalizedProcedure } from "@/lib/procedure-i18n";
+
+const categoryKey = (c: string) =>
+  c === "Diagnostic Radiology"
+    ? "service.diagnostic.name"
+    : c === "Interventional Radiology"
+      ? "service.interventional.name"
+      : c === "Nuclear Medicine"
+        ? "service.nuclear.name"
+        : "service.radiation.name";
 
 export const Route = createFileRoute("/procedures/$procedureId")({
   loader: ({ params }) => {
@@ -47,9 +57,10 @@ export const Route = createFileRoute("/procedures/$procedureId")({
 });
 
 function ProcedureDetail() {
-  const p = Route.useLoaderData();
+  const raw = Route.useLoaderData();
   const { mode } = useMode();
   const { t } = useLanguage();
+  const p = useLocalizedProcedure(raw);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12">
@@ -61,7 +72,7 @@ function ProcedureDetail() {
         {/* Main */}
         <article className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">{p.category}</span>
+            <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">{t(categoryKey(p.category))}</span>
             <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{t(`proc.type.${p.type}`)}</span>
             <span className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{t(`proc.complexity.${p.complexity}`)}</span>
             <span className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
