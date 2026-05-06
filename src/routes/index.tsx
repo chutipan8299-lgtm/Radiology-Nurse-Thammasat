@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { procedures, type Category } from "@/data/procedures";
+import { localizeProcedure } from "@/lib/procedure-i18n";
 import { useMode } from "@/contexts/mode-context";
 import { useLanguage } from "@/contexts/language-context";
 
@@ -41,13 +42,14 @@ const services: { name: Category; icon: typeof Stethoscope; nameKey: string; des
 
 function HomePage() {
   const { mode } = useMode();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [q, setQ] = useState("");
 
   const matches = useMemo(() => {
     if (!q.trim()) return [];
     const s = q.toLowerCase();
     return procedures
+      .map((p) => localizeProcedure(p, lang))
       .filter(
         (p) =>
           p.name.toLowerCase().includes(s) ||
@@ -55,7 +57,7 @@ function HomePage() {
           p.keywords.some((k) => k.includes(s)),
       )
       .slice(0, 5);
-  }, [q]);
+  }, [q, lang]);
 
   return (
     <div>
