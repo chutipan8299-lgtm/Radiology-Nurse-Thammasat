@@ -27,9 +27,9 @@ export function SiteFooter() {
         <div>
           <div className="text-sm font-semibold text-foreground">{t("footer.contact")}</div>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> +66 2 123 4567</li>
-            <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> rnu@hospital.org</li>
-            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> {t("contact.address1")}</li>
+            <li className="flex items-center gap-2"><Phone className="h-4 w-4" /><span>+66 2 123 4567</span></li>
+            <li className="flex items-center gap-2"><Mail className="h-4 w-4" /><span>rnu@hospital.org</span></li>
+            <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /><span>{t("contact.address1")}</span></li>
           </ul>
         </div>
       </div>

@@ -13,6 +13,7 @@ import { Route as ProceduresRouteImport } from './routes/procedures'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StaffLoginRouteImport } from './routes/staff.login'
 import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
 
 const ProceduresRoute = ProceduresRouteImport.update({
@@ -35,6 +36,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffLoginRoute = StaffLoginRouteImport.update({
+  id: '/staff/login',
+  path: '/staff/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProceduresProcedureIdRoute = ProceduresProcedureIdRouteImport.update({
   id: '/$procedureId',
   path: '/$procedureId',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
+  '/staff/login': typeof StaffLoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
+  '/staff/login': typeof StaffLoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,6 +70,7 @@ export interface FileRoutesById {
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
+  '/staff/login': typeof StaffLoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -71,8 +80,15 @@ export interface FileRouteTypes {
     | '/journey'
     | '/procedures'
     | '/procedures/$procedureId'
+    | '/staff/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/journey' | '/procedures' | '/procedures/$procedureId'
+  to:
+    | '/'
+    | '/contact'
+    | '/journey'
+    | '/procedures'
+    | '/procedures/$procedureId'
+    | '/staff/login'
   id:
     | '__root__'
     | '/'
@@ -80,6 +96,7 @@ export interface FileRouteTypes {
     | '/journey'
     | '/procedures'
     | '/procedures/$procedureId'
+    | '/staff/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -87,6 +104,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   JourneyRoute: typeof JourneyRoute
   ProceduresRoute: typeof ProceduresRouteWithChildren
+  StaffLoginRoute: typeof StaffLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -119,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff/login': {
+      id: '/staff/login'
+      path: '/staff/login'
+      fullPath: '/staff/login'
+      preLoaderRoute: typeof StaffLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/procedures/$procedureId': {
       id: '/procedures/$procedureId'
       path: '/$procedureId'
@@ -146,6 +171,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   JourneyRoute: JourneyRoute,
   ProceduresRoute: ProceduresRouteWithChildren,
+  StaffLoginRoute: StaffLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
