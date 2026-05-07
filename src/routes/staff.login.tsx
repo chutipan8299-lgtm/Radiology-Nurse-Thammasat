@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { Stethoscope, Lock, Mail, Eye, EyeOff, ShieldCheck, ArrowLeft, KeyRound, Building2, Loader2, CheckCircle2 } from "lucide-react";
+import { Stethoscope, Lock, Mail, Eye, EyeOff, ShieldCheck, ArrowLeft, KeyRound, Building2, Loader2, CheckCircle2, Heart } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { useMode } from "@/contexts/mode-context";
 import { cn } from "@/lib/utils";
