@@ -379,6 +379,165 @@ export const procedures: Procedure[] = [
     staffNotes: ["Document probe used and exam protocol."],
     checklist: ["Patient prep verified", "Probe disinfected"],
   },
+  {
+    id: "rfa",
+    name: "Radiofrequency Ablation (RFA)",
+    category: "Interventional Radiology",
+    type: "Treatment",
+    complexity: "Invasive",
+    description:
+      "Image-guided treatment that uses heat from radio waves to destroy tumors, most commonly in the liver.",
+    whoFor: "Patients with small liver tumors or selected tumors in kidney, lung, or bone.",
+    duration: "1–2 hours",
+    keywords: ["rfa", "ablation", "liver", "tumor", "radiofrequency"],
+    risks: ["Pain at the site", "Fever after the procedure", "Bleeding or infection (uncommon)"],
+    preparation: [
+      "Fast 6–8 hours before the procedure.",
+      "Stop blood thinners as directed.",
+      "Inform the team of allergies and medications.",
+    ],
+    steps: [
+      "Sedation and local anesthetic are given.",
+      "A thin needle electrode is guided into the tumor using imaging.",
+      "Radio waves heat and destroy the tumor tissue.",
+      "Needle is removed and the site is dressed.",
+    ],
+    aftercare: [
+      "Stay in hospital overnight for observation.",
+      "Avoid heavy activity for 1 week.",
+      "Attend follow-up imaging as scheduled.",
+    ],
+    faq: [
+      { q: "Will I feel the heat?", a: "No — sedation and local anesthetic keep you comfortable." },
+    ],
+  },
+  {
+    id: "ptbd",
+    name: "Percutaneous Transhepatic Biliary Drainage (PTBD)",
+    category: "Interventional Radiology",
+    type: "Treatment",
+    complexity: "Invasive",
+    description:
+      "A drainage tube placed through the skin into the bile ducts to relieve blockage and jaundice.",
+    whoFor: "Patients with bile duct obstruction from tumors or stones.",
+    duration: "1–2 hours",
+    keywords: ["ptbd", "biliary", "drainage", "bile", "jaundice"],
+    risks: ["Bleeding", "Infection or cholangitis", "Bile leakage"],
+    preparation: [
+      "Fast 6 hours before the procedure.",
+      "Blood tests including coagulation are required.",
+      "Antibiotics may be given before the procedure.",
+    ],
+    steps: [
+      "Local anesthetic and sedation are given.",
+      "A needle is guided into the bile duct under imaging.",
+      "A drainage catheter is placed and secured to the skin.",
+    ],
+    aftercare: [
+      "Keep the drainage bag below the level of the liver.",
+      "Record daily output and report fever or pain.",
+      "Attend scheduled tube care and exchange visits.",
+    ],
+    faq: [
+      { q: "How long will the tube stay in?", a: "It depends on your condition — from weeks to long-term." },
+    ],
+  },
+  {
+    id: "tace",
+    name: "Transarterial Chemoembolization (TACE)",
+    category: "Interventional Radiology",
+    type: "Treatment",
+    complexity: "Invasive",
+    description:
+      "Targeted liver cancer treatment that delivers chemotherapy directly to the tumor and blocks its blood supply.",
+    whoFor: "Patients with liver cancer not suitable for surgery.",
+    duration: "1–3 hours",
+    keywords: ["tace", "chemoembolization", "liver cancer", "interventional"],
+    risks: ["Post-embolization syndrome (fever, pain, nausea)", "Liver function changes", "Bleeding at puncture site"],
+    preparation: [
+      "Fast 6 hours before the procedure.",
+      "Recent liver function and imaging are required.",
+      "Stop blood thinners as directed.",
+    ],
+    steps: [
+      "A catheter is inserted via the groin artery.",
+      "Catheter is guided to the artery feeding the tumor.",
+      "Chemotherapy and embolic agents are injected.",
+      "Catheter is removed and pressure applied.",
+    ],
+    aftercare: [
+      "Bed rest for 4–6 hours.",
+      "Expect mild fever or pain for a few days — controlled with medication.",
+      "Follow-up imaging in 4–6 weeks.",
+    ],
+    faq: [
+      { q: "How many sessions are needed?", a: "Often more than one, depending on response." },
+    ],
+  },
+  {
+    id: "picc-line",
+    name: "PICC Line Insertion",
+    category: "Interventional Radiology",
+    type: "Treatment",
+    complexity: "Invasive",
+    description:
+      "A long, soft catheter placed in an arm vein for long-term IV medication, chemotherapy, or nutrition.",
+    whoFor: "Patients needing IV therapy for several weeks or longer.",
+    duration: "30–45 minutes",
+    keywords: ["picc", "central line", "iv", "catheter", "chemotherapy"],
+    risks: ["Bleeding or bruising", "Infection", "Catheter blockage or clot"],
+    preparation: [
+      "No fasting required in most cases.",
+      "Inform the team of allergies and medications.",
+      "Wear a short-sleeve shirt for easy access.",
+    ],
+    steps: [
+      "Local anesthetic is applied at the upper arm.",
+      "Ultrasound is used to find a suitable vein.",
+      "Catheter is advanced to a large central vein.",
+      "Position is confirmed by imaging and dressing applied.",
+    ],
+    aftercare: [
+      "Keep the dressing clean and dry.",
+      "Weekly dressing change by a nurse.",
+      "Report redness, swelling, or fever immediately.",
+    ],
+    faq: [
+      { q: "Can I shower with a PICC?", a: "Yes, with a waterproof cover over the dressing." },
+    ],
+  },
+  {
+    id: "vascular-intervention",
+    name: "Vascular Intervention",
+    category: "Interventional Radiology",
+    type: "Treatment",
+    complexity: "Invasive",
+    description:
+      "Minimally invasive image-guided procedures to treat narrowed, blocked, or abnormal blood vessels — including angioplasty and stenting.",
+    whoFor: "Patients with vascular disease, dialysis access problems, or vascular malformations.",
+    duration: "1–3 hours",
+    keywords: ["vascular", "angioplasty", "stent", "balloon", "fistula"],
+    risks: ["Bleeding at puncture site", "Vessel injury (rare)", "Contrast reaction"],
+    preparation: [
+      "Fast 6 hours before the procedure.",
+      "Inform the team of allergies and kidney function.",
+      "Stop blood thinners as directed.",
+    ],
+    steps: [
+      "Local anesthetic at the access site (groin or arm).",
+      "Catheter and wire are guided to the target vessel.",
+      "Balloon, stent, or other device is used as needed.",
+      "Catheter is removed and pressure applied.",
+    ],
+    aftercare: [
+      "Bed rest 4–6 hours.",
+      "Drink fluids to flush contrast.",
+      "Watch for swelling, bleeding, or coldness in the limb.",
+    ],
+    faq: [
+      { q: "Will I be awake?", a: "Yes, with local anesthetic. Sedation can be added if needed." },
+    ],
+  },
 ];
 
 export const categories: Category[] = [
