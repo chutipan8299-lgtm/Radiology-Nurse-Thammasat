@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { Lock, Eye, EyeOff, ArrowLeft, Loader2, CheckCircle2 } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft, Loader2, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { useMode } from "@/contexts/mode-context";
 import { cn } from "@/lib/utils";
@@ -22,47 +22,31 @@ const copy = {
     brand: "Radiology Nursing Unit",
     eyebrow: "Staff portal",
     title: "Welcome back",
-    subtitle: "Sign in to access protocols and clinical resources.",
-    email: "Hospital email",
-    emailPlaceholder: "name@hospital.org",
+    subtitle: "Sign in to continue.",
     password: "Password",
     passwordPlaceholder: "••••••••",
-    employeeId: "Employee ID",
+    employeeId: "Staff ID",
     idPlaceholder: "e.g. RNU-00421",
-    remember: "Remember me",
     forgot: "Forgot password?",
-    submit: "Sign in",
-    sso: "Continue with hospital SSO",
-    or: "or",
+    submit: "Login",
     backHome: "Back to patient site",
-    contactIT: "Contact IT support",
-    invalid: "Please enter a valid hospital email and password.",
+    invalid: "Please enter a valid Staff ID and password.",
     success: "Signed in. Redirecting…",
-    quote: "Calm, coordinated, compassionate care for every patient.",
-    quoteAuthor: "Radiology Nursing Unit",
   },
   th: {
     brand: "หน่วยพยาบาลรังสีวิทยา",
     eyebrow: "พอร์ทัลเจ้าหน้าที่",
     title: "ยินดีต้อนรับกลับ",
-    subtitle: "เข้าสู่ระบบเพื่อเข้าถึงโปรโตคอลและทรัพยากรทางคลินิก",
-    email: "อีเมลโรงพยาบาล",
-    emailPlaceholder: "name@hospital.org",
+    subtitle: "เข้าสู่ระบบเพื่อดำเนินการต่อ",
     password: "รหัสผ่าน",
     passwordPlaceholder: "••••••••",
     employeeId: "รหัสพนักงาน",
     idPlaceholder: "เช่น RNU-00421",
-    remember: "จดจำฉัน",
     forgot: "ลืมรหัสผ่าน?",
     submit: "เข้าสู่ระบบ",
-    sso: "เข้าสู่ระบบด้วย SSO โรงพยาบาล",
-    or: "หรือ",
     backHome: "กลับไปหน้าผู้ป่วย",
-    contactIT: "ติดต่อฝ่าย IT",
-    invalid: "กรุณากรอกอีเมลโรงพยาบาลและรหัสผ่านให้ถูกต้อง",
+    invalid: "กรุณากรอกรหัสพนักงานและรหัสผ่านให้ถูกต้อง",
     success: "เข้าสู่ระบบสำเร็จ กำลังนำคุณไป…",
-    quote: "การดูแลที่สงบ ประสานงาน และเปี่ยมด้วยความเมตตาสำหรับผู้ป่วยทุกคน",
-    quoteAuthor: "หน่วยพยาบาลรังสีวิทยา",
   },
 };
 
@@ -72,16 +56,14 @@ function StaffLoginPage() {
   const navigate = useNavigate();
   const c = copy[lang];
 
-  const [email, setEmail] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
-  const [remember, setRemember] = useState(true);
   const [status, setStatus] = useState<"idle" | "error" | "loading" | "success">("idle");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!email.includes("@") || password.length < 6) {
+    if (employeeId.trim().length < 3 || password.length < 6) {
       setStatus("error");
       return;
     }
@@ -94,152 +76,99 @@ function StaffLoginPage() {
   };
 
   return (
-    <div className="relative -mt-8 min-h-[calc(100vh-4rem)] bg-background">
-      <div className="grid min-h-[calc(100vh-4rem)] lg:grid-cols-2">
-        {/* Left: brand panel */}
-        <aside className="relative hidden overflow-hidden bg-primary/5 lg:block">
-          <div className="absolute inset-0 bg-[var(--gradient-hero)] opacity-30" />
-          <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
-            <div className="flex items-center gap-2.5">
-              <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-              <span className="text-sm font-medium tracking-tight text-foreground">{c.brand}</span>
-            </div>
-            <div className="max-w-md">
-              <p className="text-2xl font-light leading-relaxed tracking-tight text-foreground xl:text-3xl">
-                "{c.quote}"
-              </p>
-              <p className="mt-6 text-sm text-muted-foreground">— {c.quoteAuthor}</p>
-            </div>
-            <div />
-          </div>
-        </aside>
+    <div className="relative -mt-8 flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-gradient-to-br from-pink-50 via-background to-pink-100/60 px-4 py-12">
+      <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
-        {/* Right: form */}
-        <main className="flex items-center justify-center px-6 py-12 sm:px-10">
-          <div className="w-full max-w-sm">
-            <Link
-              to="/"
-              className="mb-10 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              {c.backHome}
-            </Link>
+      <div className="relative w-full max-w-sm">
+        <Link
+          to="/"
+          className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          {c.backHome}
+        </Link>
 
-            <div className="mb-1 text-xs font-medium uppercase tracking-wider text-primary">
+        <div className="rounded-2xl border border-border/60 bg-card/90 p-8 shadow-xl shadow-primary/5 backdrop-blur sm:p-10">
+          <div className="mb-8 text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-pink-400 text-primary-foreground shadow-md shadow-primary/30">
+              <span className="text-lg font-semibold">R</span>
+            </div>
+            <div className="text-[11px] font-medium uppercase tracking-wider text-primary">
               {c.eyebrow}
             </div>
-            <h1 className="text-3xl font-semibold tracking-tight text-foreground">{c.title}</h1>
-            <p className="mt-2 text-sm text-muted-foreground">{c.subtitle}</p>
-
-            <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-              <CleanField
-                id="email"
-                label={c.email}
-                type="email"
-                value={email}
-                onChange={setEmail}
-                placeholder={c.emailPlaceholder}
-                autoComplete="email"
-                required
-              />
-              <CleanField
-                id="employeeId"
-                label={c.employeeId}
-                value={employeeId}
-                onChange={setEmployeeId}
-                placeholder={c.idPlaceholder}
-                autoComplete="username"
-              />
-
-              <div>
-                <div className="mb-1.5 flex items-center justify-between">
-                  <label htmlFor="password" className="text-sm font-medium text-foreground">
-                    {c.password}
-                  </label>
-                  <button type="button" className="text-xs text-primary transition-colors hover:text-primary/80">
-                    {c.forgot}
-                  </button>
-                </div>
-                <div className="relative">
-                  <input
-                    id="password"
-                    type={showPwd ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    autoComplete="current-password"
-                    placeholder={c.passwordPlaceholder}
-                    required
-                    className="h-11 w-full rounded-lg border border-input bg-background px-3.5 pr-10 text-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPwd((s) => !s)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="Toggle password visibility"
-                  >
-                    {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
-              </div>
-
-              <label className="flex cursor-pointer select-none items-center gap-2 text-sm text-muted-foreground">
-                <input
-                  type="checkbox"
-                  checked={remember}
-                  onChange={(e) => setRemember(e.target.checked)}
-                  className="h-4 w-4 rounded border-input accent-[hsl(var(--primary))]"
-                />
-                {c.remember}
-              </label>
-
-              {status === "error" && (
-                <p role="alert" className="text-xs text-destructive">
-                  {c.invalid}
-                </p>
-              )}
-              {status === "success" && (
-                <p className="inline-flex items-center gap-1.5 text-xs text-primary">
-                  <CheckCircle2 className="h-3.5 w-3.5" />
-                  {c.success}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className={cn(
-                  "inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary text-sm font-medium text-primary-foreground transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60",
-                )}
-              >
-                {status === "loading" ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Lock className="h-3.5 w-3.5" />
-                )}
-                {c.submit}
-              </button>
-
-              <div className="flex items-center gap-3 text-[11px] uppercase tracking-wider text-muted-foreground">
-                <div className="h-px flex-1 bg-border" />
-                {c.or}
-                <div className="h-px flex-1 bg-border" />
-              </div>
-
-              <button
-                type="button"
-                className="inline-flex h-11 w-full items-center justify-center rounded-lg border border-border bg-background text-sm font-medium text-foreground transition hover:bg-muted/60"
-              >
-                {c.sso}
-              </button>
-            </form>
-
-            <p className="mt-8 text-center text-xs text-muted-foreground">
-              <a href="mailto:it@hospital.org" className="text-primary hover:underline">
-                {c.contactIT}
-              </a>
-            </p>
+            <h1 className="mt-1 text-2xl font-semibold tracking-tight text-foreground">{c.title}</h1>
+            <p className="mt-1.5 text-sm text-muted-foreground">{c.subtitle}</p>
           </div>
-        </main>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <CleanField
+              id="employeeId"
+              label={c.employeeId}
+              value={employeeId}
+              onChange={setEmployeeId}
+              placeholder={c.idPlaceholder}
+              autoComplete="username"
+              required
+            />
+
+            <div>
+              <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-foreground">
+                {c.password}
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPwd ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                  placeholder={c.passwordPlaceholder}
+                  required
+                  className="h-11 w-full rounded-full border border-input bg-background px-4 pr-11 text-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPwd((s) => !s)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label="Toggle password visibility"
+                >
+                  {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+              <div className="mt-2 text-right">
+                <button type="button" className="text-xs text-primary transition-colors hover:text-primary/80">
+                  {c.forgot}
+                </button>
+              </div>
+            </div>
+
+            {status === "error" && (
+              <p role="alert" className="text-center text-xs text-destructive">
+                {c.invalid}
+              </p>
+            )}
+            {status === "success" && (
+              <p className="inline-flex w-full items-center justify-center gap-1.5 text-xs text-primary">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                {c.success}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className={cn(
+                "inline-flex h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-pink-500 via-primary to-pink-400 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/25 transition hover:shadow-primary/40 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60",
+              )}
+            >
+              {status === "loading" && <Loader2 className="h-4 w-4 animate-spin" />}
+              {c.submit}
+            </button>
+          </form>
+        </div>
+
+        <p className="mt-6 text-center text-xs text-muted-foreground">{c.brand}</p>
       </div>
     </div>
   );
@@ -270,7 +199,7 @@ function CleanField({ id, label, value, onChange, placeholder, type = "text", au
         placeholder={placeholder}
         autoComplete={autoComplete}
         required={required}
-        className="h-11 w-full rounded-lg border border-input bg-background px-3.5 text-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15"
+        className="h-11 w-full rounded-full border border-input bg-background px-4 text-sm transition focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
     </div>
   );
