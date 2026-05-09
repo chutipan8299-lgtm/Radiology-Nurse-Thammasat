@@ -70,8 +70,11 @@ function StaffLoginPage() {
     setStatus("loading");
     setTimeout(() => {
       setMode("staff");
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("rnu-staff-id", employeeId.trim());
+      }
       setStatus("success");
-      setTimeout(() => navigate({ to: "/" }), 700);
+      setTimeout(() => navigate({ to: "/staff/select" }), 700);
     }, 800);
   };
 
