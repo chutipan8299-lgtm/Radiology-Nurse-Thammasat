@@ -17,7 +17,7 @@ function StaffLoginPage() {
 
   React.useEffect(() => {
     if (!loading && user) {
-      navigate({ to: "/staff/dashboard" });
+      navigate({ to: "/staff/select", replace: true });
     }
   }, [user, loading, navigate]);
 
@@ -43,7 +43,10 @@ function StaffLoginPage() {
       setError("รหัสบัตรประชาชนหรือรหัสผ่านไม่ถูกต้อง");
       setSubmitting(false);
     } else {
-      navigate({ to: "/staff/dashboard" });
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("rnu-staff-id", nationalId);
+      }
+      navigate({ to: "/staff/select", replace: true });
     }
   };
 
