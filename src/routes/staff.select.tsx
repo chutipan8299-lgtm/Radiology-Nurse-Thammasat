@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import { useMode } from "@/contexts/mode-context";
+import { useAuth } from "@/contexts/auth-context";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/staff/select")({
@@ -78,7 +79,8 @@ type Choice = "management" | "equipment";
 
 function StaffSelectPage() {
   const { lang } = useLanguage();
-  const { mode } = useMode();
+  const { setMode } = useMode();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
   const c = copy[lang];
 
@@ -87,21 +89,32 @@ function StaffSelectPage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (mode !== "staff") {
-      navigate({ to: "/staff/login" });
+    if (loading) return;
+    if (!user) {
+      navigate({ to: "/staff/login", replace: true });
       return;
     }
-    setStaffId(window.localStorage.getItem("rnu-staff-id") ?? "");
+    setMode("staff");
+    const fromEmail = user.email?.replace("@staff.th", "") ?? "";
+    setStaffId(window.localStorage.getItem("rnu-staff-id") || fromEmail);
     const stored = window.localStorage.getItem("rnu-staff-system");
     if (stored === "management" || stored === "equipment") setLast(stored);
-  }, [mode, navigate]);
+  }, [user, loading, navigate, setMode]);
 
   const handleSelect = (choice: Choice) => {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("rnu-staff-system", choice);
     }
-    navigate({ to: "/" });
+    navigate({ to: "/staff/dashboard" });
   };
+
+  if (loading || !user) {
+    return (
+      <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div className="relative -mt-8 min-h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-pink-50 via-background to-pink-100/50 px-4 py-16">
