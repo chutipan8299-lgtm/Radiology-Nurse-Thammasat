@@ -13,6 +13,7 @@ import { Route as ProceduresRouteImport } from './routes/procedures'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StaffSelectRouteImport } from './routes/staff.select'
 import { Route as StaffLoginRouteImport } from './routes/staff.login'
 import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
 
@@ -36,6 +37,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffSelectRoute = StaffSelectRouteImport.update({
+  id: '/staff/select',
+  path: '/staff/select',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaffLoginRoute = StaffLoginRouteImport.update({
   id: '/staff/login',
   path: '/staff/login',
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/select': typeof StaffSelectRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/select': typeof StaffSelectRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/select': typeof StaffSelectRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/procedures'
     | '/procedures/$procedureId'
     | '/staff/login'
+    | '/staff/select'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/procedures'
     | '/procedures/$procedureId'
     | '/staff/login'
+    | '/staff/select'
   id:
     | '__root__'
     | '/'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/procedures'
     | '/procedures/$procedureId'
     | '/staff/login'
+    | '/staff/select'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   JourneyRoute: typeof JourneyRoute
   ProceduresRoute: typeof ProceduresRouteWithChildren
   StaffLoginRoute: typeof StaffLoginRoute
+  StaffSelectRoute: typeof StaffSelectRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/select': {
+      id: '/staff/select'
+      path: '/staff/select'
+      fullPath: '/staff/select'
+      preLoaderRoute: typeof StaffSelectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/staff/login': {
@@ -172,7 +192,17 @@ const rootRouteChildren: RootRouteChildren = {
   JourneyRoute: JourneyRoute,
   ProceduresRoute: ProceduresRouteWithChildren,
   StaffLoginRoute: StaffLoginRoute,
+  StaffSelectRoute: StaffSelectRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
