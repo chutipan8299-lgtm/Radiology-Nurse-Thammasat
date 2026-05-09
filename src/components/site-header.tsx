@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Heart, Menu, X, Stethoscope, User, Languages, LogIn } from "lucide-react";
 import { useMode } from "@/contexts/mode-context";
@@ -19,6 +19,18 @@ export function SiteHeader() {
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
+
+  const goPatient = () => {
+    setMode("patient");
+    navigate({ to: "/" });
+    setOpen(false);
+  };
+  const goStaff = () => {
+    setMode("staff");
+    navigate({ to: user ? "/staff/select" : "/staff/login" });
+    setOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-md">
@@ -64,7 +76,7 @@ export function SiteHeader() {
           </button>
           <div className="hidden items-center rounded-full border border-border bg-muted p-1 sm:flex">
             <button
-              onClick={() => setMode("patient")}
+              onClick={goPatient}
               className={cn(
                 "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all",
                 mode === "patient"
@@ -75,7 +87,7 @@ export function SiteHeader() {
               <User className="h-3.5 w-3.5" /> {t("mode.patient")}
             </button>
             <button
-              onClick={() => setMode("staff")}
+              onClick={goStaff}
               className={cn(
                 "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-all",
                 mode === "staff"
@@ -129,7 +141,7 @@ export function SiteHeader() {
             </button>
             <div className="mt-2 flex items-center rounded-full border border-border bg-muted p-1">
               <button
-                onClick={() => setMode("patient")}
+                onClick={goPatient}
                 className={cn(
                   "flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium",
                   mode === "patient" ? "bg-background text-primary shadow-sm" : "text-muted-foreground",
@@ -138,7 +150,7 @@ export function SiteHeader() {
                 <User className="h-3.5 w-3.5" /> {t("mode.patient")}
               </button>
               <button
-                onClick={() => setMode("staff")}
+                onClick={goStaff}
                 className={cn(
                   "flex flex-1 items-center justify-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium",
                   mode === "staff" ? "bg-background text-primary shadow-sm" : "text-muted-foreground",
