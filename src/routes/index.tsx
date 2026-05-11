@@ -63,8 +63,8 @@ function HomePage() {
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[var(--gradient-soft)]" />
-        <div className="absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full bg-[var(--gradient-hero)] opacity-20 blur-3xl" />
+        <div className="absolute inset-0 -z-10 bg-(--gradient-soft)" />
+        <div className="absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full bg-(--gradient-hero) opacity-20 blur-3xl" />
         <div className="absolute -bottom-20 -left-20 -z-10 h-72 w-72 rounded-full bg-accent opacity-40 blur-3xl" />
 
         <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 md:px-6 md:pb-24 md:pt-20">
@@ -75,7 +75,7 @@ function HomePage() {
                 {mode === "patient" ? t("home.badge.patient") : t("home.badge.staff")}
               </div>
               <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
-                {t("home.title.prefix")} <span className="bg-[var(--gradient-hero)] bg-clip-text text-transparent">{t("home.title.highlight")}</span>
+                {t("home.title.prefix")} <span className="bg-(--gradient-hero) bg-clip-text text-transparent">{t("home.title.highlight")}</span>
               </h1>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
                 {t("home.subtitle")}
@@ -84,7 +84,7 @@ function HomePage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   to="/journey"
-                  className="group inline-flex items-center gap-2 rounded-full bg-[var(--gradient-hero)] px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5"
+                  className="group inline-flex items-center gap-2 rounded-full bg-(--gradient-hero) px-6 py-3 text-sm font-semibold text-primary-foreground shadow-(--shadow-soft) transition-transform hover:-translate-y-0.5"
                 >
                   {t("home.cta.prepare")}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -99,7 +99,7 @@ function HomePage() {
 
               {/* Search */}
               <div className="relative mt-8 max-w-xl">
-                <div className="flex items-center gap-2 rounded-2xl border border-border bg-background p-2 shadow-[var(--shadow-card)] focus-within:ring-2 focus-within:ring-ring">
+                <div className="flex items-center gap-2 rounded-2xl border border-border bg-background p-2 shadow-[var(--shadow-card  )] focus-within:ring-2 focus-within:ring-ring">
                   <Search className="ml-2 h-5 w-5 text-muted-foreground" />
                   <input
                     value={q}
@@ -138,8 +138,8 @@ function HomePage() {
 
             {/* Hero illustration card */}
             <div className="relative">
-              <div className="absolute inset-0 -z-10 rounded-[2rem] bg-[var(--gradient-hero)] opacity-30 blur-2xl" />
-              <div className="rounded-[2rem] border border-border bg-background p-6 shadow-[var(--shadow-soft)] md:p-8">
+              <div className="absolute inset-0 -z-10 rounded-[2rem] bg-(--gradient-hero) opacity-30 blur-2xl" />
+              <div className="rounded-[2rem] border border-border bg-background p-6 shadow-(--shadow-soft) md:p-8">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="h-2.5 w-2.5 rounded-full bg-primary" />
@@ -187,9 +187,9 @@ function HomePage() {
               key={s.name}
               to="/procedures"
               search={{ category: s.name }}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-(--shadow-card) transition-all hover:-translate-y-1 hover:shadow-(--shadow-soft)"
             >
-              <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-[var(--gradient-hero)] opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
+              <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-(--gradient-hero) opacity-0 blur-2xl transition-opacity group-hover:opacity-30" />
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary">
                 <s.icon className="h-6 w-6" />
               </div>
@@ -205,7 +205,7 @@ function HomePage() {
 
       {/* Quick access — staff focused but useful for all */}
       <section className="mx-auto max-w-7xl px-4 pb-16 md:px-6">
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-[var(--shadow-card)] md:p-10">
+        <div className="rounded-3xl border border-border bg-card p-6 shadow-(--shadow-card) md:p-10">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h2 className="text-xl font-bold text-foreground md:text-2xl">

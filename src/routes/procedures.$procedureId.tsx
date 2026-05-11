@@ -83,7 +83,7 @@ function ProcedureDetail() {
           <p className="mt-3 text-base leading-relaxed text-muted-foreground">{p.description}</p>
 
           {/* Media placeholder */}
-          <div className="mt-8 aspect-video overflow-hidden rounded-2xl border border-border bg-[var(--gradient-soft)]">
+          <div className="mt-8 aspect-video overflow-hidden rounded-2xl border border-border bg-(--gradient-soft)">
             <div className="flex h-full w-full items-center justify-center text-muted-foreground">
               <div className="text-center">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-background shadow-md">
@@ -121,7 +121,7 @@ function ProcedureDetail() {
             <ol className="space-y-3">
               {p.steps.map((s: string, i: number) => (
                 <li key={s} className="flex gap-3">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--gradient-hero)] text-xs font-semibold text-primary-foreground">{i + 1}</span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-(--gradient-hero) text-xs font-semibold text-primary-foreground">{i + 1}</span>
                   <span>{s}</span>
                 </li>
               ))}
@@ -183,10 +183,10 @@ function ProcedureDetail() {
 
         {/* Sticky sidebar */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-(--shadow-card)">
             <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t("detail.needHelp")}</div>
             <div className="mt-4 space-y-3">
-              <a href="tel:+6621234567" className="flex items-center justify-between rounded-xl bg-[var(--gradient-hero)] px-4 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)]">
+              <a href="tel:+6621234567" className="flex items-center justify-between rounded-xl bg-(--gradient-hero) px-4 py-3 text-sm font-semibold text-primary-foreground shadow-(--shadow-soft)">
                 <span className="inline-flex items-center gap-2"><Phone className="h-4 w-4" /> {t("detail.contactHospital")}</span>
                 <ArrowRight className="h-4 w-4" />
               </a>

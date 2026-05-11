@@ -129,7 +129,7 @@ function ProceduresPage() {
             placeholder={tr("home.search.placeholder")}
             className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground"
           />
-          <button className="hidden rounded-full bg-[var(--gradient-hero)] px-5 py-2 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] transition hover:opacity-95 sm:inline-flex">
+          <button className="hidden rounded-full bg-(--gradient-hero) px-5 py-2 text-sm font-medium text-primary-foreground shadow-(--shadow-soft) transition hover:opacity-95 sm:inline-flex">
             {tr("home.search.button")}
           </button>
         </div>
@@ -204,7 +204,7 @@ function ProceduresPage() {
 
                   <div className="mt-5 flex items-center justify-between border-t border-border/70 pt-4">
                     <span className="text-xs text-muted-foreground">{tr(`proc.type.${p.type}`)}</span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--gradient-hero)] px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm transition-transform group-hover:translate-x-0.5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-(--gradient-hero) px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm transition-transform group-hover:translate-x-0.5">
                       ดูรายละเอียด
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>
@@ -231,7 +231,7 @@ function FilterPill({ label, active, onClick }: { label: string; active: boolean
       className={
         "rounded-full border px-4 py-1.5 text-xs font-medium transition-all " +
         (active
-          ? "border-transparent bg-[var(--gradient-hero)] text-primary-foreground shadow-[0_4px_14px_-4px_oklch(0.62_0.19_0/0.4)]"
+          ? "border-transparent bg-(--gradient-hero) text-primary-foreground shadow-[0_4px_14px_-4px_oklch(0.62_0.19_0/0.4)]"
           : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-primary")
       }
     >

@@ -36,7 +36,7 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)]">
+        <div className="overflow-hidden rounded-2xl border border-border shadow-(--shadow-card)">
           <iframe
             title="Hospital location"
             src="https://www.openstreetmap.org/export/embed.html?bbox=100.50%2C13.74%2C100.55%2C13.78&layer=mapnik"
@@ -51,7 +51,7 @@ function ContactPage() {
 
 function ContactCard({ icon: Icon, title, lines }: { icon: typeof Phone; title: string; lines: string[] }) {
   return (
-    <div className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
+    <div className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 shadow-(--shadow-card)">
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
         <Icon className="h-5 w-5" />
       </div>
