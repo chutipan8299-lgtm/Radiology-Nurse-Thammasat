@@ -13,10 +13,14 @@ import { Route as ProceduresRouteImport } from './routes/procedures'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StaffStatisticsRouteImport } from './routes/staff.statistics'
 import { Route as StaffSelectRouteImport } from './routes/staff.select'
+import { Route as StaffPatientsRouteImport } from './routes/staff.patients'
 import { Route as StaffLoginRouteImport } from './routes/staff.login'
+import { Route as StaffInternalRouteImport } from './routes/staff.internal'
 import { Route as StaffDashboardRouteImport } from './routes/staff.dashboard'
 import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
+import { Route as StaffMedicalRouteImport } from './routes/Staff.medical'
 
 const ProceduresRoute = ProceduresRouteImport.update({
   id: '/procedures',
@@ -38,14 +42,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffStatisticsRoute = StaffStatisticsRouteImport.update({
+  id: '/staff/statistics',
+  path: '/staff/statistics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaffSelectRoute = StaffSelectRouteImport.update({
   id: '/staff/select',
   path: '/staff/select',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffPatientsRoute = StaffPatientsRouteImport.update({
+  id: '/staff/patients',
+  path: '/staff/patients',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaffLoginRoute = StaffLoginRouteImport.update({
   id: '/staff/login',
   path: '/staff/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffInternalRoute = StaffInternalRouteImport.update({
+  id: '/staff/internal',
+  path: '/staff/internal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StaffDashboardRoute = StaffDashboardRouteImport.update({
@@ -58,26 +77,39 @@ const ProceduresProcedureIdRoute = ProceduresProcedureIdRouteImport.update({
   path: '/$procedureId',
   getParentRoute: () => ProceduresRoute,
 } as any)
+const StaffMedicalRoute = StaffMedicalRouteImport.update({
+  id: '/Staff/medical',
+  path: '/Staff/medical',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
+  '/Staff/medical': typeof StaffMedicalRoute
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/internal': typeof StaffInternalRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/patients': typeof StaffPatientsRoute
   '/staff/select': typeof StaffSelectRoute
+  '/staff/statistics': typeof StaffStatisticsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
+  '/Staff/medical': typeof StaffMedicalRoute
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/internal': typeof StaffInternalRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/patients': typeof StaffPatientsRoute
   '/staff/select': typeof StaffSelectRoute
+  '/staff/statistics': typeof StaffStatisticsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,10 +117,14 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
+  '/Staff/medical': typeof StaffMedicalRoute
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/internal': typeof StaffInternalRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/patients': typeof StaffPatientsRoute
   '/staff/select': typeof StaffSelectRoute
+  '/staff/statistics': typeof StaffStatisticsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -97,30 +133,42 @@ export interface FileRouteTypes {
     | '/contact'
     | '/journey'
     | '/procedures'
+    | '/Staff/medical'
     | '/procedures/$procedureId'
     | '/staff/dashboard'
+    | '/staff/internal'
     | '/staff/login'
+    | '/staff/patients'
     | '/staff/select'
+    | '/staff/statistics'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contact'
     | '/journey'
     | '/procedures'
+    | '/Staff/medical'
     | '/procedures/$procedureId'
     | '/staff/dashboard'
+    | '/staff/internal'
     | '/staff/login'
+    | '/staff/patients'
     | '/staff/select'
+    | '/staff/statistics'
   id:
     | '__root__'
     | '/'
     | '/contact'
     | '/journey'
     | '/procedures'
+    | '/Staff/medical'
     | '/procedures/$procedureId'
     | '/staff/dashboard'
+    | '/staff/internal'
     | '/staff/login'
+    | '/staff/patients'
     | '/staff/select'
+    | '/staff/statistics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -128,9 +176,13 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   JourneyRoute: typeof JourneyRoute
   ProceduresRoute: typeof ProceduresRouteWithChildren
+  StaffMedicalRoute: typeof StaffMedicalRoute
   StaffDashboardRoute: typeof StaffDashboardRoute
+  StaffInternalRoute: typeof StaffInternalRoute
   StaffLoginRoute: typeof StaffLoginRoute
+  StaffPatientsRoute: typeof StaffPatientsRoute
   StaffSelectRoute: typeof StaffSelectRoute
+  StaffStatisticsRoute: typeof StaffStatisticsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -163,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff/statistics': {
+      id: '/staff/statistics'
+      path: '/staff/statistics'
+      fullPath: '/staff/statistics'
+      preLoaderRoute: typeof StaffStatisticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/staff/select': {
       id: '/staff/select'
       path: '/staff/select'
@@ -170,11 +229,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffSelectRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff/patients': {
+      id: '/staff/patients'
+      path: '/staff/patients'
+      fullPath: '/staff/patients'
+      preLoaderRoute: typeof StaffPatientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/staff/login': {
       id: '/staff/login'
       path: '/staff/login'
       fullPath: '/staff/login'
       preLoaderRoute: typeof StaffLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/internal': {
+      id: '/staff/internal'
+      path: '/staff/internal'
+      fullPath: '/staff/internal'
+      preLoaderRoute: typeof StaffInternalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/staff/dashboard': {
@@ -190,6 +263,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/procedures/$procedureId'
       preLoaderRoute: typeof ProceduresProcedureIdRouteImport
       parentRoute: typeof ProceduresRoute
+    }
+    '/Staff/medical': {
+      id: '/Staff/medical'
+      path: '/Staff/medical'
+      fullPath: '/Staff/medical'
+      preLoaderRoute: typeof StaffMedicalRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -211,9 +291,13 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   JourneyRoute: JourneyRoute,
   ProceduresRoute: ProceduresRouteWithChildren,
+  StaffMedicalRoute: StaffMedicalRoute,
   StaffDashboardRoute: StaffDashboardRoute,
+  StaffInternalRoute: StaffInternalRoute,
   StaffLoginRoute: StaffLoginRoute,
+  StaffPatientsRoute: StaffPatientsRoute,
   StaffSelectRoute: StaffSelectRoute,
+  StaffStatisticsRoute: StaffStatisticsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

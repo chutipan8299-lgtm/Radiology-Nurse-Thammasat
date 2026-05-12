@@ -10,7 +10,7 @@ type MenuItem = {
   icon: React.ReactNode;
   label: string;
   desc: string;
-  soon?: boolean;
+  navigateTo?: string;
 };
 
 const internalItems: MenuItem[] = [
@@ -28,6 +28,7 @@ const internalItems: MenuItem[] = [
     icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>,
     label: "บริหารจัดการภายใน",
     desc: "นโยบายและระเบียบปฏิบัติ",
+    navigateTo: "/staff/internal",
   },
   {
     icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>,
@@ -41,28 +42,38 @@ const medicalItems: MenuItem[] = [
     icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" /></svg>,
     label: "เครื่องมือแพทย์",
     desc: "รายการและสถานะอุปกรณ์",
+    navigateTo: "/staff/medical",
   },
   {
     icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>,
     label: "การบำรุงรักษา",
     desc: "ตารางและประวัติซ่อมบำรุง",
+    navigateTo: "/staff/medical",
   },
   {
     icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>,
     label: "แจ้งซ่อม / ปัญหา",
     desc: "รายงานความผิดปกติ",
+    navigateTo: "/staff/medical",
   },
   {
     icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>,
     label: "เอกสารคู่มือ",
     desc: "คู่มือการใช้งานอุปกรณ์",
+    navigateTo: "/staff/medical",
   },
 ];
 
-function Card({ item, accent = false }: { item: MenuItem; accent?: boolean }) {
+function Card({ item, accent = false, onNavigate }: {
+  item: MenuItem;
+  accent?: boolean;
+  onNavigate: (to: string) => void;
+}) {
   return (
     <button
-      className="group w-full text-left bg-card border border-border rounded-2xl p-4 hover:border-primary/30 transition-all duration-200"
+      onClick={() => item.navigateTo && onNavigate(item.navigateTo)}
+      className={`group w-full text-left bg-card border border-border rounded-2xl p-4 transition-all duration-200
+        ${item.navigateTo ? "hover:border-primary/40 hover:shadow-md cursor-pointer" : "cursor-default"}`}
       style={{ boxShadow: "var(--shadow-card)" }}
     >
       <div className="flex items-center gap-3">
@@ -73,7 +84,10 @@ function Card({ item, accent = false }: { item: MenuItem; accent?: boolean }) {
           <p className="text-sm font-medium text-foreground leading-snug">{item.label}</p>
           <p className="text-xs text-muted-foreground mt-0.5 truncate">{item.desc}</p>
         </div>
-        <svg className="w-4 h-4 text-muted-foreground/40 shrink-0 group-hover:text-primary/60 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg
+          className={`w-4 h-4 shrink-0 transition-all ${item.navigateTo ? "text-muted-foreground/40 group-hover:text-primary/60 group-hover:translate-x-0.5" : "text-muted-foreground/20"}`}
+          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
       </div>
@@ -94,13 +108,10 @@ function StaffDashboardPage() {
     navigate({ to: "/staff/login" });
   };
 
-  // แสดงรหัสบัตรแบบ mask: x-xxxx-xxxxx-xx-x
   const rawId = user?.email?.replace("@staff.th", "") ?? "";
   const maskedId = rawId.length === 13
     ? `${rawId[0]}-${rawId.slice(1, 5)}-${rawId.slice(5, 10)}-${rawId.slice(10, 12)}-${rawId[12]}`
     : rawId;
-
-  // ชื่อย่อจาก 2 ตัวแรกของรหัส
   const initials = rawId.slice(0, 2);
 
   if (loading || !user) {
@@ -113,8 +124,6 @@ function StaffDashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-
-      {/* Hero header */}
       <div className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-white" />
@@ -140,21 +149,14 @@ function StaffDashboardPage() {
             ออกจากระบบ
           </button>
         </div>
-
-        {/* Title inside hero */}
         <div className="relative max-w-3xl mx-auto px-5 pb-8">
           <h1 className="text-white text-2xl font-bold">สวัสดี 👋</h1>
           <p className="text-white/70 text-sm mt-1">ระบบจัดการรังสีวิทยา มหาวิทยาลัยธรรมศาสตร์</p>
         </div>
-
-        {/* Curved bottom */}
         <div className="h-5 bg-background rounded-t-[2rem] relative z-10" />
       </div>
 
-      {/* Content */}
       <div className="max-w-3xl mx-auto px-5 -mt-1 pb-10 space-y-7">
-
-        {/* บริหารภายใน */}
         <section>
           <div className="flex items-center gap-2 mb-3">
             <span className="w-1 h-4 rounded-full bg-primary inline-block" />
@@ -162,12 +164,11 @@ function StaffDashboardPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {internalItems.map((item) => (
-              <Card key={item.label} item={item} />
+              <Card key={item.label} item={item} onNavigate={(to) => navigate({ to: to as any })} />
             ))}
           </div>
         </section>
 
-        {/* เครื่องมือแพทย์ */}
         <section>
           <div className="flex items-center gap-2 mb-3">
             <span className="w-1 h-4 rounded-full bg-accent-foreground inline-block" />
@@ -175,7 +176,7 @@ function StaffDashboardPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {medicalItems.map((item) => (
-              <Card key={item.label} item={item} accent />
+              <Card key={item.label} item={item} accent onNavigate={(to) => navigate({ to: to as any })} />
             ))}
           </div>
         </section>
