@@ -10,14 +10,14 @@ const years = [2561, 2562, 2563, 2564, 2565, 2566, 2567, 2568];
 
 // ใส่ link ของแต่ละปีตรงนี้ได้เลย
 const yearLinks: Record<number, string> = {
-  2561: "#",
-  2562: "#",
-  2563: "#",
-  2564: "#",
-  2565: "#",
-  2566: "#",
-  2567: "#",
-  2568: "#",
+  2561: "https://docs.google.com/spreadsheets/d/18XBaqjE6zJL3yOZItWcw0uGOOXD71bjP/edit?usp=sharing&ouid=117722568353454588707&rtpof=true&sd=true",
+  2562: "https://docs.google.com/spreadsheets/d/1q4vGPLUWOKxe-eqH5Zxg2DuxUnWJZtd8/edit?usp=sharing&ouid=117722568353454588707&rtpof=true&sd=true",
+  2563: "https://docs.google.com/spreadsheets/d/17Wcbaue1k6MWGrdWQuhzNCU2um1hOXru/edit?usp=sharing&ouid=117722568353454588707&rtpof=true&sd=true",
+  2564: "https://docs.google.com/spreadsheets/d/1DeiYAcWPTmf_hJ_Jd_xagFLxk5kc2kerAw3oSm58sUE/edit?usp=sharing",
+  2565: "https://docs.google.com/spreadsheets/d/1K6qTu5P-d7fj3wEfx79Xs75nu43M7d8bgcpN476LABA/edit?usp=sharing",
+  2566: "https://docs.google.com/spreadsheets/d/1P1eCEuUc_T2CH8rYP4v-SEOdGQS6swkPp3lKfLjGJZQ/edit?usp=share_link",
+  2567: "https://docs.google.com/spreadsheets/d/1pApaQZ7M9WFbG3sSuwRX881Nmfm-Nk30xqOZ0xeEDrc/edit?usp=sharing",
+  2568: "https://docs.google.com/spreadsheets/d/1X50FZbfehP1SR7rfWt6f6NcNA2Icrofesjzg0eX3xFc/edit?usp=sharing",
 };
 
 function StaffStatisticsPage() {

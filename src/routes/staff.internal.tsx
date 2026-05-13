@@ -6,88 +6,78 @@ export const Route = createFileRoute("/staff/internal")({
   component: StaffInternalPage,
 });
 
-type SubItem = {
-  label: string;
-  href: string;
-};
+// ══════════════════════════════════════════════════════════════
+//  QUICK-ACCESS CARDS
+// ══════════════════════════════════════════════════════════════
 
+type SubItem = { label: string; href: string };
 type CardItem = {
   icon: string;
   label: string;
   href?: string;
-  navigateTo?: string;   // navigate ไปหน้าใหม่ในเว็บ
+  navigateTo?: string;
   subItems?: SubItem[];
 };
-
-type Section = {
-  title: string;
-  items: CardItem[];
-};
+type Section = { title: string; items: CardItem[] };
 
 const sections: Section[] = [
   {
     title: "ข้อมูลสำหรับบุคลากร",
     items: [
-      { icon: "📅", label: "ตารางขอเวร", href: "#" },
+      { icon: "📅", label: "ตารางขอเวร", href: "https://docs.google.com/spreadsheets/d/1cwx0GWF1CuPfbJZd-G6DbivwNWXPpJjJ56e3nDYBd8M/edit?gid=681129385#gid=681129385" },
       {
         icon: "📝", label: "บันทึกการอบรม",
-        subItems: [
-          { label: "บันทึกการอบรม 2566", href: "#" },
-          { label: "บันทึกการอบรม 2567", href: "#" },
-          { label: "บันทึกการอบรม 2568", href: "#" },
-        ],
+        navigateTo: "/staff/training-records",
       },
       { icon: "☢️", label: "ค่าสัมผัสรังสี", href: "#" },
-      { icon: "📊", label: "ตัวชี้วัด", href: "#" },
-      { icon: "📋", label: "การประเมินผลการปฏิบัติงาน", href: "#" },
+      { icon: "📊", label: "ตัวชี้วัด", 
+         navigateTo: "/staff/kpi",
+      },
+      { icon: "📋", label: "การประเมินผลการปฏิบัติงาน", href: "https://drive.google.com/drive/folders/1IEZ03Ep0t9uZFCDN0ox9zgBIIRKVZKz7https://drive.google.com/drive/folders/1IEZ03Ep0t9uZFCDN0ox9zgBIIRKVZKz7" },
       {
         icon: "👥", label: "ยอดผู้ป่วยส่งเวรตรวจการ",
         subItems: [
-          { label: "ยอดเวรตรวจการ 2566", href: "#" },
-          { label: "ยอดเวรตรวจการ เดิม", href: "#" },
+          { label: "ยอดเวรตรวจการ 2566", href: "https://docs.google.com/spreadsheets/d/1kYZP_cBYHRwbRXYj2aP9OwnsNjcu5qrsdr0g1moad9w/edit?usp=sharing" },
+          { label: "ยอดเวรตรวจการ เดิม", href: "https://docs.google.com/spreadsheets/d/1ULXrjSJzjEYEnXptqiYwGQO90S7r1w-r3wXujH5Uu10/edit#gid=203192161" },
         ],
       },
       { icon: "💰", label: "ตารางจ่ายงาน", href: "#" },
       {
         icon: "🗣️", label: "รายงานการประชุม",
         subItems: [
-          { label: "ปี 2561", href: "#" },
-          { label: "ปี 2562", href: "#" },
-          { label: "ปี 2563", href: "#" },
-          { label: "ปี 2564", href: "#" },
-          { label: "ปี 2565", href: "#" },
-          { label: "ปี 2566", href: "#" },
-          { label: "ปี 2567", href: "#" },
-          { label: "ปี 2568", href: "#" },
+          { label: "ปี 2561", href: "https://drive.google.com/drive/folders/1P2bwHc59QFHo4bppiD4I2RCyEYZLyHGJ?usp=sharing" },
+          { label: "ปี 2562", href: "https://drive.google.com/drive/folders/10AvdFtDwcq32EUgOOEQJx4TRgRFRdNLh?usp=sharing" },
+          { label: "ปี 2563", href: "https://drive.google.com/drive/folders/1AwaHdcLGn46B-ytmLzyy8GceuKGpRTPY?usp=sharing" },
+          { label: "ปี 2564", href: "https://drive.google.com/drive/folders/1XATU-BmfwNFx9YPdtCqsmQPCQOzviLT2?usp=sharing" },
+          { label: "ปี 2565", href: "https://drive.google.com/drive/folders/1zesRzvd2uhvXKkufjkUSzCiHIYROQ8BW?usp=sharing" },
+          { label: "ปี 2566", href: "https://drive.google.com/drive/folders/18UhYI0s5Nr7AVSPbp8GePXtDaDJORXtq?usp=sharing" },
+          { label: "ปี 2567", href: "https://drive.google.com/drive/folders/16sch2I-kein-IRmClT6J3YrIq8cESoRS?usp=sharing" },
+          { label: "ปี 2568", href: "https://drive.google.com/drive/folders/1Vyns-VRdRmCkRK2jEm5gsWgYDE18hfpu?usp=sharing" },
         ],
       },
-      { icon: "🏥", label: "ภาระงานแต่ละหน่วยงาน", href: "#" },
-      { icon: "📥", label: "Download เอกสาร", href: "#" },
-      { icon: "🏆", label: "รายงานผลการอบรม", href: "#" },
+      { icon: "🏥", label: "ภาระงานแต่ละหน่วยงาน", 
+         navigateTo: "/Staff/workload" },
+      { icon: "📥", label: "Download เอกสาร", 
+         navigateTo: "/staff/downloads" },
+      { icon: "🏆", label: "รายงานผลการอบรม", href: "https://drive.google.com/drive/folders/1yeIkBlA1uYz4r9jwJqjvdwK1nh4bARN2" },
     ],
   },
   {
     title: "Google Form สำหรับพยาบาลลงทะเบียนเพิ่มเติม",
     items: [
-      { icon: "📄", label: "Form เพิ่มเติมภาระงาน IR", href: "#" },
-      { icon: "📄", label: "RT ลงยอดเวรตรวจการ & ภาระงาน", href: "#" },
-      { icon: "📄", label: "ยอดเวรตรวจการ Screening", href: "#" },
-      { icon: "📄", label: "ข้อมูลผู้ป่วยแพ้สารทึบรังสี", href: "#" },
-      { icon: "📄", label: "ข้อมูลผู้ป่วย Contrast leak", href: "#" },
+      { icon: "📄", label: "Form เพิ่มเติมภาระงาน IR", href: "https://docs.google.com/forms/d/e/1FAIpQLSdieN4UCLIlyZvtFBLV-S1GgGP7FaL35e5-CrDM73hjCXIdLw/viewform?usp=sf_link" },
+      { icon: "📄", label: "RT ลงยอดเวรตรวจการ & ภาระงาน", href: "https://docs.google.com/forms/d/e/1FAIpQLSdQz38K7XlpWm3u8r9hPL4IQkMVwhJBUQv8ysCo2ZiEnfFLSA/viewform?usp=sf_link" },
+      { icon: "📄", label: "ยอดเวรตรวจการ Screening", href: "https://docs.google.com/forms/d/e/1FAIpQLSfy6ypB1KZ_ina_d0ERcKvBhRLoqFI9dX4FxtxEDPSGjHFNsg/viewform?usp=sf_link" },
+      { icon: "📄", label: "ข้อมูลผู้ป่วยแพ้สารทึบรังสี", href: "https://docs.google.com/forms/d/e/1FAIpQLSfM--Jt6mRlR2ZPU-XAJXqm3AvyUfPAnLIlo0E_mf3Akmz5oQ/viewform?usp=sf_link" },
+      { icon: "📄", label: "ข้อมูลผู้ป่วย Contrast leak", href: "https://docs.google.com/forms/d/e/1FAIpQLSeDxR7tK0Px6VLlW5TuOO-R4fh3UeE65nNkPrWxXn6gpooF-A/viewform?usp=sf_link" },
     ],
   },
-  {
-    title: "Google Form สำหรับผู้ช่วยพยาบาลลงทะเบียนเพิ่มเติม",
-    items: [
-      { icon: "📄", label: "Form ผู้ช่วยพยาบาล IR", href: "#" },
-      { icon: "📄", label: "Form ผู้ช่วยพยาบาล RT", href: "#" },
-    ],
-  },
+  
   {
     title: "PN Intervention",
     items: [
-      { icon: "📄", label: "PN Intervention", href: "#" },
-      { icon: "📄", label: "PN RT", href: "#" },
+      { icon: "📄", label: "ลงทะเบียนเพิ่มเติม PN Intervention", href: "https://docs.google.com/forms/d/e/1FAIpQLScaFeRpGbfQpBItWBKodDoLOtx66hi63i2nqoAMBAikW9bq6Q/viewform?usp=sf_link" },
+      { icon: "📄", label: "ลงทะเบียนเพิ่มเติม PN RT", href: "https://docs.google.com/forms/d/e/1FAIpQLSfoPMK1gKIo_YW8ojq039fL3bYrXCvhxnTyHrOvEFf4Pkg9Ew/viewform?usp=sf_link" },
     ],
   },
   {
@@ -99,6 +89,7 @@ const sections: Section[] = [
   },
 ];
 
+// ── Quick card ───────────────────────────────────────────────
 function ItemCard({ item, onNavigate }: { item: CardItem; onNavigate: (to: string) => void }) {
   const [expanded, setExpanded] = React.useState(false);
   const hasSubItems = item.subItems && item.subItems.length > 0;
@@ -130,9 +121,7 @@ function ItemCard({ item, onNavigate }: { item: CardItem; onNavigate: (to: strin
           <span className="text-[10px] text-primary font-medium">ดูทั้งหมด →</span>
         )}
         {hasSubItems && (
-          <span className={`text-[10px] transition-transform duration-200 text-muted-foreground ${expanded ? "rotate-180" : ""}`}>
-            ▼
-          </span>
+          <span className={`text-[10px] transition-transform duration-200 text-muted-foreground ${expanded ? "rotate-180" : ""}`}>▼</span>
         )}
       </button>
 
@@ -157,6 +146,7 @@ function ItemCard({ item, onNavigate }: { item: CardItem; onNavigate: (to: strin
   );
 }
 
+// ── Main Page ────────────────────────────────────────────────
 function StaffInternalPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -175,6 +165,7 @@ function StaffInternalPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* ── Hero ── */}
       <div className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-white" />

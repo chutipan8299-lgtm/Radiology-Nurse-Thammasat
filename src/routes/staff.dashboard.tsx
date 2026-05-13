@@ -169,6 +169,37 @@ function StaffDashboardPage() {
           </div>
         </section>
 
+        {/* ── Training Records shortcut ── */}
+        <section>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-1 h-4 rounded-full bg-primary inline-block" />
+            <h2 className="text-sm font-semibold text-foreground">บันทึกการอบรม</h2>
+          </div>
+          <button
+            onClick={() => navigate({ to: "/staff/training-records" as any })}
+            className="group w-full text-left bg-card border border-border rounded-2xl p-4 transition-all duration-200 hover:border-primary/40 hover:shadow-md cursor-pointer"
+            style={{ boxShadow: "var(--shadow-card)" }}
+          >
+            <div className="flex items-center gap-3">
+              <div className="rounded-xl p-2.5 bg-secondary text-primary transition-transform group-hover:scale-105">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0 text-left">
+                <p className="text-sm font-medium text-foreground leading-snug">บันทึกการอบรม</p>
+                <p className="text-xs text-muted-foreground mt-0.5">ไทม์ไลน์การอบรมรายบุคคลของบุคลากรทุกคน</p>
+              </div>
+              <svg
+                className="w-4 h-4 shrink-0 text-muted-foreground/40 group-hover:text-primary/60 group-hover:translate-x-0.5 transition-all"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
+          </button>
+        </section>
+
         <section>
           <div className="flex items-center gap-2 mb-3">
             <span className="w-1 h-4 rounded-full bg-accent-foreground inline-block" />

@@ -21,19 +21,19 @@ const sections: Section[] = [
   {
     title: "รายชื่อผู้ป่วยที่ทำหัตถการรังสีวินิจฉัยและร่วมรักษา (Intervention)",
     items: [
-      { icon: "📍", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง DSA", href: "#" },
-      { icon: "📚", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง Ultrasound", href: "#" },
-      { icon: "🔄", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการ Thrombectomy", href: "#" },
-      { icon: "📋", label: "การลงข้อมูลเยี่ยมตรวจผู้รับบริการ ก่อน/หลังหัตถการ/เฉพาะหัตถการ C-line", href: "#" },
-      { icon: "🏠", label: "การส่งผู้ป่วยกลับหอผู้ป่วย", href: "#" },
-      { icon: "📖", label: "ข้อมูลย้อนหลัง ปีงบประมาณ 2560–2564", href: "#" },
+      { icon: "📍", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง DSA", href: "https://docs.google.com/spreadsheets/d/1KP9LEkTU7375CMJ4JwePCUVu3CETJzS83gj210rJU98/edit?usp=sharing" },
+      { icon: "📚", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง Ultrasound", href: "https://docs.google.com/spreadsheets/d/1Zq1PBGfubkkPDjFrx411rMg7rViKk55Hr995l6dzk5M/edit?usp=sharing" },
+      { icon: "🔄", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการ Thrombectomy", href: "https://docs.google.com/spreadsheets/d/1V4lT0CAzuSOLo9fWXhZfiZ33pfRhUIN47jysd3qut7k/edit?usp=sharing" },
+      { icon: "📋", label: "การลงข้อมูลเยี่ยมตรวจผู้รับบริการ ก่อน/หลังหัตถการ/เฉพาะหัตถการ C-line", href: "https://docs.google.com/spreadsheets/d/1V4Lc7ym-teonIzHV5s3TgN8bmsbeiybK8f9PqImtclE/edit?usp=sharing" },
+      { icon: "🏠", label: "การส่งผู้ป่วยกลับหอผู้ป่วย", href: "https://docs.google.com/spreadsheets/d/1f4_HA0P9d9gT5AxE4vSxJzxalUXLPCKurMxG9QggWcA/edit?usp=sharing" },
+      { icon: "📖", label: "ข้อมูลย้อนหลัง ปีงบประมาณ 2560–2564", href: "https://drive.google.com/drive/folders/1imYdo9jO8AIWIw6yXV6cfPqkaTUfcjrO?usp=sharing" },
     ],
   },
   {
     title: "รายชื่อผู้ป่วยที่ทำหัตถการเวชศาสตร์นิวเคลียร์ (SPECT/CT)",
     items: [
-      { icon: "📍", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง SPECT/CT", href: "#" },
-      { icon: "📖", label: "ข้อมูลย้อนหลัง", href: "#" },
+      { icon: "📍", label: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง SPECT/CT", href: "https://docs.google.com/spreadsheets/d/1_aIUS7FJYueWV1cX5PKipBogh1sq5wvaSBWkAp9H4U8/edit?usp=sharing" },
+      { icon: "📖", label: "ข้อมูลย้อนหลัง", href: "https://drive.google.com/drive/folders/1dZgDG3PM-Sb6ZMlhOgOO4zsS2TESnSTf?usp=sharing" },
     ],
   },
   {
