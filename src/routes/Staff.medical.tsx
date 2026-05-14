@@ -22,12 +22,12 @@ const sections: Section[] = [
   {
     title: "เครื่องมือแพทย์ประจำหน่วยงาน",
     items: [
-      { icon: "🩻", label: "รังสีร่วมรักษา", sublabel: "INTERVENTION", href: "#" },
-      { icon: "⚛️", label: "เวชศาสตร์นิวเคลียร์", sublabel: "SPECT / CT", href: "#" },
-      { icon: "☢️", label: "รังสีรักษาและมะเร็งวิทยา", sublabel: "RADIATION THERAPY", href: "#" },
-      { icon: "🔬", label: "รังสีวินิจฉัย (จุดคัดกรอง)", sublabel: "SCREENING", href: "#" },
-      { icon: "📋", label: "บัญชีเครื่องมือแพทย์ประจำหน่วยงาน", href: "#" },
-      { icon: "🔍", label: "รายการการตรวจสอบเครื่องมือแพทย์", href: "#" },
+      { icon: "🩻", label: "รังสีร่วมรักษา", sublabel: "INTERVENTION", href: "https://intranet.hospital.tu.ac.th/radiology-nursing/page/2022041913074487/" },
+      { icon: "⚛️", label: "เวชศาสตร์นิวเคลียร์", sublabel: "SPECT / CT", href: "https://intranet.hospital.tu.ac.th/radiology-nursing/page/2022072714243060/" },
+      { icon: "☢️", label: "รังสีรักษาและมะเร็งวิทยา", sublabel: "RADIATION THERAPY", href: "https://intranet.hospital.tu.ac.th/radiology-nursing/page/2022072715141896/" },
+      { icon: "🔬", label: "รังสีวินิจฉัย (จุดคัดกรอง)", sublabel: "SCREENING", href: "https://intranet.hospital.tu.ac.th/radiology-nursing/page/2022042815411819/" },
+      { icon: "📋", label: "บัญชีเครื่องมือแพทย์ประจำหน่วยงาน", href: "https://docs.google.com/spreadsheets/d/1TnQTC7BdpP9xZE5WnwFeS2o9VapJ1FCW/edit?usp=sharing&ouid=111738603968925498014&rtpof=true&sd=true" },
+      { icon: "🔍", label: "รายการการตรวจสอบเครื่องมือแพทย์", href: "https://docs.google.com/spreadsheets/d/1_p1w_QLGHoQwOy0WpOZEIdqt3chlLGORdofzPsx_Fj8/edit?usp=sharing" },
     ],
   },
   {

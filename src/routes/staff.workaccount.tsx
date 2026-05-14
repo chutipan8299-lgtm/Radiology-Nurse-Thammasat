@@ -2,7 +2,7 @@ import * as React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/auth-context";
 
-export const Route = createFileRoute("/staff/internal")({
+export const Route = createFileRoute("/staff/workaccount")({
   component: StaffInternalPage,
 });
 
@@ -33,7 +33,7 @@ const sections: Section[] = [
       {
         icon: "☢️",
         label: "ค่าสัมผัสรังสี",
-        navigateTo: "/staff/radiation", // ✅ แก้จาก /staff/workload
+        navigateTo: "/staff/radiation", // ✅ แก้จาก href: "#"
       },
       {
         icon: "📊",
@@ -59,11 +59,7 @@ const sections: Section[] = [
           },
         ],
       },
-      {
-        icon: "💰",
-        label: "ตารางจ่ายงาน",
-        navigateTo: "/staff/workaccount",
-      },
+      { icon: "💰", label: "ตารางจ่ายงาน", href: "#" },
       {
         icon: "🗣️",
         label: "รายงานการประชุม",
@@ -81,12 +77,12 @@ const sections: Section[] = [
       {
         icon: "🏥",
         label: "ภาระงานแต่ละหน่วยงาน",
-        navigateTo: "/staff/workload", // ✅ แก้เป็น route ใหม่แยกต่างหาก
+        navigateTo: "/staff/workload", // ✅ แก้จาก /staff/workaccount ที่วนกลับมาหาตัวเอง
       },
       {
         icon: "📥",
         label: "Download เอกสาร",
-        navigateTo: "/staff/downloads", // ✅ ไม่มี trailing space
+        navigateTo: "/staff/downloads",
       },
       {
         icon: "🏆",
@@ -98,18 +94,25 @@ const sections: Section[] = [
   {
     title: "Google Form สำหรับพยาบาลลงทะเบียนเพิ่มเติม",
     items: [
-      { icon: "📄", label: "Form เพิ่มเติมภาระงาน IR", href: "https://docs.google.com/forms/d/e/1FAIpQLSdieN4UCLIlyZvtFBLV-S1GgGP7FaL35e5-CrDM73hjCXIdLw/viewform?usp=sf_link" },
-      { icon: "📄", label: "RT ลงยอดเวรตรวจการ & ภาระงาน", href: "https://docs.google.com/forms/d/e/1FAIpQLSdQz38K7XlpWm3u8r9hPL4IQkMVwhJBUQv8ysCo2ZiEnfFLSA/viewform?usp=sf_link" },
-      { icon: "📄", label: "ยอดเวรตรวจการ Screening", href: "https://docs.google.com/forms/d/e/1FAIpQLSfy6ypB1KZ_ina_d0ERcKvBhRLoqFI9dX4FxtxEDPSGjHFNsg/viewform?usp=sf_link" },
-      { icon: "📄", label: "ข้อมูลผู้ป่วยแพ้สารทึบรังสี", href: "https://docs.google.com/forms/d/e/1FAIpQLSfM--Jt6mRlR2ZPU-XAJXqm3AvyUfPAnLIlo0E_mf3Akmz5oQ/viewform?usp=sf_link" },
-      { icon: "📄", label: "ข้อมูลผู้ป่วย Contrast leak", href: "https://docs.google.com/forms/d/e/1FAIpQLSeDxR7tK0Px6VLlW5TuOO-R4fh3UeE65nNkPrWxXn6gpooF-A/viewform?usp=sf_link" },
+      { icon: "📄", label: "Form เพิ่มเติมภาระงาน IR", href: "#" },
+      { icon: "📄", label: "RT ลงยอดเวรตรวจการ & ภาระงาน", href: "#" },
+      { icon: "📄", label: "ยอดเวรตรวจการ Screening", href: "#" },
+      { icon: "📄", label: "ข้อมูลผู้ป่วยแพ้สารทึบรังสี", href: "#" },
+      { icon: "📄", label: "ข้อมูลผู้ป่วย Contrast leak", href: "#" },
+    ],
+  },
+  {
+    title: "Google Form สำหรับผู้ช่วยพยาบาลลงทะเบียนเพิ่มเติม",
+    items: [
+      { icon: "📄", label: "Form ผู้ช่วยพยาบาล IR", href: "#" },
+      { icon: "📄", label: "Form ผู้ช่วยพยาบาล RT", href: "#" },
     ],
   },
   {
     title: "PN Intervention",
     items: [
-      { icon: "📄", label: "ลงทะเบียนเพิ่มเติม PN Intervention", href: "https://docs.google.com/forms/d/e/1FAIpQLScaFeRpGbfQpBItWBKodDoLOtx66hi63i2nqoAMBAikW9bq6Q/viewform?usp=sf_link" },
-      { icon: "📄", label: "ลงทะเบียนเพิ่มเติม PN RT", href: "https://docs.google.com/forms/d/e/1FAIpQLSfoPMK1gKIo_YW8ojq039fL3bYrXCvhxnTyHrOvEFf4Pkg9Ew/viewform?usp=sf_link" },
+      { icon: "📄", label: "PN Intervention", href: "#" },
+      { icon: "📄", label: "PN RT", href: "#" },
     ],
   },
   {
@@ -146,13 +149,17 @@ function ItemCard({ item, onNavigate }: { item: CardItem; onNavigate: (to: strin
           }`}
         style={{ boxShadow: expanded ? undefined : "var(--shadow-card)" }}
       >
-        <div className="text-4xl group-hover:scale-110 transition-transform duration-200">{item.icon}</div>
+        <div className="text-4xl group-hover:scale-110 transition-transform duration-200">
+          {item.icon}
+        </div>
         <p className="text-xs font-medium text-foreground leading-snug">{item.label}</p>
         {item.navigateTo && (
           <span className="text-[10px] text-primary font-medium">ดูทั้งหมด →</span>
         )}
         {hasSubItems && (
-          <span className={`text-[10px] transition-transform duration-200 text-muted-foreground ${expanded ? "rotate-180" : ""}`}>▼</span>
+          <span className={`text-[10px] transition-transform duration-200 text-muted-foreground ${expanded ? "rotate-180" : ""}`}>
+            ▼
+          </span>
         )}
       </button>
 
@@ -211,7 +218,9 @@ function StaffInternalPage() {
             กลับหน้า Dashboard
           </button>
           <h1 className="text-white text-2xl font-bold">บริหารภายใน</h1>
-          <p className="text-white/70 text-sm mt-1">การบริหารจัดการข้อมูลและแผนงานทั่วไปของงานการพยาบาลรังสีวิทยา</p>
+          <p className="text-white/70 text-sm mt-1">
+            การบริหารจัดการข้อมูลและแผนงานทั่วไปของงานการพยาบาลรังสีวิทยา
+          </p>
         </div>
         <div className="h-5 bg-background rounded-t-[2rem] relative z-10" />
       </div>

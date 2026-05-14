@@ -2,13 +2,9 @@ import * as React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/auth-context";
 
-export const Route = createFileRoute("/staff/downloads ")({
+export const Route = createFileRoute("/staff/downloads")({
   component: DownloadsPage,
 });
-
-// ══════════════════════════════════════════════════════════════
-//  DATA — จากรูปหน้า Download เอกสาร (hospital.tu.ac.th)
-// ══════════════════════════════════════════════════════════════
 
 type DocLink = { label: string; href: string };
 type DocSection = { title: string; emoji: string; docs: DocLink[] };
@@ -18,42 +14,40 @@ const docSections: DocSection[] = [
     title: "สวัสดิการ",
     emoji: "🎁",
     docs: [
-      { label: "แบบฟอร์มขอรับสวัสดิการ งานการพยาบาลรังสีวิทยา", href: "#" },
-      { label: "เอกสารแนบเบิกสวัสดิการ ฝ่ายการพยาบาล",          href: "#" },
-      { label: "แบบฟอร์มขอรับสวัสดิการ ฝ่ายการพยาบาล",          href: "#" },
-      { label: "แบบฟอร์มเบิกสวัสดิการด้านสุขภาพแบบยืดหยุ่น",   href: "#" },
-      { label: "เอกสารแนบเบิกสวัสดิการสุขภาพแบบยืดหยุ่น",      href: "#" },
-      { label: "แบบฟอร์มการขอเรียกร้องค่ารักษาพยาบาล การประกันสุขภาพ (กลุ่ม)", href: "#" },
-      { label: "แบบฟอร์มขอเบิกชุดเยี่ยมไข้บุคลากรโรงพยาบาล กรณีเข้ารับการรักษาในโรงพยาบาล", href: "#" },
+      { label: "แบบฟอร์มขอรับสวัสดิการ งานการพยาบาลรังสีวิทยา", href: "https://drive.google.com/file/d/1BMk8mrrHcMx9Yzmjf7wLMOOkIaiCviXw/view?usp=share_link" },
+      { label: "เอกสารแนบเบิกสวัสดิการ ฝ่ายการพยาบาล", href: "https://www.hospital.tu.ac.th/ndtuh/upload/addsome/files/202203161301560.pdf" },
+      { label: "แบบฟอร์มขอรับสวัสดิการ ฝ่ายการพยาบาล", href: "https://drive.google.com/file/d/1JOw_cUmE3PMVtLlRThxZOkNyPg_agYb9/view?usp=share_link" },
+      { label: "แบบฟอร์มเบิกสวัสดิการด้านสุขภาพแบบยืดหยุ่น", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/2025013016204865.pdf" },
+      { label: "เอกสารแนบเบิกสวัสดิการสุขภาพแบบยืดหยุ่น", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/2022072614455485.pdf" },
+      { label: "แบบฟอร์มการขอเรียกร้องค่ารักษาพยาบาล การประกันสุขภาพ (กลุ่ม)", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/2024102409383968.pdf" },
+      { label: "แบบฟอร์มขอเบิกชุดเยี่ยมไข้บุคลากรโรงพยาบาล กรณีเข้ารับการรักษาในโรงพยาบาล", href: "https://www.hospital.tu.ac.th/hr/upload/addsome/files/2022072611323451.pdf" },
     ],
   },
   {
     title: "การลาต่าง ๆ",
     emoji: "✈️",
     docs: [
-      { label: "แบบฟอร์มขออนุญาตไปต่างประเทศ ข้าราชการ พนักงานมหาวิทยาลัย", href: "#" },
-      { label: "แบบฟอร์มขออนุญาตไปต่างประเทศ พนักงานโรงพยาบาล",            href: "#" },
-      { label: "แบบใบรายงานตัวกลับ (ลาคลอดบุตร/ลาอุปสมบท/ลาศึกษา/ลาฝึกอบรม ฯลฯ)", href: "#" },
-      { label: "แบบใบขอยกเลิกวันลา",                                          href: "#" },
-      { label: "แบบหนังสือขอลาออกจากงาน พนักงานมหาวิทยาลัย",                 href: "#" },
-      { label: "แบบหนังสือขอลาออกจากงาน พนักงานโรงพยาบาล",                   href: "#" },
+      { label: "แบบฟอร์มขออนุญาตไปต่างประเทศ ข้าราชการ พนักงานมหาวิทยาลัย", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/202403130848591.pdf" },
+      { label: "แบบฟอร์มขออนุญาตไปต่างประเทศ พนักงานโรงพยาบาล", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/2024031308491255.pdf" },
+      { label: "แบบใบรายงานตัวกลับ (ลาคลอดบุตร/ลาอุปสมบท/ลาศึกษา/ลาฝึกอบรม ฯลฯ)", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/2022080214070934.pdf" },
+      { label: "แบบใบขอยกเลิกวันลา", href: "https://drive.google.com/file/d/1b362vQjLnTkdZ-Ly-GjnVg7EiA2k2IjC/view?usp=share_link" },
+      { label: "แบบหนังสือขอลาออกจากงาน พนักงานมหาวิทยาลัย", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/2024080108540758.pdf" },
+      { label: "แบบหนังสือขอลาออกจากงาน พนักงานโรงพยาบาล", href: "https://intranet.hospital.tu.ac.th/hr/upload/addsome/files/2024080108542320.pdf" },
     ],
   },
   {
     title: "เอกสารภายในหน่วยงาน",
     emoji: "📂",
     docs: [
-      { label: "แบบบันทึกการปฏิบัติงานสัมผัสรังสี",          href: "#" },
-      { label: "ใบบันทึกสัญญาณชีพ เวชศาสตร์นิวเคลียร์",      href: "#" },
+      { label: "แบบบันทึกการปฏิบัติงานสัมผัสรังสี", href: "https://drive.google.com/file/d/150ZVRbGkAoWT15oxq37bq6tueHqjBCcS/view?usp=sharing" },
+      { label: "ใบบันทึกสัญญาณชีพ เวชศาสตร์นิวเคลียร์", href: "https://drive.google.com/file/d/11NHFQ-XEzR9q_6M26X_wA50HE_JmJv1D/view?usp=share_link" },
     ],
   },
 ];
 
-// ── Row ──────────────────────────────────────────────────────
 function DocSectionRow({ section }: { section: DocSection }) {
   return (
     <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
-      {/* Header */}
       <div
         className="px-5 py-3 flex items-center gap-2"
         style={{ background: "linear-gradient(90deg,#c6d8f5 0%,#dce8fb 50%,#c6d8f5 100%)" }}
@@ -61,7 +55,6 @@ function DocSectionRow({ section }: { section: DocSection }) {
         <span className="text-lg">{section.emoji}</span>
         <h3 className="text-[#1e3a6e] font-bold text-sm tracking-wide">{section.title}</h3>
       </div>
-      {/* Doc list */}
       <div className="divide-y divide-border">
         {section.docs.map((doc) => {
           const hasLink = doc.href !== "#";
@@ -71,14 +64,11 @@ function DocSectionRow({ section }: { section: DocSection }) {
               disabled={!hasLink}
               onClick={() => hasLink && window.open(doc.href, "_blank")}
               className={`w-full flex items-center gap-3 px-5 py-3.5 text-left transition-all duration-150
-                ${hasLink
-                  ? "hover:bg-[#eef3fb] cursor-pointer"
-                  : "opacity-50 cursor-default"}`}
+                ${hasLink ? "hover:bg-[#eef3fb] cursor-pointer" : "opacity-50 cursor-default"}`}
             >
-              {/* File icon */}
               <span className="text-[#1e4d8c] flex-shrink-0">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/>
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z" />
                 </svg>
               </span>
               <span className={`text-sm font-medium flex-1 leading-snug ${hasLink ? "text-[#1e4d8c]" : "text-muted-foreground"}`}>
@@ -87,7 +77,7 @@ function DocSectionRow({ section }: { section: DocSection }) {
               {hasLink && (
                 <span className="text-[#1e4d8c]/40 flex-shrink-0">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                 </span>
               )}
@@ -99,7 +89,6 @@ function DocSectionRow({ section }: { section: DocSection }) {
   );
 }
 
-// ── Page ─────────────────────────────────────────────────────
 function DownloadsPage() {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
@@ -117,7 +106,6 @@ function DownloadsPage() {
     );
   }
 
-  // Filter by search
   const filtered = search.trim()
     ? docSections
         .map((sec) => ({
@@ -131,7 +119,6 @@ function DownloadsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero */}
       <div className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-white" />
@@ -150,10 +137,9 @@ function DownloadsPage() {
           <h1 className="text-white text-2xl font-bold">Download เอกสาร</h1>
           <p className="text-white/70 text-sm mt-1">แบบฟอร์มและเอกสารสำหรับบุคลากรงานการพยาบาลรังสีวิทยา</p>
 
-          {/* Search */}
           <div className="mt-5 flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 max-w-md">
             <svg className="w-4 h-4 text-white/50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 105 11a6 6 0 0012 0z" />
             </svg>
             <input
               type="text"
