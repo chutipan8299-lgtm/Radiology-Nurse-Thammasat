@@ -13,20 +13,21 @@ import { Route as ProceduresRouteImport } from './routes/procedures'
 import { Route as JourneyRouteImport } from './routes/journey'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StaffWorkunitRouteImport } from './routes/staff.workunit'
+import { Route as StaffWorkloadRouteImport } from './routes/staff.workload'
 import { Route as StaffWorkaccountRouteImport } from './routes/staff.workaccount'
 import { Route as StaffTrainingRecordsRouteImport } from './routes/staff.training-records'
 import { Route as StaffStatisticsRouteImport } from './routes/staff.statistics'
 import { Route as StaffSelectRouteImport } from './routes/staff.select'
 import { Route as StaffRadiationRouteImport } from './routes/staff.radiation'
 import { Route as StaffPatientsRouteImport } from './routes/staff.patients'
+import { Route as StaffMedicalRouteImport } from './routes/staff.medical'
 import { Route as StaffLoginRouteImport } from './routes/staff.login'
 import { Route as StaffKpiRouteImport } from './routes/staff.kpi'
 import { Route as StaffInternalRouteImport } from './routes/staff.internal'
 import { Route as StaffDownloadsRouteImport } from './routes/staff.downloads'
 import { Route as StaffDashboardRouteImport } from './routes/staff.dashboard'
 import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
-import { Route as StaffWorkloadRouteImport } from './routes/Staff.workload'
-import { Route as StaffMedicalRouteImport } from './routes/Staff.medical'
 
 const ProceduresRoute = ProceduresRouteImport.update({
   id: '/procedures',
@@ -46,6 +47,16 @@ const ContactRoute = ContactRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffWorkunitRoute = StaffWorkunitRouteImport.update({
+  id: '/staff/workunit',
+  path: '/staff/workunit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffWorkloadRoute = StaffWorkloadRouteImport.update({
+  id: '/staff/workload',
+  path: '/staff/workload',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StaffWorkaccountRoute = StaffWorkaccountRouteImport.update({
@@ -78,6 +89,11 @@ const StaffPatientsRoute = StaffPatientsRouteImport.update({
   path: '/staff/patients',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffMedicalRoute = StaffMedicalRouteImport.update({
+  id: '/staff/medical',
+  path: '/staff/medical',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaffLoginRoute = StaffLoginRouteImport.update({
   id: '/staff/login',
   path: '/staff/login',
@@ -108,56 +124,48 @@ const ProceduresProcedureIdRoute = ProceduresProcedureIdRouteImport.update({
   path: '/$procedureId',
   getParentRoute: () => ProceduresRoute,
 } as any)
-const StaffWorkloadRoute = StaffWorkloadRouteImport.update({
-  id: '/Staff/workload',
-  path: '/Staff/workload',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StaffMedicalRoute = StaffMedicalRouteImport.update({
-  id: '/Staff/medical',
-  path: '/Staff/medical',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
-  '/Staff/medical': typeof StaffMedicalRoute
-  '/Staff/workload': typeof StaffWorkloadRoute
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/downloads': typeof StaffDownloadsRoute
   '/staff/internal': typeof StaffInternalRoute
   '/staff/kpi': typeof StaffKpiRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/medical': typeof StaffMedicalRoute
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
   '/staff/workaccount': typeof StaffWorkaccountRoute
+  '/staff/workload': typeof StaffWorkloadRoute
+  '/staff/workunit': typeof StaffWorkunitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
-  '/Staff/medical': typeof StaffMedicalRoute
-  '/Staff/workload': typeof StaffWorkloadRoute
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/downloads': typeof StaffDownloadsRoute
   '/staff/internal': typeof StaffInternalRoute
   '/staff/kpi': typeof StaffKpiRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/medical': typeof StaffMedicalRoute
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
   '/staff/workaccount': typeof StaffWorkaccountRoute
+  '/staff/workload': typeof StaffWorkloadRoute
+  '/staff/workunit': typeof StaffWorkunitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -165,20 +173,21 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
-  '/Staff/medical': typeof StaffMedicalRoute
-  '/Staff/workload': typeof StaffWorkloadRoute
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/downloads': typeof StaffDownloadsRoute
   '/staff/internal': typeof StaffInternalRoute
   '/staff/kpi': typeof StaffKpiRoute
   '/staff/login': typeof StaffLoginRoute
+  '/staff/medical': typeof StaffMedicalRoute
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
   '/staff/workaccount': typeof StaffWorkaccountRoute
+  '/staff/workload': typeof StaffWorkloadRoute
+  '/staff/workunit': typeof StaffWorkunitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,60 +196,63 @@ export interface FileRouteTypes {
     | '/contact'
     | '/journey'
     | '/procedures'
-    | '/Staff/medical'
-    | '/Staff/workload'
     | '/procedures/$procedureId'
     | '/staff/dashboard'
     | '/staff/downloads'
     | '/staff/internal'
     | '/staff/kpi'
     | '/staff/login'
+    | '/staff/medical'
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
     | '/staff/statistics'
     | '/staff/training-records'
     | '/staff/workaccount'
+    | '/staff/workload'
+    | '/staff/workunit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contact'
     | '/journey'
     | '/procedures'
-    | '/Staff/medical'
-    | '/Staff/workload'
     | '/procedures/$procedureId'
     | '/staff/dashboard'
     | '/staff/downloads'
     | '/staff/internal'
     | '/staff/kpi'
     | '/staff/login'
+    | '/staff/medical'
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
     | '/staff/statistics'
     | '/staff/training-records'
     | '/staff/workaccount'
+    | '/staff/workload'
+    | '/staff/workunit'
   id:
     | '__root__'
     | '/'
     | '/contact'
     | '/journey'
     | '/procedures'
-    | '/Staff/medical'
-    | '/Staff/workload'
     | '/procedures/$procedureId'
     | '/staff/dashboard'
     | '/staff/downloads'
     | '/staff/internal'
     | '/staff/kpi'
     | '/staff/login'
+    | '/staff/medical'
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
     | '/staff/statistics'
     | '/staff/training-records'
     | '/staff/workaccount'
+    | '/staff/workload'
+    | '/staff/workunit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -248,19 +260,20 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   JourneyRoute: typeof JourneyRoute
   ProceduresRoute: typeof ProceduresRouteWithChildren
-  StaffMedicalRoute: typeof StaffMedicalRoute
-  StaffWorkloadRoute: typeof StaffWorkloadRoute
   StaffDashboardRoute: typeof StaffDashboardRoute
   StaffDownloadsRoute: typeof StaffDownloadsRoute
   StaffInternalRoute: typeof StaffInternalRoute
   StaffKpiRoute: typeof StaffKpiRoute
   StaffLoginRoute: typeof StaffLoginRoute
+  StaffMedicalRoute: typeof StaffMedicalRoute
   StaffPatientsRoute: typeof StaffPatientsRoute
   StaffRadiationRoute: typeof StaffRadiationRoute
   StaffSelectRoute: typeof StaffSelectRoute
   StaffStatisticsRoute: typeof StaffStatisticsRoute
   StaffTrainingRecordsRoute: typeof StaffTrainingRecordsRoute
   StaffWorkaccountRoute: typeof StaffWorkaccountRoute
+  StaffWorkloadRoute: typeof StaffWorkloadRoute
+  StaffWorkunitRoute: typeof StaffWorkunitRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -291,6 +304,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/workunit': {
+      id: '/staff/workunit'
+      path: '/staff/workunit'
+      fullPath: '/staff/workunit'
+      preLoaderRoute: typeof StaffWorkunitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/workload': {
+      id: '/staff/workload'
+      path: '/staff/workload'
+      fullPath: '/staff/workload'
+      preLoaderRoute: typeof StaffWorkloadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/staff/workaccount': {
@@ -335,6 +362,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffPatientsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff/medical': {
+      id: '/staff/medical'
+      path: '/staff/medical'
+      fullPath: '/staff/medical'
+      preLoaderRoute: typeof StaffMedicalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/staff/login': {
       id: '/staff/login'
       path: '/staff/login'
@@ -377,20 +411,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProceduresProcedureIdRouteImport
       parentRoute: typeof ProceduresRoute
     }
-    '/Staff/workload': {
-      id: '/Staff/workload'
-      path: '/Staff/workload'
-      fullPath: '/Staff/workload'
-      preLoaderRoute: typeof StaffWorkloadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/Staff/medical': {
-      id: '/Staff/medical'
-      path: '/Staff/medical'
-      fullPath: '/Staff/medical'
-      preLoaderRoute: typeof StaffMedicalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -411,19 +431,20 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   JourneyRoute: JourneyRoute,
   ProceduresRoute: ProceduresRouteWithChildren,
-  StaffMedicalRoute: StaffMedicalRoute,
-  StaffWorkloadRoute: StaffWorkloadRoute,
   StaffDashboardRoute: StaffDashboardRoute,
   StaffDownloadsRoute: StaffDownloadsRoute,
   StaffInternalRoute: StaffInternalRoute,
   StaffKpiRoute: StaffKpiRoute,
   StaffLoginRoute: StaffLoginRoute,
+  StaffMedicalRoute: StaffMedicalRoute,
   StaffPatientsRoute: StaffPatientsRoute,
   StaffRadiationRoute: StaffRadiationRoute,
   StaffSelectRoute: StaffSelectRoute,
   StaffStatisticsRoute: StaffStatisticsRoute,
   StaffTrainingRecordsRoute: StaffTrainingRecordsRoute,
   StaffWorkaccountRoute: StaffWorkaccountRoute,
+  StaffWorkloadRoute: StaffWorkloadRoute,
+  StaffWorkunitRoute: StaffWorkunitRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

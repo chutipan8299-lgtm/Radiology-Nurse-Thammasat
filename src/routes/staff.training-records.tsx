@@ -38,7 +38,7 @@ const groups: RoleGroup[] = [
     role: "พยาบาล",
     emoji: "👩‍⚕️",
     persons: [
-      { name: "นพมาศ ชนะดวงใจ",          href: "#" },
+      { name: "นพมาศ ชนะดวงใจ",          href: "https://docs.google.com/spreadsheets/d/1KQLpxk1ZdP0jdrhKAnS2HIeV5EZu5T_mboOGfWkncsk/edit?usp=sharing" },
       { name: "สรวัชญ์ พันธ์ภูวงษ์",      href: "#" },
       { name: "จิตมณี กันนอก",            href: "#" },
       { name: "ลลิตา กล้าหาญ",            href: "#" },

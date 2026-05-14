@@ -2,7 +2,7 @@ import * as React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/auth-context";
 
-export const Route = createFileRoute("/Staff/medical")({
+export const Route = createFileRoute("/staff/medical")({
   component: StaffMedicalPage,
 });
 

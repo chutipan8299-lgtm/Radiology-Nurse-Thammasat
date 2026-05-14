@@ -2,7 +2,7 @@ import * as React from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/auth-context";
 
-export const Route = createFileRoute("/Staff/workload")({
+export const Route = createFileRoute("/staff/workload")({
   component: WorkloadPage,
 });
 
@@ -13,35 +13,35 @@ const units: UnitGroup[] = [
   {
     id: "intervention", name: "Intervention", emoji: "🫁",
     links: [
-      { label: "ภาระงานพยาบาล",               href: "#" },
-      { label: "ภาระงานพยาบาลย้อนหลัง",        href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาล",         href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "#" },
+      { label: "ภาระงานพยาบาล",               href: "https://docs.google.com/spreadsheets/d/1nV089dvwvyk15DbYBA6ulC1e2XKwDEl6bFWJca0MJ94/edit?gid=372204153#gid=372204153" },
+      { label: "ภาระงานพยาบาลย้อนหลัง",        href: "https://drive.google.com/drive/folders/1A7kO8VwC-aikdmM51cFj116m8YhLM8E2" },
+      { label: "ภาระงานผู้ช่วยพยาบาล",         href: "https://docs.google.com/spreadsheets/d/1EIr-X-UlFUpdylBevoyrmJKC5Dd0eE7sAvtDXr2K9aQ/edit#gid=1812876432" },
+      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "https://drive.google.com/drive/folders/1PQNa-qXHSrnbMsD-19W__80GC_T7nY_G" },
     ],
   },
   {
     id: "spect", name: "SPECT / CT", emoji: "☢️",
     links: [
-      { label: "ภาระงานพยาบาล",               href: "#" },
-      { label: "ภาระงานพยาบาลย้อนหลัง",        href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาล",         href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "#" },
+      { label: "ภาระงานพยาบาล",               href: "https://docs.google.com/spreadsheets/d/1QlNs8ZuL8IYCELdJtzbrx_q7huF1ujiPmAJPD_wNjvM/edit?usp=sharing" },
+      { label: "ภาระงานพยาบาลย้อนหลัง",        href: "https://drive.google.com/drive/folders/1KfDKhecozlekEDXb2aW0-kfGtPlMvDPO?usp=sharing" },
+      { label: "ภาระงานผู้ช่วยพยาบาล",         href: "https://docs.google.com/spreadsheets/d/1kcfNeZagkUBifKC_hp-rc7DUwAlf3Qve-_PH6ltuamM/edit?usp=sharing" },
+      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "https://drive.google.com/drive/folders/1wADT50ztbMQppSJ18yHXMx__L1MSsFfl" },
     ],
   },
   {
     id: "radiation", name: "Radiation Therapy", emoji: "🎯",
     links: [
-      { label: "ภาระงานพยาบาล",               href: "#" },
-      { label: "ภาระงานพยาบาลย้อนหลัง",        href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาล",         href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "#" },
+      { label: "ภาระงานพยาบาล",               href: "https://docs.google.com/spreadsheets/d/1SZxAGfhE4--rlE75ChcSfiBqR9pP_sXbVu7Sc39h-tw/edit?usp=sharing" },
+      { label: "ภาระงานพยาบาลย้อนหลัง",        href: "https://drive.google.com/drive/folders/1nJy7WY-mIlyRkQA0F9pzYrXVZx5Pj-8k?usp=sharing" },
+      { label: "ภาระงานผู้ช่วยพยาบาล",         href: "https://docs.google.com/spreadsheets/d/1f2GfGTLLGhwF_G30XTan8wkKhzxy-Y1Qcop6Pb5HVXk/edit?usp=sharing" },
+      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "https://drive.google.com/drive/folders/1Wdtu47SxOkdJX8Yl6uSos7yKHWrESMAV?usp=sharing" },
     ],
   },
   {
     id: "diagnostic", name: "Diagnostic Radiology", emoji: "🔍",
     links: [
-      { label: "ภาระงานพยาบาล",        href: "#" },
-      { label: "ภาระงานพยาบาลย้อนหลัง", href: "#" },
+      { label: "ภาระงานพยาบาล",        href: "https://docs.google.com/spreadsheets/d/1Fd7WgAWlenlWI2w6HqzWr8Z9ALT9qUg6FH-Yj8cYCJ8/edit?usp=sharing" },
+      { label: "ภาระงานพยาบาลย้อนหลัง", href: "https://drive.google.com/drive/folders/1XEmJc0nyb5hX64978rWHJQhtwhxWG82O?usp=share_link" },
     ],
   },
 ];

@@ -1,248 +1,219 @@
-import * as React from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useAuth } from "@/contexts/auth-context";
+import { createFileRoute } from "@tanstack/react-router";
+import {
+  ClipboardList,
+  FileSpreadsheet,
+  UserRound,
+  Stethoscope,
+  ChevronRight,
+} from "lucide-react";
 
 export const Route = createFileRoute("/staff/workaccount")({
-  component: StaffInternalPage,
+  component: StaffWorkloadPage,
 });
 
-type SubItem = { label: string; href: string };
-type CardItem = {
-  icon: string;
-  label: string;
-  href?: string;
-  navigateTo?: string;
-  subItems?: SubItem[];
-};
-type Section = { title: string; items: CardItem[] };
-
-const sections: Section[] = [
-  {
-    title: "ข้อมูลสำหรับบุคลากร",
-    items: [
-      {
-        icon: "📅",
-        label: "ตารางขอเวร",
-        href: "https://docs.google.com/spreadsheets/d/1cwx0GWF1CuPfbJZd-G6DbivwNWXPpJjJ56e3nDYBd8M/edit?gid=681129385#gid=681129385",
-      },
-      {
-        icon: "📝",
-        label: "บันทึกการอบรม",
-        navigateTo: "/staff/training-records",
-      },
-      {
-        icon: "☢️",
-        label: "ค่าสัมผัสรังสี",
-        navigateTo: "/staff/radiation", // ✅ แก้จาก href: "#"
-      },
-      {
-        icon: "📊",
-        label: "ตัวชี้วัด",
-        navigateTo: "/staff/kpi",
-      },
-      {
-        icon: "📋",
-        label: "การประเมินผลการปฏิบัติงาน",
-        href: "https://drive.google.com/drive/folders/1IEZ03Ep0t9uZFCDN0ox9zgBIIRKVZKz7",
-      },
-      {
-        icon: "👥",
-        label: "ยอดผู้ป่วยส่งเวรตรวจการ",
-        subItems: [
-          {
-            label: "ยอดเวรตรวจการ 2566",
-            href: "https://docs.google.com/spreadsheets/d/1kYZP_cBYHRwbRXYj2aP9OwnsNjcu5qrsdr0g1moad9w/edit?usp=sharing",
-          },
-          {
-            label: "ยอดเวรตรวจการ เดิม",
-            href: "https://docs.google.com/spreadsheets/d/1ULXrjSJzjEYEnXptqiYwGQO90S7r1w-r3wXujH5Uu10/edit#gid=203192161",
-          },
-        ],
-      },
-      { icon: "💰", label: "ตารางจ่ายงาน", href: "#" },
-      {
-        icon: "🗣️",
-        label: "รายงานการประชุม",
-        subItems: [
-          { label: "ปี 2561", href: "https://drive.google.com/drive/folders/1P2bwHc59QFHo4bppiD4I2RCyEYZLyHGJ?usp=sharing" },
-          { label: "ปี 2562", href: "https://drive.google.com/drive/folders/10AvdFtDwcq32EUgOOEQJx4TRgRFRdNLh?usp=sharing" },
-          { label: "ปี 2563", href: "https://drive.google.com/drive/folders/1AwaHdcLGn46B-ytmLzyy8GceuKGpRTPY?usp=sharing" },
-          { label: "ปี 2564", href: "https://drive.google.com/drive/folders/1XATU-BmfwNFx9YPdtCqsmQPCQOzviLT2?usp=sharing" },
-          { label: "ปี 2565", href: "https://drive.google.com/drive/folders/1zesRzvd2uhvXKkufjkUSzCiHIYROQ8BW?usp=sharing" },
-          { label: "ปี 2566", href: "https://drive.google.com/drive/folders/18UhYI0s5Nr7AVSPbp8GePXtDaDJORXtq?usp=sharing" },
-          { label: "ปี 2567", href: "https://drive.google.com/drive/folders/16sch2I-kein-IRmClT6J3YrIq8cESoRS?usp=sharing" },
-          { label: "ปี 2568", href: "https://drive.google.com/drive/folders/1Vyns-VRdRmCkRK2jEm5gsWgYDE18hfpu?usp=sharing" },
-        ],
-      },
-      {
-        icon: "🏥",
-        label: "ภาระงานแต่ละหน่วยงาน",
-        navigateTo: "/staff/workload", // ✅ แก้จาก /staff/workaccount ที่วนกลับมาหาตัวเอง
-      },
-      {
-        icon: "📥",
-        label: "Download เอกสาร",
-        navigateTo: "/staff/downloads",
-      },
-      {
-        icon: "🏆",
-        label: "รายงานผลการอบรม",
-        href: "https://drive.google.com/drive/folders/1yeIkBlA1uYz4r9jwJqjvdwK1nh4bARN2",
-      },
-    ],
-  },
-  {
-    title: "Google Form สำหรับพยาบาลลงทะเบียนเพิ่มเติม",
-    items: [
-      { icon: "📄", label: "Form เพิ่มเติมภาระงาน IR", href: "#" },
-      { icon: "📄", label: "RT ลงยอดเวรตรวจการ & ภาระงาน", href: "#" },
-      { icon: "📄", label: "ยอดเวรตรวจการ Screening", href: "#" },
-      { icon: "📄", label: "ข้อมูลผู้ป่วยแพ้สารทึบรังสี", href: "#" },
-      { icon: "📄", label: "ข้อมูลผู้ป่วย Contrast leak", href: "#" },
-    ],
-  },
-  {
-    title: "Google Form สำหรับผู้ช่วยพยาบาลลงทะเบียนเพิ่มเติม",
-    items: [
-      { icon: "📄", label: "Form ผู้ช่วยพยาบาล IR", href: "#" },
-      { icon: "📄", label: "Form ผู้ช่วยพยาบาล RT", href: "#" },
-    ],
-  },
-  {
-    title: "PN Intervention",
-    items: [
-      { icon: "📄", label: "PN Intervention", href: "#" },
-      { icon: "📄", label: "PN RT", href: "#" },
-    ],
-  },
-  {
-    title: "ข้อมูลผู้ป่วย",
-    items: [
-      { icon: "📓", label: "รายชื่อผู้ป่วยที่ทำหัตถการ", navigateTo: "/staff/patients" },
-      { icon: "📈", label: "สถิติผู้รับบริการ รายเดือน", navigateTo: "/staff/statistics" },
-    ],
-  },
-];
-
-function ItemCard({ item, onNavigate }: { item: CardItem; onNavigate: (to: string) => void }) {
-  const [expanded, setExpanded] = React.useState(false);
-  const hasSubItems = !!item.subItems?.length;
-
-  const handleClick = () => {
-    if (item.navigateTo) {
-      onNavigate(item.navigateTo);
-    } else if (hasSubItems) {
-      setExpanded((v) => !v);
-    } else if (item.href && item.href !== "#") {
-      window.open(item.href, "_blank");
-    }
-  };
-
+function ActionCard({
+  icon,
+  title,
+  items,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  items: {
+    label: string;
+    href: string;
+  }[];
+}) {
   return (
-    <div className="flex flex-col gap-2">
-      <button
-        onClick={handleClick}
-        className={`group flex flex-col items-center gap-3 bg-card border rounded-2xl p-5 transition-all duration-200 text-center w-full
-          ${expanded
-            ? "border-primary bg-primary/5 shadow-md"
-            : "border-border hover:border-primary/30 hover:shadow-md"
-          }`}
-        style={{ boxShadow: expanded ? undefined : "var(--shadow-card)" }}
-      >
-        <div className="text-4xl group-hover:scale-110 transition-transform duration-200">
-          {item.icon}
+    <div className="rounded-[32px] border border-pink-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div className="flex flex-col items-center text-center">
+        <div className="mb-5 flex h-28 w-28 items-center justify-center rounded-full bg-pink-100 text-pink-500 shadow-inner">
+          {icon}
         </div>
-        <p className="text-xs font-medium text-foreground leading-snug">{item.label}</p>
-        {item.navigateTo && (
-          <span className="text-[10px] text-primary font-medium">ดูทั้งหมด →</span>
-        )}
-        {hasSubItems && (
-          <span className={`text-[10px] transition-transform duration-200 text-muted-foreground ${expanded ? "rotate-180" : ""}`}>
-            ▼
-          </span>
-        )}
-      </button>
 
-      {hasSubItems && expanded && (
-        <div className="flex flex-col gap-1.5 pl-1">
-          {item.subItems!.map((sub) => (
+        <h2 className="mb-6 text-3xl font-black text-[#4b1630]">
+          {title}
+        </h2>
+
+        <div className="w-full space-y-3">
+          {items.map((item, index) => (
             <a
-              key={sub.label}
-              href={sub.href !== "#" ? sub.href : undefined}
+              key={index}
+              href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => sub.href === "#" && e.preventDefault()}
-              className="flex items-center gap-2 bg-secondary/60 hover:bg-secondary border border-border rounded-xl px-3 py-2.5 text-xs font-medium text-foreground transition-all hover:border-primary/30"
+              className="group flex items-center justify-between rounded-2xl bg-pink-50 px-5 py-4 text-left transition-all hover:bg-pink-100"
             >
-              <span className="text-primary">→</span>
-              {sub.label}
+              <span className="text-lg font-semibold text-[#4b1630]">
+                {item.label}
+              </span>
+
+              <ChevronRight className="text-pink-400 transition-all group-hover:translate-x-1" />
             </a>
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
 
-function StaffInternalPage() {
-  const { user, loading } = useAuth();
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (!loading && !user) navigate({ to: "/staff/login" });
-  }, [user, loading, navigate]);
-
-  if (loading || !user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-7 h-7 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-      </div>
-    );
-  }
-
+function SummaryCard({
+  icon,
+  title,
+  label,
+  href,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  label: string;
+  href: string;
+}) {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-white" />
-          <div className="absolute -bottom-12 -left-12 w-64 h-64 rounded-full bg-white" />
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block rounded-[32px] border border-pink-100 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+    >
+      <div className="flex flex-col items-center text-center">
+        <div className="mb-5 flex h-28 w-28 items-center justify-center rounded-full bg-pink-100 text-pink-500">
+          {icon}
         </div>
-        <div className="relative max-w-5xl mx-auto px-5 py-8">
-          <button
-            onClick={() => navigate({ to: "/staff/dashboard" })}
-            className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs mb-4 transition-colors"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 19.5L8.25 12l7.5-7.5" />
-            </svg>
-            กลับหน้า Dashboard
-          </button>
-          <h1 className="text-white text-2xl font-bold">บริหารภายใน</h1>
-          <p className="text-white/70 text-sm mt-1">
-            การบริหารจัดการข้อมูลและแผนงานทั่วไปของงานการพยาบาลรังสีวิทยา
+
+        <h2 className="mb-6 text-3xl font-black text-[#4b1630]">
+          {title}
+        </h2>
+
+        <div className="w-full rounded-2xl bg-pink-50 px-5 py-4 transition-all group-hover:bg-pink-100">
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-semibold text-[#4b1630]">
+              {label}
+            </span>
+
+            <ChevronRight className="text-pink-400 transition-all group-hover:translate-x-1" />
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function StaffWorkloadPage() {
+  return (
+    <div className="min-h-screen bg-[#fff8fc]">
+      {/* HERO */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-pink-500 via-pink-400 to-pink-300 px-8 py-20 text-white">
+        <div className="absolute -left-16 top-10 h-52 w-52 rounded-full bg-white/10 blur-2xl" />
+        <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <div className="mb-4 inline-flex rounded-full bg-white/20 px-5 py-2 text-sm font-semibold backdrop-blur">
+              Radiology Nursing
+            </div>
+
+            <h1 className="mb-6 text-5xl font-black leading-tight md:text-6xl">
+              ตารางจ่ายงานและ
+              <br />
+              สรุปการปฏิบัติงานรายวัน
+            </h1>
+
+            <p className="max-w-3xl text-lg leading-8 text-white/90">
+              ระบบจัดการภาระงานพยาบาลรังสีวิทยา สำหรับลงทะเบียนภาระงาน
+              สรุปผลการปฏิบัติงาน และติดตามข้อมูลภายในหน่วยงาน
+              ด้วยรูปแบบใหม่ที่ใช้งานง่ายและรวดเร็ว
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      <div className="mx-auto max-w-7xl px-6 py-14">
+        {/* SECTION 1 */}
+        <div className="mb-14">
+          <div className="mb-8">
+            <h2 className="text-4xl font-black text-[#4b1630]">
+              แบบการลงทะเบียนภาระงาน
+            </h2>
+
+            <div className="mt-3 h-1 w-40 rounded-full bg-pink-400" />
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            {/* Nurse */}
+            <ActionCard
+              icon={<UserRound size={56} />}
+              title="พยาบาล"
+              items={[
+                {
+                  label: "ลงทะเบียนภาระงาน IR",
+                  href: "https://docs.google.com/forms/d/e/1FAIpQLSdHDMZHu8yVjlQXVE21Ilv5ekuJW4HFHgyMLKhxrRh1xTgbFw/viewform",
+                },
+                {
+                  label: "ลงทะเบียนภาระงาน RT",
+                  href: "https://docs.google.com/forms/d/e/1FAIpQLSfO3qVCrQVWHeksXp4WId1YDHFethYU1m_qJtT8elzqKbHxNQ/viewform",
+                },
+                {
+                  label: "ตารางแก้ไขภาระงาน",
+                  href: "https://docs.google.com/spreadsheets/d/1wgT-dif1CnWHAQVT7VmRlDP2tYqLGpmqSeVwwLTuuKI/edit?usp=sharing",
+                },
+              ]}
+            />
+
+            {/* Assistant */}
+            <ActionCard
+              icon={<Stethoscope size={56} />}
+              title="ผู้ช่วยพยาบาล"
+              items={[
+                {
+                  label: "ลงทะเบียนภาระงาน",
+                  href: "https://docs.google.com/forms/d/e/1FAIpQLScoImgZthVds3IrcgDIXKZ8RPOlL5PEiDhrMvfFfREc7LBy3Q/viewform",
+                },
+                {
+                  label: "ตารางแก้ไขภาระงาน",
+                  href: "https://docs.google.com/spreadsheets/d/1aP6YBgh7qqLJrABgE1qwFTDjIA3en3SkTwXsw3BNp9Q/edit?usp=sharing",
+                },
+              ]}
+            />
+          </div>
+        </div>
+
+        {/* SECTION 2 */}
+        <div>
+          <div className="mb-8">
+            <h2 className="text-4xl font-black text-[#4b1630]">
+              แบบการสรุปการปฏิบัติงานประจำวัน
+            </h2>
+
+            <div className="mt-3 h-1 w-52 rounded-full bg-pink-400" />
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <SummaryCard
+              icon={<ClipboardList size={56} />}
+              title="สรุปการปฏิบัติงาน"
+              label="แบบฟอร์มสรุปการปฏิบัติงาน"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc1ucC4Fq60u_ZD0xYeA83lOnFX7gWTToPHA_cFPTg7JWLhNQ/viewform?usp=sf_link"
+            />
+
+            <SummaryCard
+              icon={<FileSpreadsheet size={56} />}
+              title="Google Sheets"
+              label="ตารางสรุปข้อมูลรายวัน"
+              href="https://sheets.google.com"
+            />
+          </div>
+        </div>
+
+        {/* FOOTER */}
+        <div className="mt-20 rounded-[32px] bg-gradient-to-r from-pink-500 to-pink-400 px-8 py-10 text-center text-white shadow-lg">
+          <h3 className="text-3xl font-black">
+            Radiology Nursing Management
+          </h3>
+
+          <p className="mt-3 text-lg text-white/90">
+            ระบบจัดการงานพยาบาลรังสีวิทยา มหาวิทยาลัยธรรมศาสตร์
           </p>
         </div>
-        <div className="h-5 bg-background rounded-t-[2rem] relative z-10" />
-      </div>
-
-      <div className="max-w-5xl mx-auto px-5 -mt-1 pb-12 space-y-10">
-        {sections.map((section) => (
-          <section key={section.title}>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-1 h-5 rounded-full bg-primary inline-block" />
-              <h2 className="text-sm font-semibold text-foreground">{section.title}</h2>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-              {section.items.map((item) => (
-                <ItemCard
-                  key={item.label}
-                  item={item}
-                  onNavigate={(to) => navigate({ to: to as any })}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
       </div>
     </div>
   );
