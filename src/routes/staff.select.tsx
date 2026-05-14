@@ -1,410 +1,410 @@
-import * as React from "react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import {
+  Users,
+  FileText,
+  BarChart3,
+  CalendarDays,
+  Stethoscope,
+  Wrench,
+  ClipboardCheck,
+  Activity,
+  ArrowRight,
+  LogOut,
+  Sparkles,
+  Building2,
+} from "lucide-react";
+
+import { useLanguage } from "@/contexts/language-context";
+import { useMode } from "@/contexts/mode-context";
 import { useAuth } from "@/contexts/auth-context";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/staff/select")({
-  component: WorkUnitPage,
+  head: () => ({
+    meta: [
+      { title: "Select Internal System — Radiology Nursing Unit" },
+      {
+        name: "description",
+        content:
+          "Choose between Internal Management and Medical Equipment systems after staff sign-in.",
+      },
+    ],
+  }),
+  component: StaffSelectPage,
 });
 
-type WorkLink = { label: string; href: string };
+// ══════════════════════════════════════════════════════════════
+// COPY
+// ══════════════════════════════════════════════════════════════
+const copy = {
+  en: {
+    eyebrow: "Staff portal",
+    heading: "Select Internal System",
+    sub: "Please choose the system you want to access.",
+    welcome: "Signed in as",
+    guest: "Staff member",
+    signOut: "Sign out",
+    enter: "Enter",
+    last: "Last accessed",
+    quickAccess: "Quick access",
 
-type Department = {
-  id: string;
-  name: string;
-  name_en: string;
-  emoji: string;
-  gradient: string;
-  accent: string;
-  description: string;
-  nurseLinks: WorkLink[];
-  assistantLinks: WorkLink[];
+    mgmt: {
+      title: "Internal Management",
+      desc: "Day-to-day operations for the nursing unit.",
+      items: ["Staff administration", "Documents", "Reports", "Scheduling"],
+    },
+
+    eq: {
+      title: "Medical Equipment",
+      desc: "Track, maintain and inspect clinical devices.",
+      items: [
+        "Equipment inventory",
+        "Maintenance",
+        "Inspection records",
+        "Device tracking",
+      ],
+    },
+
+    workunit: {
+      title: "Work Unit Workload",
+      desc: "Nurse & assistant workload by department.",
+      items: [
+        "Intervention",
+        "SPECT / CT",
+        "Radiation Therapy",
+        "Diagnostic",
+      ],
+    },
+  },
+
+  th: {
+    eyebrow: "พอร์ทัลเจ้าหน้าที่",
+    heading: "เลือกระบบภายใน",
+    sub: "กรุณาเลือกระบบที่คุณต้องการเข้าใช้งาน",
+    welcome: "เข้าสู่ระบบในชื่อ",
+    guest: "เจ้าหน้าที่",
+    signOut: "ออกจากระบบ",
+    enter: "เข้าสู่ระบบ",
+    last: "เข้าใช้งานล่าสุด",
+    quickAccess: "เข้าถึงด่วน",
+
+    mgmt: {
+      title: "ระบบจัดการภายใน",
+      desc: "การปฏิบัติงานประจำวันของหน่วยพยาบาล",
+      items: ["จัดการเจ้าหน้าที่", "เอกสาร", "รายงาน", "ตารางเวร"],
+    },
+
+    eq: {
+      title: "ระบบเครื่องมือแพทย์",
+      desc: "ติดตาม บำรุงรักษา และตรวจสอบอุปกรณ์การแพทย์",
+      items: [
+        "คลังอุปกรณ์",
+        "การบำรุงรักษา",
+        "บันทึกการตรวจสอบ",
+        "ติดตามอุปกรณ์",
+      ],
+    },
+
+    workunit: {
+      title: "ภาระงานหน่วยปฏิบัติงาน",
+      desc: "ภาระงานพยาบาลและผู้ช่วยพยาบาล แยกตามหน่วยงาน",
+      items: [
+        "รังสีร่วมรักษา",
+        "SPECT / CT",
+        "รังสีรักษา",
+        "รังสีวินิจฉัย",
+      ],
+    },
+  },
 };
 
-const departments: Department[] = [
-  {
-    id: "intervention",
-    name: "รังสีร่วมรักษา",
-    name_en: "Intervention",
-    emoji: "💉",
-    gradient: "from-rose-500 to-pink-700",
-    accent: "rose",
-    description:
-      "งานรังสีร่วมรักษาให้บริการตรวจและรักษาโรคด้วยเทคนิคทางรังสีวิทยาหลอดเลือดและอวัยวะต่างๆ",
-    nurseLinks: [
-      { label: "ภาระงานพยาบาล (ปัจจุบัน)", href: "/staff/Intervention" },
-      { label: "ภาระงานพยาบาลย้อนหลัง", href: "#" },
-    ],
-    assistantLinks: [
-      { label: "ภาระงานผู้ช่วยพยาบาล (ปัจจุบัน)", href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "#" },
-    ],
-  },
-  {
-    id: "spect",
-    name: "เวชศาสตร์นิวเคลียร์",
-    name_en: "SPECT / CT",
-    emoji: "⚛️",
-    gradient: "from-violet-500 to-purple-700",
-    accent: "violet",
-    description:
-      "ให้บริการตรวจวินิจฉัยและรักษาโรคด้วยสารเภสัชรังสี ครอบคลุมการตรวจ SPECT และ CT",
-    nurseLinks: [
-      { label: "ภาระงานพยาบาล (ปัจจุบัน)", href: "#" },
-      { label: "ภาระงานพยาบาลย้อนหลัง", href: "#" },
-    ],
-    assistantLinks: [
-      { label: "ภาระงานผู้ช่วยพยาบาล (ปัจจุบัน)", href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "#" },
-    ],
-  },
-  {
-    id: "rt",
-    name: "รังสีรักษาและมะเร็งวิทยา",
-    name_en: "Radiation Therapy",
-    emoji: "🎯",
-    gradient: "from-sky-500 to-cyan-700",
-    accent: "sky",
-    description:
-      "ให้บริการฉายรังสีรักษามะเร็งด้วยเครื่องมือทันสมัย ดูแลผู้ป่วยตลอดกระบวนการรักษา",
-    nurseLinks: [
-      { label: "ภาระงานพยาบาล (ปัจจุบัน)", href: "#" },
-      { label: "ภาระงานพยาบาลย้อนหลัง", href: "#" },
-    ],
-    assistantLinks: [
-      { label: "ภาระงานผู้ช่วยพยาบาล (ปัจจุบัน)", href: "#" },
-      { label: "ภาระงานผู้ช่วยพยาบาลย้อนหลัง", href: "#" },
-    ],
-  },
-  {
-    id: "diag",
-    name: "รังสีวินิจฉัย",
-    name_en: "Diagnostic Radiology",
-    emoji: "🩻",
-    gradient: "from-emerald-500 to-green-700",
-    accent: "emerald",
-    description:
-      "ให้บริการตรวจวินิจฉัยโรคด้วยเครื่องมือรังสีวิทยาครบวงจร X-ray, CT, MRI และ Ultrasound",
-    nurseLinks: [
-      { label: "ภาระงานพยาบาล (ปัจจุบัน)", href: "#" },
-      { label: "ภาระงานพยาบาลย้อนหลัง", href: "#" },
-    ],
-    assistantLinks: [],
-  },
-];
+type Choice = "management" | "equipment" | "workunit";
 
-function LinkRow({ link }: { link: WorkLink }) {
-  const hasLink = link.href !== "#";
-
-  return (
-    <a
-      href={hasLink ? link.href : undefined}
-      target={hasLink ? "_blank" : undefined}
-      rel="noopener noreferrer"
-      onClick={(e) => !hasLink && e.preventDefault()}
-      className={`
-        group flex items-center gap-3 rounded-2xl px-4 py-3
-        border transition-all duration-200
-        ${
-          hasLink
-            ? "bg-white hover:bg-slate-50 border-slate-200 hover:border-pink-300 hover:shadow-sm cursor-pointer"
-            : "bg-slate-100/70 border-slate-200 opacity-60 cursor-default"
-        }
-      `}
-    >
-      <div
-        className={`
-          w-9 h-9 rounded-xl flex items-center justify-center shrink-0
-          ${
-            hasLink
-              ? "bg-pink-100 text-pink-700"
-              : "bg-slate-200 text-slate-500"
-          }
-        `}
-      >
-        📄
-      </div>
-
-      <div className="flex-1 min-w-0">
-        <p
-          className={`
-            text-sm font-medium truncate
-            ${hasLink ? "text-slate-700" : "text-slate-500"}
-          `}
-        >
-          {link.label}
-        </p>
-      </div>
-
-      {hasLink && (
-        <svg
-          className="w-4 h-4 text-slate-400 group-hover:text-pink-600 transition"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M14 5h5m0 0v5m0-5L10 14"
-          />
-        </svg>
-      )}
-    </a>
-  );
-}
-
-function DeptCard({ dept }: { dept: Department }) {
-  const [open, setOpen] = React.useState(dept.id === "intervention");
-
-  return (
-    <div className="group bg-white border border-slate-200 rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
-      {/* Header */}
-      <div
-        onClick={() => setOpen((v) => !v)}
-        className={`
-          relative overflow-hidden cursor-pointer
-          bg-gradient-to-r ${dept.gradient}
-        `}
-      >
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full translate-x-10 -translate-y-10" />
-        </div>
-
-        <div className="relative px-6 py-6 flex items-center gap-4">
-          <div className="w-16 h-16 rounded-3xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl shadow-inner">
-            {dept.emoji}
-          </div>
-
-          <div className="flex-1">
-            <h2 className="text-white text-xl font-bold">
-              {dept.name}
-            </h2>
-
-            <p className="text-white/75 text-sm mt-1">
-              {dept.name_en}
-            </p>
-
-            <p className="text-white/85 text-xs leading-6 mt-3 max-w-2xl">
-              {dept.description}
-            </p>
-          </div>
-
-          <div
-            className={`
-              w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm
-              flex items-center justify-center transition-transform duration-300
-              ${open ? "rotate-180" : ""}
-            `}
-          >
-            <svg
-              className="w-5 h-5 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      {open && (
-        <div className="p-6 space-y-6 bg-[#fafafa]">
-          {/* Nurse */}
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-9 h-9 rounded-xl bg-pink-100 flex items-center justify-center">
-                👩‍⚕️
-              </div>
-
-              <div>
-                <p className="font-semibold text-slate-800">
-                  ภาระงานพยาบาล
-                </p>
-                <p className="text-xs text-slate-500">
-                  Nurse Workload System
-                </p>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-3">
-              {dept.nurseLinks.map((link) => (
-                <LinkRow key={link.label} link={link} />
-              ))}
-            </div>
-          </div>
-
-          {/* Assistant */}
-          {dept.assistantLinks.length > 0 && (
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center">
-                  🧑‍⚕️
-                </div>
-
-                <div>
-                  <p className="font-semibold text-slate-800">
-                    ภาระงานผู้ช่วยพยาบาล
-                  </p>
-
-                  <p className="text-xs text-slate-500">
-                    Assistant Nurse Workload
-                  </p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-3">
-                {dept.assistantLinks.map((link) => (
-                  <LinkRow key={link.label} link={link} />
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function WorkUnitPage() {
+// ══════════════════════════════════════════════════════════════
+// PAGE
+// ══════════════════════════════════════════════════════════════
+function StaffSelectPage() {
+  const { lang } = useLanguage();
+  const { setMode } = useMode();
   const { user, loading } = useAuth();
-  const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (!loading && !user) {
-      navigate({ to: "/staff/login" });
+  const navigate = useNavigate();
+  const c = copy[lang];
+
+  const [staffId, setStaffId] = useState<string>("");
+  const [last, setLast] = useState<Choice | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (loading) return;
+
+    if (!user) {
+      navigate({ to: "/staff/login", replace: true });
+      return;
     }
-  }, [user, loading, navigate]);
+
+    setMode("staff");
+
+    const fromEmail = user.email?.replace("@staff.th", "") ?? "";
+
+    setStaffId(
+      window.localStorage.getItem("rnu-staff-id") || fromEmail
+    );
+
+    const stored = window.localStorage.getItem(
+      "rnu-staff-system"
+    ) as Choice | null;
+
+    if (stored) setLast(stored);
+  }, [user, loading, navigate, setMode]);
+
+  const handleSelect = (choice: Choice) => {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("rnu-staff-system", choice);
+    }
+
+    const destinations: Record<Choice, string> = {
+      management: "/staff/internal",
+      equipment: "/staff/medical",
+      workunit: "/staff/workunit",
+    };
+
+    navigate({ to: destinations[choice] as any });
+  };
 
   if (loading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f4f4f5]">
-        <div className="w-8 h-8 border-[3px] border-pink-500 border-t-transparent rounded-full animate-spin" />
+      <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f4f4f5]">
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#111827]">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-[-80px] right-[-60px] w-[300px] h-[300px] rounded-full bg-white" />
-          <div className="absolute bottom-[-100px] left-[-60px] w-[320px] h-[320px] rounded-full bg-white" />
-        </div>
+    <div className="relative -mt-8 min-h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-pink-50 via-background to-pink-100/50 px-4 py-16">
+      <div className="pointer-events-none absolute -top-32 -left-24 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
 
-        <div className="relative max-w-6xl mx-auto px-6 py-12">
-          <button
-            onClick={() => navigate({ to: "/staff/select" as any })}
-            className="flex items-center gap-2 text-white/70 hover:text-white text-sm mb-8 transition"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-            กลับหน้าเลือกระบบ
-          </button>
+      <div className="pointer-events-none absolute -bottom-32 -right-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
 
-          <div className="flex flex-col lg:flex-row lg:items-center gap-8">
-            <div className="flex items-center gap-5">
-              <div className="w-20 h-20 rounded-[28px] bg-white/10 backdrop-blur-md flex items-center justify-center text-4xl shadow-xl">
-                🏥
-              </div>
+      <div className="relative mx-auto max-w-5xl">
+        {/* HEADER */}
+        <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+              <Sparkles className="h-3.5 w-3.5" />
+              {c.eyebrow}
+            </span>
 
-              <div>
-                <h1 className="text-white text-4xl font-black tracking-tight">
-                  หน่วยปฏิบัติงาน
-                </h1>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              {c.heading}
+            </h1>
 
-                <p className="text-white/70 text-lg mt-2 max-w-2xl leading-8">
-                  ระบบภาระงานพยาบาลและผู้ช่วยพยาบาล
-                  สำหรับหน่วยงานรังสีวิทยาและรังสีร่วมรักษา
-                </p>
-              </div>
+            <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+              {c.sub}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 rounded-full border border-border/60 bg-background/80 px-4 py-2 shadow-sm backdrop-blur">
+            <div className="grid h-9 w-9 place-content-center rounded-full bg-gradient-to-br from-primary to-primary/70 text-sm font-semibold text-primary-foreground">
+              {(staffId || c.guest).charAt(0).toUpperCase()}
             </div>
-          </div>
 
-          {/* Chips */}
-          <div className="flex flex-wrap gap-3 mt-10">
-            {departments.map((dept) => (
-              <div
-                key={dept.id}
-                className={`
-                  bg-white/10 backdrop-blur-md border border-white/10
-                  rounded-2xl px-4 py-2 text-white text-sm font-medium
-                  flex items-center gap-2
-                `}
-              >
-                <span>{dept.emoji}</span>
-                <span>{dept.name}</span>
-              </div>
-            ))}
+            <div className="leading-tight">
+              <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                {c.welcome}
+              </p>
+
+              <p className="text-sm font-medium text-foreground">
+                {staffId || c.guest}
+              </p>
+            </div>
+
+            <Link
+              to="/staff/login"
+              className="ml-2 inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-muted-foreground transition hover:text-primary"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              {c.signOut}
+            </Link>
           </div>
         </div>
 
-        <div className="h-8 bg-[#f4f4f5] rounded-t-[40px]" />
-      </section>
+        {/* MAIN CARDS */}
+        <div className="grid gap-6 md:grid-cols-2 mb-8">
+          <SystemCard
+            title={c.mgmt.title}
+            desc={c.mgmt.desc}
+            items={c.mgmt.items}
+            icons={[Users, FileText, BarChart3, CalendarDays]}
+            accentIcon={Stethoscope}
+            isLast={last === "management"}
+            lastLabel={c.last}
+            cta={c.enter}
+            onSelect={() => handleSelect("management")}
+          />
 
-      {/* CONTENT */}
-      <main className="max-w-6xl mx-auto px-6 pb-16 -mt-2 relative z-10">
-        {/* Title */}
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 bg-pink-100 text-pink-700 rounded-full px-4 py-2 text-sm font-semibold">
-            ✨ หน่วยงานทั้งหมด
-          </div>
+          <SystemCard
+            title={c.eq.title}
+            desc={c.eq.desc}
+            items={c.eq.items}
+            icons={[Activity, Wrench, ClipboardCheck, Sparkles]}
+            accentIcon={Wrench}
+            isLast={last === "equipment"}
+            lastLabel={c.last}
+            cta={c.enter}
+            onSelect={() => handleSelect("equipment")}
+          />
+        </div>
 
-          <h2 className="text-3xl font-black text-slate-900 mt-4">
-            เลือกหน่วยงานที่ต้องการใช้งาน
-          </h2>
+        {/* QUICK ACCESS */}
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-1 h-4 rounded-full bg-primary/50 inline-block" />
 
-          <p className="text-slate-500 mt-2 leading-7">
-            คลิกที่การ์ดเพื่อดูภาระงาน เอกสารออนไลน์
-            และระบบที่เกี่ยวข้องของแต่ละหน่วยงาน
+          <p className="text-xs font-semibold text-muted-foreground">
+            {c.quickAccess}
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid gap-6">
-          {departments.map((dept) => (
-            <DeptCard key={dept.id} dept={dept} />
-          ))}
+        <div className="grid gap-4 grid-cols-1">
+          <SystemCard
+            title={c.workunit.title}
+            desc={c.workunit.desc}
+            items={c.workunit.items}
+            icons={[Building2, Building2, Building2, Building2]}
+            accentIcon={Building2}
+            isLast={last === "workunit"}
+            lastLabel={c.last}
+            cta={c.enter}
+            onSelect={() => handleSelect("workunit")}
+            compact
+          />
         </div>
-
-        {/* Footer Note */}
-        <div className="mt-8 bg-white border border-slate-200 rounded-3xl p-5 flex items-start gap-4 shadow-sm">
-          <div className="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl shrink-0">
-            💡
-          </div>
-
-          <div>
-            <h3 className="font-bold text-slate-800">
-              คำแนะนำการใช้งาน
-            </h3>
-
-            <p className="text-sm text-slate-500 leading-7 mt-1">
-              ระบบนี้ออกแบบให้สอดคล้องกับหน้า Intervention ใหม่
-              โดยใช้รูปแบบ Card Layout, Gradient Header และ Rounded UI
-              เพื่อให้ใช้งานง่ายทั้งบน Desktop และ Tablet
-            </p>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════
+// SYSTEM CARD
+// ══════════════════════════════════════════════════════════════
+type IconType = React.ComponentType<{ className?: string }>;
+
+function SystemCard({
+  title,
+  desc,
+  items,
+  icons,
+  accentIcon: AccentIcon,
+  isLast,
+  lastLabel,
+  cta,
+  onSelect,
+  compact = false,
+}: {
+  title: string;
+  desc: string;
+  items: string[];
+  icons: IconType[];
+  accentIcon: IconType;
+  isLast: boolean;
+  lastLabel: string;
+  cta: string;
+  onSelect: () => void;
+  compact?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className={cn(
+        "group relative flex h-full flex-col overflow-hidden rounded-3xl border border-border/60 bg-background/90 text-left shadow-sm backdrop-blur",
+        "transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
+        compact ? "p-5" : "p-7"
+      )}
+    >
+      <div className="pointer-events-none absolute -top-16 -right-16 h-44 w-44 rounded-full bg-primary/10 blur-2xl transition-opacity group-hover:opacity-80" />
+
+      <div className="relative flex items-start justify-between">
+        <div
+          className={cn(
+            "grid place-content-center rounded-2xl bg-gradient-to-br from-primary to-primary/70 text-primary-foreground shadow-md shadow-primary/20",
+            compact ? "h-11 w-11" : "h-14 w-14"
+          )}
+        >
+          <AccentIcon className={compact ? "h-5 w-5" : "h-7 w-7"} />
+        </div>
+
+        {isLast && (
+          <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-medium text-primary">
+            {lastLabel}
+          </span>
+        )}
+      </div>
+
+      <h2
+        className={cn(
+          "relative font-semibold tracking-tight text-foreground",
+          compact ? "mt-3 text-base" : "mt-5 text-xl"
+        )}
+      >
+        {title}
+      </h2>
+
+      <p
+        className={cn(
+          "relative text-muted-foreground",
+          compact ? "mt-1 text-xs" : "mt-1.5 text-sm"
+        )}
+      >
+        {desc}
+      </p>
+
+      {!compact && (
+        <ul className="relative mt-5 grid grid-cols-2 gap-2.5">
+          {items.map((item, i) => {
+            const Icon = icons[i] ?? icons[0];
+
+            return (
+              <li
+                key={item}
+                className="flex items-center gap-2 rounded-xl bg-muted/40 px-3 py-2 text-xs text-foreground/80 transition-colors group-hover:bg-primary/5"
+              >
+                <Icon className="h-3.5 w-3.5 text-primary shrink-0" />
+
+                <span className="truncate">{item}</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+
+      {compact && (
+        <ul className="relative mt-3 flex flex-wrap gap-1.5">
+          {items.map((item) => (
+            <li
+              key={item}
+              className="rounded-full bg-muted/50 px-2 py-0.5 text-[10px] text-foreground/70 group-hover:bg-primary/5"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div
+        className={cn(
+          "relative flex items-center justify-between border-t border-border/60 text-sm font-medium text-primary",
+          compact ? "mt-4 pt-3" : "mt-6 pt-4"
+        )}
+      >
+        <span>{cta}</span>
+
+        <span className="grid h-8 w-8 place-content-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:translate-x-1">
+          <ArrowRight className="h-3.5 w-3.5" />
+        </span>
+      </div>
+    </button>
   );
 }
