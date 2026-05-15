@@ -94,7 +94,7 @@ const internalSections: InternalSection[] = [
         label: "การประเมินผลการปฏิบัติงาน",
         href: "https://drive.google.com/drive/folders/1IEZ03Ep0t9uZFCDN0ox9zgBIIRKVZKz7",
       },
-      { label: "ตารางจ่ายงาน", href: "#" },
+      { label: "ตารางจ่ายงาน", href: "/staff/workaccoun" },
       { label: "ภาระงานแต่ละหน่วยงาน", navigateTo: "/staff/workaccount" },
       { label: "Download เอกสาร", navigateTo: "/staff/downloads" },
       {
@@ -106,18 +106,18 @@ const internalSections: InternalSection[] = [
   {
     title: "Google Form พยาบาล",
     items: [
-      { label: "Form เพิ่มเติมภาระงาน IR", href: "#" },
-      { label: "RT ลงยอดเวรตรวจการ & ภาระงาน", href: "#" },
-      { label: "ยอดเวรตรวจการ Screening", href: "#" },
-      { label: "ข้อมูลผู้ป่วยแพ้สารทึบรังสี", href: "#" },
-      { label: "ข้อมูลผู้ป่วย Contrast leak", href: "#" },
+      {  label: "Form เพิ่มเติมภาระงาน IR", href: "https://docs.google.com/forms/d/e/1FAIpQLSdieN4UCLIlyZvtFBLV-S1GgGP7FaL35e5-CrDM73hjCXIdLw/viewform?usp=sf_link" },
+      {  label: "RT ลงยอดเวรตรวจการ & ภาระงาน", href: "https://docs.google.com/forms/d/e/1FAIpQLSdQz38K7XlpWm3u8r9hPL4IQkMVwhJBUQv8ysCo2ZiEnfFLSA/viewform?usp=sf_link" },
+      {  label: "ยอดเวรตรวจการ Screening", href: "https://docs.google.com/forms/d/e/1FAIpQLSfy6ypB1KZ_ina_d0ERcKvBhRLoqFI9dX4FxtxEDPSGjHFNsg/viewform?usp=sf_link" },
+      {  label: "ข้อมูลผู้ป่วยแพ้สารทึบรังสี", href: "https://docs.google.com/forms/d/e/1FAIpQLSfM--Jt6mRlR2ZPU-XAJXqm3AvyUfPAnLIlo0E_mf3Akmz5oQ/viewform?usp=sf_link" },
+      {  label: "ข้อมูลผู้ป่วย Contrast leak", href: "https://docs.google.com/forms/d/e/1FAIpQLSeDxR7tK0Px6VLlW5TuOO-R4fh3UeE65nNkPrWxXn6gpooF-A/viewform?usp=sf_link" },
     ],
   },
   {
     title: "Google Form ผู้ช่วยพยาบาล",
     items: [
-      { label: "Form ผู้ช่วยพยาบาล IR", href: "#" },
-      { label: "Form ผู้ช่วยพยาบาล RT", href: "#" },
+      {  label: "ลงทะเบียนเพิ่มเติม PN Intervention", href: "https://docs.google.com/forms/d/e/1FAIpQLScaFeRpGbfQpBItWBKodDoLOtx66hi63i2nqoAMBAikW9bq6Q/viewform?usp=sf_link" },
+      {  label: "ลงทะเบียนเพิ่มเติม PN RT", href: "https://docs.google.com/forms/d/e/1FAIpQLSfoPMK1gKIo_YW8ojq039fL3bYrXCvhxnTyHrOvEFf4Pkg9Ew/viewform?usp=sf_link" },
     ],
   },
   {
@@ -140,52 +140,52 @@ const interventionFormSections = [
       {
         title: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง DSA",
         links: [
-          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง DSA 👍🏻", href: "#", type: "form" },
-          { label: "รายงานการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง DSA 💡", href: "#", type: "report" },
+          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง DSA 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLScNUdA8ggI8VD7f_c_ub03U3A2tMmjGYzQsTix2MGrZq2z1-Q/viewform?usp=sf_link", type: "form" },
+          { label: "รายงานการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง DSA 💡", href: "https://docs.google.com/spreadsheets/d/17wOSvXF9AV5YGxDwFm8xFOkH_5J4v9Sw_Xdrok9juqw/edit?usp=sharing", type: "report" },
         ],
       },
       {
         title: "การลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง Ultrasound",
         links: [
-          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง Ultrasound 👍🏻", href: "#", type: "form" },
-          { label: "รายงานการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง Ultrasound 💡", href: "#", type: "report" },
+          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง Ultrasound 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSeVcvrpvcTpf_Oyr-dN3X6QODq90VG6-29uAb8wEWoboFvdmw/viewform?usp=sf_link", type: "form" },
+          { label: "รายงานการลงข้อมูลผู้รับบริการที่ทำหัตถการห้อง Ultrasound 💡", href: "https://docs.google.com/spreadsheets/d/1AgQOAKTnNfjw--rdWJ1dYbCMiuM2wxCD_w_zq5C86G8/edit?usp=sharing", type: "report" },
         ],
       },
       {
         title: "การลงข้อมูลผู้รับบริการที่ทำหัตถการ Thrombectomy",
         links: [
-          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการ Thrombectomy 👍🏻", href: "#", type: "form" },
-          { label: "รายงานการลงข้อมูลผู้รับบริการที่ทำหัตถการ Thrombectomy 💡", href: "#", type: "report" },
+          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการ Thrombectomy 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSdYuNR1NpS9jZi7Hio0nyOZmMNUGJ60dOGHmZpnfmH2_Q3e5w/viewform?usp=sf_link", type: "form" },
+          { label: "รายงานการลงข้อมูลผู้รับบริการที่ทำหัตถการ Thrombectomy 💡", href: "https://docs.google.com/spreadsheets/d/1juj2XnbwPGzNXAOMV829KtXFkggef2lrNLRNRrlHURs/edit?usp=sharing", type: "report" },
         ],
       },
       {
         title: "การลงข้อมูลเยี่ยมตรวจผู้รับบริการ ก่อน / หลังหัตถการ / เฉพาะหัตถการ C-line",
         links: [
-          { label: "แบบการลงข้อมูลเยี่ยมตรวจผู้รับบริการ ก่อน / หลังหัตถการ / เฉพาะหัตถการ C-line 👍🏻", href: "#", type: "form" },
-          { label: "รายงานการลงข้อมูลเยี่ยมตรวจผู้รับบริการ ก่อน / หลังหัตถการ / เฉพาะหัตถการ C-line 💡", href: "#", type: "report" },
+          { label: "แบบการลงข้อมูลเยี่ยมตรวจผู้รับบริการ ก่อน / หลังหัตถการ / เฉพาะหัตถการ C-line 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSeqUXqF7JKthqC3Rwx1ywbbGIgqN_oSDVuQo2ZDXEtRACWuNg/viewform?usp=sf_link", type: "form" },
+          { label: "รายงานการลงข้อมูลเยี่ยมตรวจผู้รับบริการ ก่อน / หลังหัตถการ / เฉพาะหัตถการ C-line 💡", href: "https://docs.google.com/spreadsheets/d/1cZup5k0qnVidWpiTTgveX1kGK1BD3HXweBsefZp0a9I/edit?usp=sharing", type: "report" },
         ],
       },
       {
         title: "การลงข้อมูลผู้รับบริการที่ทำหัตถการ Picc line",
         links: [
-          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการ Picc line 👍🏻", href: "#", type: "form" },
-          { label: "แบบการลงข้อมูลผู้รับบริการที่นำสาย Picc line ออก 👍🏻", href: "#", type: "form" },
-          { label: "แบบการลงข้อมูลผู้รับบริการที่นำสาย Picc line กลับบ้าน 👍🏻", href: "#", type: "form" },
-          { label: "แฟ้มเอกสารออนไลน์ที่แปลงข้อมูลใน google form เป็นเอกสารการดูแลผู้รับบริการที่ทำหัตถการ Picc line 💡", href: "#", type: "report" },
+          { label: "แบบการลงข้อมูลผู้รับบริการที่ทำหัตถการ Picc line 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSc_WawBdeKXg8sozDdKumdoHFsxfT_WdAz4pal1aaqtuYrbBQ/viewform", type: "form" },
+          { label: "แบบการลงข้อมูลผู้รับบริการที่นำสาย Picc line ออก 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSd_FTjZIPDZsUokO3V6uODnbBlYlc7Q6Xm79wibSplRTt2DQw/viewform", type: "form" },
+          { label: "แบบการลงข้อมูลผู้รับบริการที่นำสาย Picc line กลับบ้าน 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSdJ0h_d0dovUPzaab-DBzL7yT25Jd284RmHEHdeJ4wjGJ10_w/viewform", type: "form" },
+          { label: "แฟ้มเอกสารออนไลน์ที่แปลงข้อมูลใน google form เป็นเอกสารการดูแลผู้รับบริการที่ทำหัตถการ Picc line 💡", href: "https://drive.google.com/drive/folders/19lQ-k_30ue8tJc3IUotseXsZ_17S_C-x", type: "report" },
         ],
       },
       {
         title: "การส่งผู้ป่วยกลับหอผู้ป่วย",
         links: [
-          { label: "แบบการส่งผู้ป่วยกลับหอผู้ป่วย 👍🏻", href: "#", type: "form" },
-          { label: "รายงานการส่งผู้ป่วยกลับหอผู้ป่วย 💡", href: "#", type: "report" },
+          { label: "แบบการส่งผู้ป่วยกลับหอผู้ป่วย 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLScjSsKqFfAEqAZVlQ-Ys8NJDqB4Y8AyC2IP7XwjnXTjTtpciQ/viewform?usp=sf_link", type: "form" },
+          { label: "รายงานการส่งผู้ป่วยกลับหอผู้ป่วย 💡", href: "https://docs.google.com/spreadsheets/d/1ZkF-Jts7RjAB5GzLpKX18rowjxSeS5dmonwB-docZpc/edit?usp=sharing", type: "report" },
         ],
       },
       {
         title: "Consult For IV Insertion",
         links: [
-          { label: "แบบ Consult For IV Insertion 👍🏻", href: "#", type: "form" },
-          { label: "รายงาน Consult For IV Insertion 💡", href: "#", type: "report" },
+          { label: "แบบ Consult For IV Insertion 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSeFwHayyhSdXuH-9N730laHL5n-W7RJ7wkIGwWi0DnXhIU-6w/viewform?usp=sf_link", type: "form" },
+          { label: "รายงาน Consult For IV Insertion 💡", href: "https://docs.google.com/spreadsheets/d/1RtyCtTlavVvlDOIWBmTDK_sMwVTwyJJX7SMPE_2NuRg/edit?usp=sharing", type: "report" },
         ],
       },
     ],
@@ -196,22 +196,29 @@ const interventionEquipmentSections = [
   {
     title: "การตรวจสอบความครบถ้วนของเครื่องมือแพทย์",
     links: [
-      { label: "แบบการตรวจสอบความครบถ้วนของเครื่องมือแพทย์ 👍🏻", href: "#", type: "form" },
-      { label: "รายงานการตรวจสอบความครบถ้วนของเครื่องมือแพทย์ 💡", href: "#", type: "report" },
+      { label: "แบบการตรวจสอบความครบถ้วนของเครื่องมือแพทย์ 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLScJH5vEokG8hE3wZDUbXLb6BZvaR3X06rPv8VONqVbsuZ751Q/viewform?usp=sf_link", type: "form" },
+      { label: "รายงานการตรวจสอบความครบถ้วนของเครื่องมือแพทย์ 💡", href: "https://docs.google.com/spreadsheets/d/13z4T2ZZkVV0oCWruYEraFGxAJCTlEr6h8_q-DfJ0dZU/edit?usp=sharing", type: "report" },
     ],
   },
   {
     title: "การตรวจสอบความสมบูรณ์และพร้อมใช้งานของปราศจากเชื้อ",
     links: [
-      { label: "แบบการตรวจสอบความสมบูรณ์และพร้อมใช้งานของปราศจากเชื้อ 👍🏻", href: "#", type: "form" },
-      { label: "รายงานการตรวจสอบความสมบูรณ์และพร้อมใช้งานของปราศจากเชื้อ 💡", href: "#", type: "report" },
+      { label: "แบบการตรวจสอบความสมบูรณ์และพร้อมใช้งานของปราศจากเชื้อ 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSe5puFJX2cSHkMnuJ7C4wXnhkFlTANz5qvVsxGumf_09mmLbg/viewform?usp=sf_link", type: "form" },
+      { label: "รายงานการตรวจสอบความสมบูรณ์และพร้อมใช้งานของปราศจากเชื้อ 💡", href: "https://docs.google.com/spreadsheets/d/1EzFiE-sV2Lnj8EGEKJ_b14HQbUmvSoWm-WFx3Z-GfKI/edit?usp=sharing", type: "report" },
     ],
   },
   {
     title: "การตรวจสอบรถฉุกเฉิน",
     links: [
-      { label: "แบบการตรวจสอบรถฉุกเฉิน 👍🏻", href: "#", type: "form" },
-      { label: "รายงานการตรวจสอบรถฉุกเฉิน 💡", href: "#", type: "report" },
+      { label: "แบบการตรวจสอบรถฉุกเฉิน 👍🏻", href: "https://docs.google.com/forms/d/e/1FAIpQLSewKtaaOwaSaqF1E7r8-dmt9gDPIGHHiZWCShchqAVO2lozRw/viewform?usp=sf_link", type: "form" },
+      { label: "รายงานการตรวจสอบรถฉุกเฉิน 💡", href: "https://docs.google.com/spreadsheets/d/1jczvLN4cwqRA8O1JUIKsIACBS7wNFED4iNwbU9vvsu4/edit?usp=sharing", type: "report" },
+    ],
+  },
+  {
+    title: "เอกสารออนไลน์อื่นๆ ที่ใช้งาน",
+    links: [
+      { label: "ตารางการตรวจข้อมูลผู้ป่วยแต่ละวัน", href: "https://docs.google.com/spreadsheets/d/1x8qSBxW8Q4Po-cW0T73hAHZLGjeo7_RrVq4mhUUUKEE/edit?usp=sharing", type: "form" },
+      { label: "แบบประเมินค่าใช้จ่าย intervention", href: "https://docs.google.com/spreadsheets/d/1x8qSBxW8Q4Po-cW0T73hAHZLGjeo7_RrVq4mhUUUKEE/edit?usp=sharing", type: "report" },
     ],
   },
 ];

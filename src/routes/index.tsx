@@ -6,12 +6,9 @@ import {
   Activity,
   Atom,
   Radiation,
-  ShieldCheck,
   FileText,
   AlertCircle,
   Sparkles,
-  Clock,
-  HeartHandshake,
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { procedures, type Category } from "@/data/procedures";
@@ -67,105 +64,73 @@ function HomePage() {
         <div className="absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full bg-(--gradient-hero) opacity-20 blur-3xl" />
         <div className="absolute -bottom-20 -left-20 -z-10 h-72 w-72 rounded-full bg-accent opacity-40 blur-3xl" />
 
-        <div className="mx-auto max-w-7xl px-4 pb-16 pt-12 md:px-6 md:pb-24 md:pt-20">
-          <div className="grid gap-10 md:grid-cols-2 md:items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-primary shadow-sm">
-                <Sparkles className="h-3.5 w-3.5" />
-                {mode === "patient" ? t("home.badge.patient") : t("home.badge.staff")}
-              </div>
-              <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
-                {t("home.title.prefix")} <span className="bg-(--gradient-hero) bg-clip-text text-transparent">{t("home.title.highlight")}</span>
-              </h1>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                {t("home.subtitle")}
-              </p>
+        <div className="mx-auto max-w-3xl px-4 pb-16 pt-12 text-center md:px-6 md:pb-24 md:pt-20">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-primary shadow-sm">
+            <Sparkles className="h-3.5 w-3.5" />
+            {mode === "patient" ? t("home.badge.patient") : t("home.badge.staff")}
+          </div>
+          <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            {t("home.title.prefix")}{" "}
+            <span className="bg-(--gradient-hero) bg-clip-text text-transparent">
+              {t("home.title.highlight")}
+            </span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+            {t("home.subtitle")}
+          </p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  to="/journey"
-                  className="group inline-flex items-center gap-2 rounded-full bg-(--gradient-hero) px-6 py-3 text-sm font-semibold text-primary-foreground shadow-(--shadow-soft) transition-transform hover:-translate-y-0.5"
-                >
-                  {t("home.cta.prepare")}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </Link>
-                <Link
-                  to="/procedures"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary"
-                >
-                  <Search className="h-4 w-4" /> {t("home.cta.search")}
-                </Link>
-              </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              to="/journey"
+              className="group inline-flex items-center gap-2 rounded-full bg-(--gradient-hero) px-6 py-3 text-sm font-semibold text-primary-foreground shadow-(--shadow-soft) transition-transform hover:-translate-y-0.5"
+            >
+              {t("home.cta.prepare")}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+            <Link
+              to="/procedures"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary"
+            >
+              <Search className="h-4 w-4" /> {t("home.cta.search")}
+            </Link>
+          </div>
 
-              {/* Search */}
-              <div className="relative mt-8 max-w-xl">
-                <div className="flex items-center gap-2 rounded-2xl border border-border bg-background p-2 shadow-[var(--shadow-card  )] focus-within:ring-2 focus-within:ring-ring">
-                  <Search className="ml-2 h-5 w-5 text-muted-foreground" />
-                  <input
-                    value={q}
-                    onChange={(e) => setQ(e.target.value)}
-                    placeholder={t("home.search.placeholder")}
-                    className="flex-1 bg-transparent px-1 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground"
-                  />
+          {/* Search */}
+          <div className="relative mx-auto mt-8 max-w-xl">
+            <div className="flex items-center gap-2 rounded-2xl border border-border bg-background p-2 shadow-[var(--shadow-card)] focus-within:ring-2 focus-within:ring-ring">
+              <Search className="ml-2 h-5 w-5 text-muted-foreground" />
+              <input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder={t("home.search.placeholder")}
+                className="flex-1 bg-transparent px-1 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground"
+              />
+              <Link
+                to="/procedures"
+                search={{ q }}
+                className="rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
+              >
+                {t("home.search.button")}
+              </Link>
+            </div>
+            {matches.length > 0 && (
+              <div className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-2xl border border-border bg-popover shadow-xl text-left">
+                {matches.map((m) => (
                   <Link
-                    to="/procedures"
-                    search={{ q }}
-                    className="rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
+                    key={m.id}
+                    to="/procedures/$procedureId"
+                    params={{ procedureId: m.id }}
+                    className="flex items-center justify-between gap-3 border-b border-border px-4 py-3 last:border-b-0 hover:bg-secondary"
                   >
-                    {t("home.search.button")}
-                  </Link>
-                </div>
-                {matches.length > 0 && (
-                  <div className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-2xl border border-border bg-popover shadow-xl">
-                    {matches.map((m) => (
-                      <Link
-                        key={m.id}
-                        to="/procedures/$procedureId"
-                        params={{ procedureId: m.id }}
-                        className="flex items-center justify-between gap-3 border-b border-border px-4 py-3 last:border-b-0 hover:bg-secondary"
-                      >
-                        <div>
-                          <div className="text-sm font-medium text-foreground">{m.name}</div>
-                          <div className="text-xs text-muted-foreground">{m.category}</div>
-                        </div>
-                        <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Hero illustration card */}
-            <div className="relative">
-              <div className="absolute inset-0 -z-10 rounded-[2rem] bg-(--gradient-hero) opacity-30 blur-2xl" />
-              <div className="rounded-[2rem] border border-border bg-background p-6 shadow-(--shadow-soft) md:p-8">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-                    <span className="text-xs font-medium text-muted-foreground">{t("home.card.title")}</span>
-                  </div>
-                  <span className="rounded-full bg-secondary px-2.5 py-1 text-[10px] font-medium text-secondary-foreground">{t("home.card.today")}</span>
-                </div>
-                <div className="mt-6 space-y-4">
-                  {[
-                    { icon: ShieldCheck, tk: "home.card.safe.t", dk: "home.card.safe.d" },
-                    { icon: HeartHandshake, tk: "home.card.team.t", dk: "home.card.team.d" },
-                    { icon: Clock, tk: "home.card.time.t", dk: "home.card.time.d" },
-                  ].map((f) => (
-                    <div key={f.tk} className="flex items-start gap-3 rounded-2xl bg-muted/60 p-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-background text-primary shadow-sm">
-                        <f.icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-semibold text-foreground">{t(f.tk)}</div>
-                        <div className="text-xs text-muted-foreground">{t(f.dk)}</div>
-                      </div>
+                    <div>
+                      <div className="text-sm font-medium text-foreground">{m.name}</div>
+                      <div className="text-xs text-muted-foreground">{m.category}</div>
                     </div>
-                  ))}
-                </div>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                  </Link>
+                ))}
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -203,7 +168,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Quick access — staff focused but useful for all */}
+      {/* Quick access */}
       <section className="mx-auto max-w-7xl px-4 pb-16 md:px-6">
         <div className="rounded-3xl border border-border bg-card p-6 shadow-(--shadow-card) md:p-10">
           <div className="flex flex-wrap items-center justify-between gap-3">

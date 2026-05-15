@@ -39,6 +39,8 @@ export function SiteHeader() {
 
   const goPatient = () => {
     setMode("patient");
+    navigate({ to: "/" });
+    setOpen(false);
   };
 
   const goStaff = () => {

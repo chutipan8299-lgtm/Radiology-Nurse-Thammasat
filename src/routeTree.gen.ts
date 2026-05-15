@@ -16,11 +16,19 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as StaffWorkunitRouteImport } from './routes/staff.workunit'
 import { Route as StaffWorkloadRouteImport } from './routes/staff.workload'
 import { Route as StaffWorkaccountRouteImport } from './routes/staff.workaccount'
+import { Route as StaffWork_spectRouteImport } from './routes/staff.work_spect'
+import { Route as StaffWork_screeningRouteImport } from './routes/staff.work_screening'
+import { Route as StaffWork_radiationRouteImport } from './routes/staff.work_radiation'
+import { Route as StaffWork_interventionRouteImport } from './routes/staff.work_intervention'
 import { Route as StaffTrainingRecordsRouteImport } from './routes/staff.training-records'
 import { Route as StaffStatisticsRouteImport } from './routes/staff.statistics'
 import { Route as StaffSelectRouteImport } from './routes/staff.select'
 import { Route as StaffRadiationRouteImport } from './routes/staff.radiation'
 import { Route as StaffPatientsRouteImport } from './routes/staff.patients'
+import { Route as StaffMedicalequipmentpage_spectRouteImport } from './routes/staff.medicalequipmentpage_spect'
+import { Route as StaffMedicalequipmentpage_screeningRouteImport } from './routes/staff.medicalequipmentpage_screening'
+import { Route as StaffMedicalequipmentpage_radiationRouteImport } from './routes/staff.medicalequipmentpage_radiation'
+import { Route as StaffMedicalequipmentpageRouteImport } from './routes/staff.medicalequipmentpage'
 import { Route as StaffMedicalRouteImport } from './routes/staff.medical'
 import { Route as StaffLoginRouteImport } from './routes/staff.login'
 import { Route as StaffKpiRouteImport } from './routes/staff.kpi'
@@ -64,6 +72,26 @@ const StaffWorkaccountRoute = StaffWorkaccountRouteImport.update({
   path: '/staff/workaccount',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffWork_spectRoute = StaffWork_spectRouteImport.update({
+  id: '/staff/work_spect',
+  path: '/staff/work_spect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffWork_screeningRoute = StaffWork_screeningRouteImport.update({
+  id: '/staff/work_screening',
+  path: '/staff/work_screening',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffWork_radiationRoute = StaffWork_radiationRouteImport.update({
+  id: '/staff/work_radiation',
+  path: '/staff/work_radiation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffWork_interventionRoute = StaffWork_interventionRouteImport.update({
+  id: '/staff/work_intervention',
+  path: '/staff/work_intervention',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaffTrainingRecordsRoute = StaffTrainingRecordsRouteImport.update({
   id: '/staff/training-records',
   path: '/staff/training-records',
@@ -89,6 +117,30 @@ const StaffPatientsRoute = StaffPatientsRouteImport.update({
   path: '/staff/patients',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffMedicalequipmentpage_spectRoute =
+  StaffMedicalequipmentpage_spectRouteImport.update({
+    id: '/staff/medicalequipmentpage_spect',
+    path: '/staff/medicalequipmentpage_spect',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const StaffMedicalequipmentpage_screeningRoute =
+  StaffMedicalequipmentpage_screeningRouteImport.update({
+    id: '/staff/medicalequipmentpage_screening',
+    path: '/staff/medicalequipmentpage_screening',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const StaffMedicalequipmentpage_radiationRoute =
+  StaffMedicalequipmentpage_radiationRouteImport.update({
+    id: '/staff/medicalequipmentpage_radiation',
+    path: '/staff/medicalequipmentpage_radiation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const StaffMedicalequipmentpageRoute =
+  StaffMedicalequipmentpageRouteImport.update({
+    id: '/staff/medicalequipmentpage',
+    path: '/staff/medicalequipmentpage',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const StaffMedicalRoute = StaffMedicalRouteImport.update({
   id: '/staff/medical',
   path: '/staff/medical',
@@ -137,11 +189,19 @@ export interface FileRoutesByFullPath {
   '/staff/kpi': typeof StaffKpiRoute
   '/staff/login': typeof StaffLoginRoute
   '/staff/medical': typeof StaffMedicalRoute
+  '/staff/medicalequipmentpage': typeof StaffMedicalequipmentpageRoute
+  '/staff/medicalequipmentpage_radiation': typeof StaffMedicalequipmentpage_radiationRoute
+  '/staff/medicalequipmentpage_screening': typeof StaffMedicalequipmentpage_screeningRoute
+  '/staff/medicalequipmentpage_spect': typeof StaffMedicalequipmentpage_spectRoute
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
+  '/staff/work_intervention': typeof StaffWork_interventionRoute
+  '/staff/work_radiation': typeof StaffWork_radiationRoute
+  '/staff/work_screening': typeof StaffWork_screeningRoute
+  '/staff/work_spect': typeof StaffWork_spectRoute
   '/staff/workaccount': typeof StaffWorkaccountRoute
   '/staff/workload': typeof StaffWorkloadRoute
   '/staff/workunit': typeof StaffWorkunitRoute
@@ -158,11 +218,19 @@ export interface FileRoutesByTo {
   '/staff/kpi': typeof StaffKpiRoute
   '/staff/login': typeof StaffLoginRoute
   '/staff/medical': typeof StaffMedicalRoute
+  '/staff/medicalequipmentpage': typeof StaffMedicalequipmentpageRoute
+  '/staff/medicalequipmentpage_radiation': typeof StaffMedicalequipmentpage_radiationRoute
+  '/staff/medicalequipmentpage_screening': typeof StaffMedicalequipmentpage_screeningRoute
+  '/staff/medicalequipmentpage_spect': typeof StaffMedicalequipmentpage_spectRoute
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
+  '/staff/work_intervention': typeof StaffWork_interventionRoute
+  '/staff/work_radiation': typeof StaffWork_radiationRoute
+  '/staff/work_screening': typeof StaffWork_screeningRoute
+  '/staff/work_spect': typeof StaffWork_spectRoute
   '/staff/workaccount': typeof StaffWorkaccountRoute
   '/staff/workload': typeof StaffWorkloadRoute
   '/staff/workunit': typeof StaffWorkunitRoute
@@ -180,11 +248,19 @@ export interface FileRoutesById {
   '/staff/kpi': typeof StaffKpiRoute
   '/staff/login': typeof StaffLoginRoute
   '/staff/medical': typeof StaffMedicalRoute
+  '/staff/medicalequipmentpage': typeof StaffMedicalequipmentpageRoute
+  '/staff/medicalequipmentpage_radiation': typeof StaffMedicalequipmentpage_radiationRoute
+  '/staff/medicalequipmentpage_screening': typeof StaffMedicalequipmentpage_screeningRoute
+  '/staff/medicalequipmentpage_spect': typeof StaffMedicalequipmentpage_spectRoute
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
+  '/staff/work_intervention': typeof StaffWork_interventionRoute
+  '/staff/work_radiation': typeof StaffWork_radiationRoute
+  '/staff/work_screening': typeof StaffWork_screeningRoute
+  '/staff/work_spect': typeof StaffWork_spectRoute
   '/staff/workaccount': typeof StaffWorkaccountRoute
   '/staff/workload': typeof StaffWorkloadRoute
   '/staff/workunit': typeof StaffWorkunitRoute
@@ -203,11 +279,19 @@ export interface FileRouteTypes {
     | '/staff/kpi'
     | '/staff/login'
     | '/staff/medical'
+    | '/staff/medicalequipmentpage'
+    | '/staff/medicalequipmentpage_radiation'
+    | '/staff/medicalequipmentpage_screening'
+    | '/staff/medicalequipmentpage_spect'
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
     | '/staff/statistics'
     | '/staff/training-records'
+    | '/staff/work_intervention'
+    | '/staff/work_radiation'
+    | '/staff/work_screening'
+    | '/staff/work_spect'
     | '/staff/workaccount'
     | '/staff/workload'
     | '/staff/workunit'
@@ -224,11 +308,19 @@ export interface FileRouteTypes {
     | '/staff/kpi'
     | '/staff/login'
     | '/staff/medical'
+    | '/staff/medicalequipmentpage'
+    | '/staff/medicalequipmentpage_radiation'
+    | '/staff/medicalequipmentpage_screening'
+    | '/staff/medicalequipmentpage_spect'
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
     | '/staff/statistics'
     | '/staff/training-records'
+    | '/staff/work_intervention'
+    | '/staff/work_radiation'
+    | '/staff/work_screening'
+    | '/staff/work_spect'
     | '/staff/workaccount'
     | '/staff/workload'
     | '/staff/workunit'
@@ -245,11 +337,19 @@ export interface FileRouteTypes {
     | '/staff/kpi'
     | '/staff/login'
     | '/staff/medical'
+    | '/staff/medicalequipmentpage'
+    | '/staff/medicalequipmentpage_radiation'
+    | '/staff/medicalequipmentpage_screening'
+    | '/staff/medicalequipmentpage_spect'
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
     | '/staff/statistics'
     | '/staff/training-records'
+    | '/staff/work_intervention'
+    | '/staff/work_radiation'
+    | '/staff/work_screening'
+    | '/staff/work_spect'
     | '/staff/workaccount'
     | '/staff/workload'
     | '/staff/workunit'
@@ -266,11 +366,19 @@ export interface RootRouteChildren {
   StaffKpiRoute: typeof StaffKpiRoute
   StaffLoginRoute: typeof StaffLoginRoute
   StaffMedicalRoute: typeof StaffMedicalRoute
+  StaffMedicalequipmentpageRoute: typeof StaffMedicalequipmentpageRoute
+  StaffMedicalequipmentpage_radiationRoute: typeof StaffMedicalequipmentpage_radiationRoute
+  StaffMedicalequipmentpage_screeningRoute: typeof StaffMedicalequipmentpage_screeningRoute
+  StaffMedicalequipmentpage_spectRoute: typeof StaffMedicalequipmentpage_spectRoute
   StaffPatientsRoute: typeof StaffPatientsRoute
   StaffRadiationRoute: typeof StaffRadiationRoute
   StaffSelectRoute: typeof StaffSelectRoute
   StaffStatisticsRoute: typeof StaffStatisticsRoute
   StaffTrainingRecordsRoute: typeof StaffTrainingRecordsRoute
+  StaffWork_interventionRoute: typeof StaffWork_interventionRoute
+  StaffWork_radiationRoute: typeof StaffWork_radiationRoute
+  StaffWork_screeningRoute: typeof StaffWork_screeningRoute
+  StaffWork_spectRoute: typeof StaffWork_spectRoute
   StaffWorkaccountRoute: typeof StaffWorkaccountRoute
   StaffWorkloadRoute: typeof StaffWorkloadRoute
   StaffWorkunitRoute: typeof StaffWorkunitRoute
@@ -327,6 +435,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffWorkaccountRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff/work_spect': {
+      id: '/staff/work_spect'
+      path: '/staff/work_spect'
+      fullPath: '/staff/work_spect'
+      preLoaderRoute: typeof StaffWork_spectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/work_screening': {
+      id: '/staff/work_screening'
+      path: '/staff/work_screening'
+      fullPath: '/staff/work_screening'
+      preLoaderRoute: typeof StaffWork_screeningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/work_radiation': {
+      id: '/staff/work_radiation'
+      path: '/staff/work_radiation'
+      fullPath: '/staff/work_radiation'
+      preLoaderRoute: typeof StaffWork_radiationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/work_intervention': {
+      id: '/staff/work_intervention'
+      path: '/staff/work_intervention'
+      fullPath: '/staff/work_intervention'
+      preLoaderRoute: typeof StaffWork_interventionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/staff/training-records': {
       id: '/staff/training-records'
       path: '/staff/training-records'
@@ -360,6 +496,34 @@ declare module '@tanstack/react-router' {
       path: '/staff/patients'
       fullPath: '/staff/patients'
       preLoaderRoute: typeof StaffPatientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/medicalequipmentpage_spect': {
+      id: '/staff/medicalequipmentpage_spect'
+      path: '/staff/medicalequipmentpage_spect'
+      fullPath: '/staff/medicalequipmentpage_spect'
+      preLoaderRoute: typeof StaffMedicalequipmentpage_spectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/medicalequipmentpage_screening': {
+      id: '/staff/medicalequipmentpage_screening'
+      path: '/staff/medicalequipmentpage_screening'
+      fullPath: '/staff/medicalequipmentpage_screening'
+      preLoaderRoute: typeof StaffMedicalequipmentpage_screeningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/medicalequipmentpage_radiation': {
+      id: '/staff/medicalequipmentpage_radiation'
+      path: '/staff/medicalequipmentpage_radiation'
+      fullPath: '/staff/medicalequipmentpage_radiation'
+      preLoaderRoute: typeof StaffMedicalequipmentpage_radiationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff/medicalequipmentpage': {
+      id: '/staff/medicalequipmentpage'
+      path: '/staff/medicalequipmentpage'
+      fullPath: '/staff/medicalequipmentpage'
+      preLoaderRoute: typeof StaffMedicalequipmentpageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/staff/medical': {
@@ -437,11 +601,21 @@ const rootRouteChildren: RootRouteChildren = {
   StaffKpiRoute: StaffKpiRoute,
   StaffLoginRoute: StaffLoginRoute,
   StaffMedicalRoute: StaffMedicalRoute,
+  StaffMedicalequipmentpageRoute: StaffMedicalequipmentpageRoute,
+  StaffMedicalequipmentpage_radiationRoute:
+    StaffMedicalequipmentpage_radiationRoute,
+  StaffMedicalequipmentpage_screeningRoute:
+    StaffMedicalequipmentpage_screeningRoute,
+  StaffMedicalequipmentpage_spectRoute: StaffMedicalequipmentpage_spectRoute,
   StaffPatientsRoute: StaffPatientsRoute,
   StaffRadiationRoute: StaffRadiationRoute,
   StaffSelectRoute: StaffSelectRoute,
   StaffStatisticsRoute: StaffStatisticsRoute,
   StaffTrainingRecordsRoute: StaffTrainingRecordsRoute,
+  StaffWork_interventionRoute: StaffWork_interventionRoute,
+  StaffWork_radiationRoute: StaffWork_radiationRoute,
+  StaffWork_screeningRoute: StaffWork_screeningRoute,
+  StaffWork_spectRoute: StaffWork_spectRoute,
   StaffWorkaccountRoute: StaffWorkaccountRoute,
   StaffWorkloadRoute: StaffWorkloadRoute,
   StaffWorkunitRoute: StaffWorkunitRoute,
