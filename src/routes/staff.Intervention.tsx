@@ -2,7 +2,11 @@ import {
   ClipboardList,
   Bookmark,
 } from "lucide-react";
+import { createFileRoute } from '@tanstack/react-router'
 
+export const Route = createFileRoute('/staff/Intervention')({
+  component: () => <InterventionPage />,
+})
 const formSections = [
   {
     title: "การลงข้อมูลผู้รับบริการ",
