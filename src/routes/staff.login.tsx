@@ -51,7 +51,11 @@ function StaffLoginPage() {
     }
   };
 
-  if (loading) return null;
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <span className="w-8 h-8 rounded-full border-2 border-primary/40 border-t-primary animate-spin" />
+    </div>
+  );
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 bg-background">
@@ -113,6 +117,7 @@ function StaffLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="••••••••"
+                autoComplete="current-password"
                 className="w-full bg-background border border-border rounded-xl px-4 py-3 pr-11 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
               />
               <button
