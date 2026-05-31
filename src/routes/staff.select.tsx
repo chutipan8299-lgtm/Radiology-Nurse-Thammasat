@@ -80,7 +80,7 @@ const EQUIPMENT_DEPTS = [
     icon: ScanLine,
     color: "#10b981",
     bg: "#d1fae5",
-    route: "/staff/medicalequipmentpage_screening",  // สะกดตามชื่อไฟล์
+    route: "/staff/medicalequipmentpage_screening",
   },
 ];
 
@@ -181,6 +181,7 @@ function StaffSelectPage() {
     };
     navigate({ to: destinations[choice] as any });
   };
+
   if (loading || !user) {
     return (
       <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
@@ -271,10 +272,10 @@ function StaffSelectPage() {
         >
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {EQUIPMENT_DEPTS.map((dept) => (
-              <EquipmentDeptCard 
-              key={dept.key} 
-              dept={dept} 
-              onClick={() => navigate({ to: (dept as any).route})}
+              <EquipmentDeptCard
+                key={dept.key}
+                dept={dept}
+                onClick={() => { window.location.href = dept.route; }}
               />
             ))}
           </div>
@@ -289,7 +290,11 @@ function StaffSelectPage() {
         >
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {WORKLOAD_DEPTS.map((dept) => (
-              <WorkloadDeptCard key={dept.key} dept={dept} onClick={() => navigate({ to: dept.route as any})} />
+              <WorkloadDeptCard
+                key={dept.key}
+                dept={dept}
+                onClick={() => { window.location.href = dept.route; }}
+              />
             ))}
           </div>
         </QuickAccessPanel>
