@@ -80,7 +80,7 @@ const EQUIPMENT_DEPTS = [
     icon: ScanLine,
     color: "#10b981",
     bg: "#d1fae5",
-    route: "/staff/medicalequipmentpage_sceening",  // สะกดตามชื่อไฟล์
+    route: "/staff/medicalequipmentpage_screening",  // สะกดตามชื่อไฟล์
   },
 ];
 

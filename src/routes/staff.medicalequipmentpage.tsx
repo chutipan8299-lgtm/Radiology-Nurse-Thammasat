@@ -81,7 +81,7 @@ const sidebarDepts = [
   { label: "รังสีร่วมรักษา", sublabel: "Intervention", icon: "💉", route: "/staff/medicalequipmentpage", active: true },
   { label: "เวชศาสตร์นิวเคลียร์", sublabel: "SPECT / CT", icon: "☢️", route: "/staff/medicalequipmentpage_spect" },
   { label: "รังสีรักษาและมะเร็งวิทยา", sublabel: "Radiation Therapy", icon: "🎯", route: "/staff/medicalequipmentpage_radiation" },
-  { label: "รังสีวินิจฉัย", sublabel: "Diagnostic Radiology", icon: "🩺", route: "/staff/medicalequipmentpage_sceening" },
+  { label: "รังสีวินิจฉัย", sublabel: "Diagnostic Radiology", icon: "🩺", route: "/staff/medicalequipmentpage_screening" },
 ];
 
 // ---- Hook: detect mobile ----
