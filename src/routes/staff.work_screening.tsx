@@ -74,10 +74,10 @@ function ActionLink({ label, href, type }: { label: string; href: string; type: 
 function Sidebar({ active, onNavigate }: { active: string; onNavigate: (to: string) => void }) {
   const menuItems = [
     { id: "internal", label: "บริหารภายใน", labelEn: "Internal Management", emoji: "🏠", route: "/staff/workunit" },
-    { id: "intervention", label: "รังสีร่วมรักษา", labelEn: "Intervention", emoji: "💉", route: "/staff/work-intervention" },
-    { id: "spect", label: "เวชศาสตร์นิวเคลียร์", labelEn: "SPECT / CT", emoji: "⚛️", route: "/staff/work-spect" },
+    { id: "intervention", label: "รังสีร่วมรักษา", labelEn: "Intervention", emoji: "💉", route: "/staff/work_intervention" },
+    { id: "spect", label: "เวชศาสตร์นิวเคลียร์", labelEn: "SPECT / CT", emoji: "⚛️", route: "/staff/work_spect" },
     { id: "rt", label: "รังสีรักษาและมะเร็งวิทยา", labelEn: "Radiation Therapy", emoji: "🎯", route: "/staff/work_radiation" },
-    { id: "diag", label: "รังสีวินิจฉัย", labelEn: "Diagnostic Radiology", emoji: "🔍", route: "/staff/work-screening" },
+    { id: "diag", label: "รังสีวินิจฉัย", labelEn: "Diagnostic Radiology", emoji: "🔍", route: "/staff/work_screening" },
   ];
 
   return (
