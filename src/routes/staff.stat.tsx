@@ -1,6 +1,11 @@
 "use client";
 
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+
+export const Route = createFileRoute("/staff/stat" as any)({
+  component: StatisticsPage,
+});
 
 export default function StatisticsPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -25,7 +30,7 @@ export default function StatisticsPage() {
 
   return (
     <>
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@600;700&display=swap");
 
         :root {
@@ -183,17 +188,9 @@ export default function StatisticsPage() {
           font-size: 22px;
         }
 
-        .icon-ir {
-          background: var(--ir-pale);
-        }
-
-        .icon-nm {
-          background: var(--nm-pale);
-        }
-
-        .icon-rt {
-          background: var(--rt-pale);
-        }
+        .icon-ir { background: var(--ir-pale); }
+        .icon-nm { background: var(--nm-pale); }
+        .icon-rt { background: var(--rt-pale); }
 
         .sec-title {
           font-size: 22px;
@@ -222,9 +219,7 @@ export default function StatisticsPage() {
           gap: 10px;
         }
 
-        .sub-card-body {
-          padding: 16px;
-        }
+        .sub-card-body { padding: 16px; }
 
         .item-list {
           list-style: none;
@@ -257,11 +252,9 @@ export default function StatisticsPage() {
         }
 
         @media (max-width: 768px) {
-          .stat-bar {
-            grid-template-columns: 1fr;
-          }
+          .stat-bar { grid-template-columns: 1fr; }
         }
-      `}</style>
+      ` }} />
 
       <section className="hero">
         <div className="hero-inner">
