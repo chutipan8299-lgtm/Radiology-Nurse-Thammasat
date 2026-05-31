@@ -1,12 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
 import {
   ClipboardList,
   Bookmark,
 } from "lucide-react";
-
-export const Route = createFileRoute("/staff/Intervention")({
-  component: InterventionPage,
-});
 
 const formSections = [
   {

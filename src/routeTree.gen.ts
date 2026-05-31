@@ -22,7 +22,6 @@ import { Route as StaffWork_radiationRouteImport } from './routes/staff.work_rad
 import { Route as StaffWork_interventionRouteImport } from './routes/staff.work_intervention'
 import { Route as StaffTrainingRecordsRouteImport } from './routes/staff.training-records'
 import { Route as StaffStatisticsRouteImport } from './routes/staff.statistics'
-import { Route as StaffStatRouteImport } from './routes/staff.stat'
 import { Route as StaffSelectRouteImport } from './routes/staff.select'
 import { Route as StaffRadiationRouteImport } from './routes/staff.radiation'
 import { Route as StaffPatientsRouteImport } from './routes/staff.patients'
@@ -36,7 +35,6 @@ import { Route as StaffKpiRouteImport } from './routes/staff.kpi'
 import { Route as StaffInternalRouteImport } from './routes/staff.internal'
 import { Route as StaffDownloadsRouteImport } from './routes/staff.downloads'
 import { Route as StaffDashboardRouteImport } from './routes/staff.dashboard'
-import { Route as StaffInterventionRouteImport } from './routes/staff.Intervention'
 import { Route as ProceduresProcedureIdRouteImport } from './routes/procedures.$procedureId'
 
 const ProceduresRoute = ProceduresRouteImport.update({
@@ -102,11 +100,6 @@ const StaffTrainingRecordsRoute = StaffTrainingRecordsRouteImport.update({
 const StaffStatisticsRoute = StaffStatisticsRouteImport.update({
   id: '/staff/statistics',
   path: '/staff/statistics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StaffStatRoute = StaffStatRouteImport.update({
-  id: '/staff/stat',
-  path: '/staff/stat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StaffSelectRoute = StaffSelectRouteImport.update({
@@ -178,11 +171,6 @@ const StaffDashboardRoute = StaffDashboardRouteImport.update({
   path: '/staff/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StaffInterventionRoute = StaffInterventionRouteImport.update({
-  id: '/staff/Intervention',
-  path: '/staff/Intervention',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProceduresProcedureIdRoute = ProceduresProcedureIdRouteImport.update({
   id: '/$procedureId',
   path: '/$procedureId',
@@ -195,7 +183,6 @@ export interface FileRoutesByFullPath {
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
-  '/staff/Intervention': typeof StaffInterventionRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/downloads': typeof StaffDownloadsRoute
   '/staff/internal': typeof StaffInternalRoute
@@ -209,7 +196,6 @@ export interface FileRoutesByFullPath {
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
-  '/staff/stat': typeof StaffStatRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
   '/staff/work_intervention': typeof StaffWork_interventionRoute
@@ -226,7 +212,6 @@ export interface FileRoutesByTo {
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
-  '/staff/Intervention': typeof StaffInterventionRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/downloads': typeof StaffDownloadsRoute
   '/staff/internal': typeof StaffInternalRoute
@@ -240,7 +225,6 @@ export interface FileRoutesByTo {
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
-  '/staff/stat': typeof StaffStatRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
   '/staff/work_intervention': typeof StaffWork_interventionRoute
@@ -258,7 +242,6 @@ export interface FileRoutesById {
   '/journey': typeof JourneyRoute
   '/procedures': typeof ProceduresRouteWithChildren
   '/procedures/$procedureId': typeof ProceduresProcedureIdRoute
-  '/staff/Intervention': typeof StaffInterventionRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/staff/downloads': typeof StaffDownloadsRoute
   '/staff/internal': typeof StaffInternalRoute
@@ -272,7 +255,6 @@ export interface FileRoutesById {
   '/staff/patients': typeof StaffPatientsRoute
   '/staff/radiation': typeof StaffRadiationRoute
   '/staff/select': typeof StaffSelectRoute
-  '/staff/stat': typeof StaffStatRoute
   '/staff/statistics': typeof StaffStatisticsRoute
   '/staff/training-records': typeof StaffTrainingRecordsRoute
   '/staff/work_intervention': typeof StaffWork_interventionRoute
@@ -291,7 +273,6 @@ export interface FileRouteTypes {
     | '/journey'
     | '/procedures'
     | '/procedures/$procedureId'
-    | '/staff/Intervention'
     | '/staff/dashboard'
     | '/staff/downloads'
     | '/staff/internal'
@@ -305,7 +286,6 @@ export interface FileRouteTypes {
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
-    | '/staff/stat'
     | '/staff/statistics'
     | '/staff/training-records'
     | '/staff/work_intervention'
@@ -322,7 +302,6 @@ export interface FileRouteTypes {
     | '/journey'
     | '/procedures'
     | '/procedures/$procedureId'
-    | '/staff/Intervention'
     | '/staff/dashboard'
     | '/staff/downloads'
     | '/staff/internal'
@@ -336,7 +315,6 @@ export interface FileRouteTypes {
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
-    | '/staff/stat'
     | '/staff/statistics'
     | '/staff/training-records'
     | '/staff/work_intervention'
@@ -353,7 +331,6 @@ export interface FileRouteTypes {
     | '/journey'
     | '/procedures'
     | '/procedures/$procedureId'
-    | '/staff/Intervention'
     | '/staff/dashboard'
     | '/staff/downloads'
     | '/staff/internal'
@@ -367,7 +344,6 @@ export interface FileRouteTypes {
     | '/staff/patients'
     | '/staff/radiation'
     | '/staff/select'
-    | '/staff/stat'
     | '/staff/statistics'
     | '/staff/training-records'
     | '/staff/work_intervention'
@@ -384,7 +360,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   JourneyRoute: typeof JourneyRoute
   ProceduresRoute: typeof ProceduresRouteWithChildren
-  StaffInterventionRoute: typeof StaffInterventionRoute
   StaffDashboardRoute: typeof StaffDashboardRoute
   StaffDownloadsRoute: typeof StaffDownloadsRoute
   StaffInternalRoute: typeof StaffInternalRoute
@@ -398,7 +373,6 @@ export interface RootRouteChildren {
   StaffPatientsRoute: typeof StaffPatientsRoute
   StaffRadiationRoute: typeof StaffRadiationRoute
   StaffSelectRoute: typeof StaffSelectRoute
-  StaffStatRoute: typeof StaffStatRoute
   StaffStatisticsRoute: typeof StaffStatisticsRoute
   StaffTrainingRecordsRoute: typeof StaffTrainingRecordsRoute
   StaffWork_interventionRoute: typeof StaffWork_interventionRoute
@@ -503,13 +477,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffStatisticsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/staff/stat': {
-      id: '/staff/stat'
-      path: '/staff/stat'
-      fullPath: '/staff/stat'
-      preLoaderRoute: typeof StaffStatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/staff/select': {
       id: '/staff/select'
       path: '/staff/select'
@@ -601,13 +568,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/staff/Intervention': {
-      id: '/staff/Intervention'
-      path: '/staff/Intervention'
-      fullPath: '/staff/Intervention'
-      preLoaderRoute: typeof StaffInterventionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/procedures/$procedureId': {
       id: '/procedures/$procedureId'
       path: '/$procedureId'
@@ -635,7 +595,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   JourneyRoute: JourneyRoute,
   ProceduresRoute: ProceduresRouteWithChildren,
-  StaffInterventionRoute: StaffInterventionRoute,
   StaffDashboardRoute: StaffDashboardRoute,
   StaffDownloadsRoute: StaffDownloadsRoute,
   StaffInternalRoute: StaffInternalRoute,
@@ -651,7 +610,6 @@ const rootRouteChildren: RootRouteChildren = {
   StaffPatientsRoute: StaffPatientsRoute,
   StaffRadiationRoute: StaffRadiationRoute,
   StaffSelectRoute: StaffSelectRoute,
-  StaffStatRoute: StaffStatRoute,
   StaffStatisticsRoute: StaffStatisticsRoute,
   StaffTrainingRecordsRoute: StaffTrainingRecordsRoute,
   StaffWork_interventionRoute: StaffWork_interventionRoute,

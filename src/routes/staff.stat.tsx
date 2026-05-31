@@ -3,7 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-export const Route = createFileRoute("/staff/stat")({
+export const Route = createFileRoute("/staff/stat" as any)({
   component: StatisticsPage,
 });
 
